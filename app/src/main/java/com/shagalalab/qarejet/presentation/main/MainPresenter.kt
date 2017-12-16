@@ -8,7 +8,7 @@ import com.arellomobile.mvp.MvpPresenter
  */
 
 @InjectViewState
-class MainPresenter(): MvpPresenter<MainView>() {
+class MainPresenter : MvpPresenter<MainView>() {
 
     fun openNewTransactionScreen() {
         viewState.addNewTransaction()
