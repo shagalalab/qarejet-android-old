@@ -1,7 +1,7 @@
 package com.shagalalab.qarejet.presentation.newtransaction
 
 import android.util.Log
-import com.shagalalab.qarejet.domain.interactor.transaction.NewTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
 import com.shagalalab.qarejet.domain.model.Transaction
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -11,20 +11,21 @@ import io.reactivex.schedulers.Schedulers
  */
 
 class NewTransactionPresenter constructor(
-        var newTransactionUseCase : NewTransactionUseCase
+        private var addNewTransactionsUseCase: AddNewTransactionUseCase
 ) {
-    fun fetchNewTransactions() {
-        newTransactionUseCase.execute()
+
+    fun addNewTransaction(transaction: Transaction) {
+        addNewTransactionsUseCase.execute(transaction)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSuccess, this::onFailure)
     }
 
-    fun onSuccess(transactions: List<Transaction>) {
-        Log.d("mytest", "size: " + transactions.size)
+    private fun onSuccess() {
+        Log.d("mytest", "Transaction added")
     }
 
-    fun onFailure(throwable: Throwable) {
+    private fun onFailure(throwable: Throwable) {
         //show error message
         Log.e("mytest", "Error happened", throwable)
     }

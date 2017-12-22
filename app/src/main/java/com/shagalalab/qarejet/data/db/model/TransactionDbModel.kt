@@ -1,15 +1,35 @@
 package com.shagalalab.qarejet.data.db.model
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.TypeConverters
+import com.shagalalab.qarejet.data.db.DateConverter
 import java.util.*
 
 /**
  * Created by atabek on 12/14/2017.
  */
 
-@Entity(tableName = "transactions")
+@Entity(tableName = "transactions"
+//        foreignKeys = arrayOf(
+//                ForeignKey(
+//                        entity = AccountDbModel::class,
+//                        parentColumns = arrayOf("id"),
+//                        childColumns = arrayOf("account_id")),
+//                ForeignKey(
+//                        entity = CategoryDbModel::class,
+//                        parentColumns = arrayOf("id"),
+//                        childColumns = arrayOf("category_id")
+//                ))
+)
+@TypeConverters(DateConverter::class)
 data class TransactionDbModel(
-        @PrimaryKey val id: Int, val type: String, val date: Date, val account: AccountDbModel,
-        val category: CategoryDbModel, val amount: Double, val memo: String
+        @PrimaryKey(autoGenerate = true) val id: Long,
+        val type: String,
+        val date: Date,
+        @ColumnInfo(name = "account_id") val accountId: Long,
+        @ColumnInfo(name = "category_id") val categoryId: Long,
+        val amount: Double,
+        val memo: String
 )

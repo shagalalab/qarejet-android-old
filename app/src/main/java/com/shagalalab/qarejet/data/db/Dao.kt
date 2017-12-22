@@ -15,8 +15,8 @@ interface AccountDao {
     @Query("SELECT * from accounts")
     fun getAccounts(): Single<List<AccountDbModel>>
 
-    @Query("SELECT * from account where id = :id")
-    fun getAccount(id: Int): Single<AccountDbModel>
+    @Query("SELECT * from accounts where id = :id")
+    fun getAccount(id: Long): Single<AccountDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAccount(account: AccountDbModel)
@@ -30,8 +30,8 @@ interface CategoryDao {
     @Query("SELECT * from categories")
     fun getCategories(): Single<List<CategoryDbModel>>
 
-    @Query("SELECT * from category where id = :id")
-    fun getCategory(id: Int): Single<CategoryDbModel>
+    @Query("SELECT * from categories where id = :id")
+    fun getCategory(id: Long): Single<CategoryDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: CategoryDbModel)
@@ -45,8 +45,8 @@ interface TransactionDao {
     @Query("SELECT * from transactions")
     fun getTransactions(): Single<List<TransactionDbModel>>
 
-    @Query("SELECT * from transaction where id = :id")
-    fun getCategory(id: Int): Single<TransactionDbModel>
+    @Query("SELECT * from transactions where id = :id")
+    fun getTransaction(id: Long): Single<TransactionDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTransaction(transaction: TransactionDbModel)

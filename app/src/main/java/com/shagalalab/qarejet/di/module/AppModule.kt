@@ -14,6 +14,10 @@ class AppModule(val app: QarejetApp) {
 
     @Provides
     @Singleton
-    fun provideApp() = app
+    fun providesApp() = app
+
+    @Provides
+    @Singleton
+    fun providesContext() = app.applicationContext
 
 }

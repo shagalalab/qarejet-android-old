@@ -8,10 +8,10 @@ import com.shagalalab.qarejet.domain.repository.TransactionRepository
  * Created by atabek on 12/14/2017.
  */
 
-class NewTransactionUseCase constructor(
+class GetAllTransactionsUseCase constructor(
     private val transactionRepository: TransactionRepository
 ) : SingleUseCase<List<Transaction>> {
 
-    override fun execute() = transactionRepository.getTransactions()
+    override fun execute() = transactionRepository.getAllTransactions()
 
 }

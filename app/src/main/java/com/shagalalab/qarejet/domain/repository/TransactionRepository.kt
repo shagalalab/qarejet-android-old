@@ -1,6 +1,7 @@
 package com.shagalalab.qarejet.domain.repository
 
 import com.shagalalab.qarejet.domain.model.Transaction
+import io.reactivex.Completable
 import io.reactivex.Single
 
 /**
@@ -9,7 +10,7 @@ import io.reactivex.Single
 
 interface TransactionRepository {
 
-    fun getTransactions(): Single<List<Transaction>>
-    fun getTransaction(id: Int): Single<Transaction>
-    fun addTransaction()
+    fun getAllTransactions(): Single<List<Transaction>>
+    fun getTransaction(id: Long): Single<Transaction>
+    fun addTransaction(transaction: Transaction): Completable
 }

@@ -10,6 +10,6 @@ interface SingleUseCase<T> {
     fun execute() : Single<T>
 }
 
-interface SingleUserCaseWithParameters<P, R> {
+interface SingleUseCaseWithParameters<P, R> {
     fun execute(parameter: P) : Single<R>
 }

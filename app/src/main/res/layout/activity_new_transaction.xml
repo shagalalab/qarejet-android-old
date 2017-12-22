@@ -1,12 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/transaction_amount"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New transaction"/>
+        android:background="@color/colorPrimary"
+        android:gravity="end"
+        android:inputType="number"
+        android:padding="@dimen/standard_margin"
+        android:text="@string/zero"
+        android:textColor="@android:color/white"/>
 
-</android.support.constraint.ConstraintLayout>
+    <RadioGroup
+        android:id="@+id/transaction_type"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_margin="@dimen/standard_margin"
+        android:background="@drawable/tab_bordered_background"
+        android:checkedButton="@id/transaction_type_expense"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/transaction_type_income"
+            style="@style/TabButtons"
+            android:text="@string/income"/>
+
+        <RadioButton
+            android:id="@+id/transaction_type_expense"
+            style="@style/TabButtons"
+            android:text="@string/expense"/>
+
+    </RadioGroup>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/standard_margin"
+            android:paddingStart="@dimen/standard_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/transaction_card_account_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/account"
+                    android:paddingEnd="12dp"
+                    android:src="@drawable/ic_credit_card_black_24dp"/>
+
+                <Spinner
+                    android:id="@+id/transactionCardAccountSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/transaction_card_category_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/category"
+                    android:paddingEnd="12dp"
+                    android:src="@drawable/ic_label_outline_black_24dp"/>
+
+                <Spinner
+                    android:id="@+id/transactionCardCategoryList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/transaction_card_note_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/note"
+                    android:paddingEnd="12dp"
+                    android:src="@drawable/ic_description_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/transactionCardNoteText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/add_note"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:maxLines="1"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/transaction_card_date_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/date"
+                    android:paddingEnd="12dp"
+                    android:src="@drawable/ic_date_range_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/transaction_card_date_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="date"
+                    android:text="@string/today"/>
+
+                <ImageView
+                    android:id="@+id/transaction_card_time_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/time"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:src="@drawable/ic_access_time_black_24dp"/>
+
+                <EditText
+                    android:id="@+id/transaction_card_time_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="time"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addTransaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/add_transaction"
+                android:theme="@style/PrimaryFlatButton"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

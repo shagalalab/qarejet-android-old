@@ -10,7 +10,7 @@ import com.shagalalab.qarejet.data.db.model.TransactionDbModel
  * Created by atabek on 12/14/2017.
  */
 
-@Database(entities = arrayOf(AccountDbModel::class, CategoryDbModel::class, TransactionDbModel::class), version = 1)
+@Database(entities = arrayOf(AccountDbModel::class, CategoryDbModel::class, TransactionDbModel::class), version = 1, exportSchema = false)
 abstract class Database : RoomDatabase() {
     abstract val accountDao: AccountDao
     abstract val categoryDao: CategoryDao

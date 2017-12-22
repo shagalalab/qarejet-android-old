@@ -1,6 +1,6 @@
 package com.shagalalab.qarejet.di.module
 
-import com.shagalalab.qarejet.domain.interactor.transaction.NewTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
 import com.shagalalab.qarejet.presentation.newtransaction.NewTransactionPresenter
 import dagger.Module
 import dagger.Provides
@@ -15,6 +15,6 @@ class PresenterModule {
 
     @Provides
     @Singleton
-    fun provideNewTransactionPresenter(useCase: NewTransactionUseCase) = NewTransactionPresenter(useCase)
+    fun providesNewTransactionPresenter(useCase: AddNewTransactionUseCase) = NewTransactionPresenter(useCase)
 
 }
