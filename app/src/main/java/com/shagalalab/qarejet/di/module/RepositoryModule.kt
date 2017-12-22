@@ -1,6 +1,6 @@
 package com.shagalalab.qarejet.di.module
 
-import com.shagalalab.qarejet.data.db.Database
+import android.content.Context
 import com.shagalalab.qarejet.data.repository.TransactionRepositoryImpl
 import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import dagger.Module
@@ -16,6 +16,6 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesTransactionRepository(database: Database): TransactionRepository = TransactionRepositoryImpl(database)
+    fun providesTransactionRepository(context: Context): TransactionRepository = TransactionRepositoryImpl(context)
 
 }
