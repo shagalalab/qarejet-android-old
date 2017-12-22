@@ -66,11 +66,14 @@ dependencies {
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     // Dependency injection
-    compile "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
 
     // Testing
     testImplementation "junit:junit:$jUnitVersion"
     androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 }
