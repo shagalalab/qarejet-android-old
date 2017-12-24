@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.presentation.newtransaction
+package com.shagalalab.qarejet.ui.transaction
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -34,6 +34,8 @@ class NewTransactionActivity : AppCompatActivity() {
         val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         transactionCardCategoryList.adapter = categoryAdapter
+
+        presenter.checkDataExists()
 
         addTransaction.setOnClickListener({
             Log.d("mytest", "account: " + transactionCardAccountSpinner.selectedItem)

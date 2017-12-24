@@ -21,6 +21,9 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAccount(account: AccountDbModel)
 
+    @Insert
+    fun insertAccounts(accounts: List<AccountDbModel>)
+
     @Delete
     fun deleteAccount(account: AccountDbModel)
 }
@@ -35,6 +38,9 @@ interface CategoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCategory(category: CategoryDbModel)
+
+    @Insert
+    fun insertCategories(categories: List<CategoryDbModel>)
 
     @Delete
     fun deleteCategory(category: CategoryDbModel)

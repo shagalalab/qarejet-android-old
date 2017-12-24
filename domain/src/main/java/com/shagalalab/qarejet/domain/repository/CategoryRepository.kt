@@ -13,5 +13,6 @@ interface CategoryRepository {
     fun getAllCategories(): Single<List<Category>>
     fun getCategory(id: Long): Single<Category>
     fun addCategory(category: Category): Completable
+    fun addCategories(categories: List<Category>): Completable
 
 }

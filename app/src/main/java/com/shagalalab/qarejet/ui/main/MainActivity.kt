@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.presentation.main
+package com.shagalalab.qarejet.ui.main
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.presentation.newtransaction.NewTransactionActivity
+import com.shagalalab.qarejet.ui.transaction.NewTransactionActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 

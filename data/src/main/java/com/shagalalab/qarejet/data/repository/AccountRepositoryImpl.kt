@@ -36,4 +36,12 @@ class AccountRepositoryImpl constructor(var database: Database) : AccountReposit
         })
     }
 
+    override fun addAccounts(accounts: List<Account>): Completable {
+        return Completable.fromAction({
+            database
+                    .accountDao
+                    .insertAccounts(DomainToDbMapper.mapAccounts(accounts))
+        })
+    }
+
 }

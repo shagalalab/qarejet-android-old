@@ -30,8 +30,8 @@ object DbToDomainMapper {
         return Account(dbModel.id, dbModel.title)
     }
 
-    fun mapCategories(dbModel: List<CategoryDbModel>) : List<Category> {
-        return dbModel.map { mapCategory(it) }
+    fun mapCategories(dbModels: List<CategoryDbModel>) : List<Category> {
+        return dbModels.map { mapCategory(it) }
     }
 
     fun mapCategory(dbModel: CategoryDbModel) : Category {
@@ -47,8 +47,16 @@ object DomainToDbMapper {
                 model.categoryId, model.amount, model.memo)
     }
 
+    fun mapAccounts(models: List<Account>) : List<AccountDbModel> {
+        return models.map { mapAccount(it) }
+    }
+
     fun mapAccount(model: Account) : AccountDbModel {
         return AccountDbModel(0, model.title)
+    }
+
+    fun mapCategories(models: List<Category>) : List<CategoryDbModel> {
+        return models.map { mapCategory(it) }
     }
 
     fun mapCategory(model: Category) : CategoryDbModel {

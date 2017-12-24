@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.presentation.main
+package com.shagalalab.qarejet.ui.main
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter

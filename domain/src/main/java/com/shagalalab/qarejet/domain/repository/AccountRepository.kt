@@ -13,5 +13,6 @@ interface AccountRepository {
     fun getAllAccounts(): Single<List<Account>>
     fun getAccount(id: Long): Single<Account>
     fun addAccount(account: Account): Completable
+    fun addAccounts(accounts: List<Account>): Completable
 
 }

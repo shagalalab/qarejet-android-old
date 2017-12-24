@@ -36,4 +36,12 @@ class CategoryRepositoryImpl constructor(var database: Database) : CategoryRepos
         })
     }
 
+    override fun addCategories(categories: List<Category>): Completable {
+        return Completable.fromAction({
+            database
+                    .categoryDao
+                    .insertCategories(DomainToDbMapper.mapCategories(categories))
+        })
+    }
+
 }
