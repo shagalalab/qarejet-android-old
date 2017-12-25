@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/transaction_amount"
+        android:id="@+id/transactionAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:gravity="end"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:padding="@dimen/standard_margin"
         android:text="@string/zero"
         android:textColor="@android:color/white"/>
@@ -23,16 +23,16 @@
         android:layout_height="46dp"
         android:layout_margin="@dimen/standard_margin"
         android:background="@drawable/tab_bordered_background"
-        android:checkedButton="@id/transaction_type_expense"
+        android:checkedButton="@id/transactionTypeExpense"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/transaction_type_income"
+            android:id="@+id/transactionTypeIncome"
             style="@style/TabButtons"
             android:text="@string/income"/>
 
         <RadioButton
-            android:id="@+id/transaction_type_expense"
+            android:id="@+id/transactionTypeExpense"
             style="@style/TabButtons"
             android:text="@string/expense"/>
 
@@ -134,11 +134,12 @@
                     android:src="@drawable/ic_date_range_black_24dp"/>
 
                 <EditText
-                    android:id="@+id/transaction_card_date_text"
+                    android:id="@+id/transactionCardDateText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="date"
+                    android:focusable="false"
                     android:text="@string/today"/>
 
                 <ImageView
@@ -151,10 +152,11 @@
                     android:src="@drawable/ic_access_time_black_24dp"/>
 
                 <EditText
-                    android:id="@+id/transaction_card_time_text"
+                    android:id="@+id/transactionCardTimeText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:focusable="false"
                     android:inputType="time"/>
 
             </LinearLayout>

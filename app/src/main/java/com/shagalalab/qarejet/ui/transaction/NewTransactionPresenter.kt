@@ -1,13 +1,12 @@
 package com.shagalalab.qarejet.ui.transaction
 
-import android.util.Log
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
 import com.shagalalab.qarejet.domain.model.Transaction
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 /**
  * Created by atabek on 12/16/2017.
@@ -18,32 +17,61 @@ class NewTransactionPresenter constructor(
         private val getAllAccountsUseCase: GetAllAccountsUseCase,
         private val getAllCategoriesUseCase: GetAllCategoriesUseCase
 ) {
-    fun checkDataExists() {
+    companion object {
+        val TRANSACTION_TYPE_INCOME = "income"
+        val TRANSACTION_TYPE_EXPENSE = "expense"
+    }
+
+    private lateinit var view: NewTransactionView
+    private var transactionType = TRANSACTION_TYPE_EXPENSE
+
+    fun init(view: NewTransactionView) {
+        this.view = view
+    }
+
+    fun requestAccountData() {
         getAllAccountsUseCase.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer { Log.d("mytest", "accounts: " + it.size) })
+                .subscribe(view::updateAccounts)
+    }
 
+    fun requestCategoryData() {
         getAllCategoriesUseCase.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(Consumer { Log.d("mytest", "categories: " + it.size) })
+                .subscribe(view::updateCategories)
     }
 
+    fun setTransactionTypeToIncome() {
+        transactionType = TRANSACTION_TYPE_INCOME
+    }
 
-    fun addNewTransaction(transaction: Transaction) {
-        addNewTransactionsUseCase.execute(transaction)
+    fun setTransactionTypeToExpense() {
+        transactionType = TRANSACTION_TYPE_EXPENSE
+    }
+
+    fun chooseDate() {
+        view.showDateChooser()
+    }
+
+    fun chooseTime() {
+        view.showTimeChooser()
+    }
+
+    fun addNewTransaction(amount: Double, accountId: Long, categoryId: Long, note: String, date: Date) {
+        addNewTransactionsUseCase.execute(Transaction(0, transactionType, date, accountId, categoryId, amount, note))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onSuccess, this::onFailure)
     }
 
     private fun onSuccess() {
-        Log.d("mytest", "Transaction added")
+        view.finishActivity()
+        view.showMessage("Transaction added")
     }
 
     private fun onFailure(throwable: Throwable) {
-        //show error message
-        Log.e("mytest", "Error happened", throwable)
+        view.showMessage("Error happened")
     }
 }
