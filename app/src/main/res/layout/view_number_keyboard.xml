@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/numberKeyboardPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/standard_margin"
+            android:background="@color/black30"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_7"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_8"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_9"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_4"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_5"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_6"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_1"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_2"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_3"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_dot"/>
+
+            <TextView
+                style="@style/KeyboardTextButton"
+                android:text="@string/key_0"/>
+
+            <ImageView
+                style="@style/KeyboardButtonBase"
+                android:contentDescription="@string/remove_previous_number"
+                android:padding="@dimen/standard_margin_half"
+                android:src="@drawable/ic_keyboard_backspace_white_24dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/numberKeyboardShowHide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:contentDescription="@string/hide_number_keyboard"
+        android:focusable="true"
+        android:paddingBottom="@dimen/standard_margin_half"
+        android:paddingEnd="@dimen/standard_margin"
+        android:paddingStart="@dimen/standard_margin"
+        android:paddingTop="@dimen/standard_margin_half"
+        android:src="@drawable/ic_keyboard_arrow_up_white_48dp"/>
+
+</LinearLayout>

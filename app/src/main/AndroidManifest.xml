@@ -23,7 +23,8 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.transaction.NewTransactionActivity"/>
+        <activity android:name=".ui.transaction.NewTransactionActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
     </application>
 
 </manifest>

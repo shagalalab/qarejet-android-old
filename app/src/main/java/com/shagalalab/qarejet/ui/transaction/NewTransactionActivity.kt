@@ -1,5 +1,6 @@
 package com.shagalalab.qarejet.ui.transaction
 
+import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.widget.DatePickerFragment
+import com.shagalalab.qarejet.ui.widget.NumberKeyboardView
 import com.shagalalab.qarejet.ui.widget.TimePickerFragment
 import kotlinx.android.synthetic.main.activity_new_transaction.*
 import java.text.DateFormat
@@ -51,6 +53,21 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         transactionTypeExpense.setOnClickListener { presenter.setTransactionTypeToExpense() }
         transactionCardDateText.setOnClickListener { presenter.chooseDate() }
         transactionCardTimeText.setOnClickListener { presenter.chooseTime() }
+        transactionKeyboard.setNumberListener(object : NumberKeyboardView.NumberVisibilityListener {
+            override fun onNumberKeyboardChange(isShowing: Boolean, height: Float, animationDuration: Long) {
+                val h = if (isShowing) -height else height
+
+                ValueAnimator.ofFloat(0f, h).apply {
+                    duration = animationDuration
+                    val y = transactionBelowKeyboard.y
+                    addUpdateListener {
+                        transactionBelowKeyboard.y = y + (it.animatedValue as Float)
+                    }
+                    start()
+                }
+            }
+
+        })
         addTransaction.setOnClickListener({
             presenter.addNewTransaction(
                     transactionAmount.text.toString().toDouble(),
