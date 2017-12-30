@@ -1,20 +1,34 @@
 package com.shagalalab.qarejet.ui.widget
 
-import io.reactivex.functions.Consumer
-import io.reactivex.subjects.PublishSubject
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
+import android.content.res.Resources
+import android.view.ViewGroup
+import android.widget.ImageView
+import com.shagalalab.qarejet.R
 
-class NumberKeyboardPresenter constructor(
-    private var publishSubject : PublishSubject<String> = PublishSubject.create()
+class NumberKeyboardPresenter(
+        private val listener: NumberKeyboardView.NumberListener,
+        private val resources: Resources
 ) {
-    private val integerLimit = 12
-    private val fractionLimit = 2
+
+    companion object {
+        private val INTEGER_LIMIT = 12
+        private val FRACTION_LIMIT = 2
+        private val DURATION = 500L
+    }
     private var valueText = "0"
+    private var isVisible = true
 
     fun handleNumber(number: String) {
         if (valueText.contains(".")) {
-            if (valueText.substringAfter(".").length == fractionLimit) return
+            if (valueText.substringAfter(".").length == FRACTION_LIMIT) return
         } else {
-            if (valueText.length == integerLimit) return
+            if (valueText.length == INTEGER_LIMIT) {
+                listener.onShowMessage(resources.getString(R.string.maximum_digits_reached, INTEGER_LIMIT))
+                return
+            }
         }
 
         if (valueText == "0") {
@@ -23,7 +37,7 @@ class NumberKeyboardPresenter constructor(
         } else {
             valueText += number
         }
-        publishSubject.onNext(valueText)
+        listener.onNumberTextChanged(valueText)
     }
 
     fun handleBackspace() {
@@ -33,17 +47,49 @@ class NumberKeyboardPresenter constructor(
         if (valueText.isEmpty()) {
             valueText = "0"
         }
-        publishSubject.onNext(valueText)
+        listener.onNumberTextChanged(valueText)
     }
 
     fun handleDot() {
         if (valueText.contains(".")) return
 
         valueText += "."
-        publishSubject.onNext(valueText)
+        listener.onNumberTextChanged(valueText)
     }
 
-    fun subscribe(observer: Consumer<String>) {
-        publishSubject.subscribe(observer)
+    fun handleShowHideAnimation(numberKeyboardPanel: ViewGroup, numberKeyboardShowHide: ImageView) {
+        val keyboardHeight = numberKeyboardPanel.height.toFloat()
+        val from : Float
+        val to : Float
+        numberKeyboardShowHide.isEnabled = false
+        listener.onNumberKeyboardChanged(isVisible, keyboardHeight, DURATION)
+        if (isVisible) {
+            from = 0f
+            to = -keyboardHeight
+        } else {
+            from = -keyboardHeight
+            to = 0f
+        }
+        ValueAnimator.ofFloat(from, to).apply {
+            duration = DURATION
+            addUpdateListener {
+                val value = it.animatedValue as Float
+                numberKeyboardPanel.y = value
+                numberKeyboardShowHide.y = value + keyboardHeight
+            }
+            addListener(object : AnimatorListenerAdapter(){
+                override fun onAnimationEnd(animation: Animator?) {
+                    numberKeyboardShowHide.isEnabled = true
+                    numberKeyboardShowHide.setImageResource(
+                            if (isVisible)
+                                R.drawable.ic_keyboard_arrow_up_white_48dp
+                            else
+                                R.drawable.ic_keyboard_arrow_down_white_48dp
+                    )
+                }
+            })
+            start()
+            isVisible = !isVisible
+        }
     }
 }

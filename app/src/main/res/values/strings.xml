@@ -32,6 +32,8 @@
     <string name="hide_number_keyboard">Hide number keyboard</string>
     <string name="show_number_keyboard">Show number keyboard</string>
     <string name="remove_previous_number">Remove previous number</string>
+    <string name="enter_amount">Please enter transaction amount</string>
+    <string name="maximum_digits_reached">You have reached maximum of %d digits</string>
 
     <string-array name="accounts">
         <item>Cash</item>

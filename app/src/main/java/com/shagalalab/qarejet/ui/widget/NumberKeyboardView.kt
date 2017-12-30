@@ -1,34 +1,25 @@
 package com.shagalalab.qarejet.ui.widget
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ValueAnimator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.shagalalab.qarejet.R
-import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.view_number_keyboard.view.*
 
 class NumberKeyboardView : FrameLayout {
-    private lateinit var listener: NumberListener
-    private val animationDuration = 500L
-    private var presenter: NumberKeyboardPresenter
-    private var isVisible = true
+    private lateinit var presenter: NumberKeyboardPresenter
 
     constructor(context: Context?) : this(context, null)
     constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         val view = View.inflate(context, R.layout.view_number_keyboard, null)
         addView(view)
-        presenter = NumberKeyboardPresenter()
     }
 
     fun setNumberListener(numberListener: NumberListener) {
-        listener = numberListener
+        presenter = NumberKeyboardPresenter(numberListener, context.resources)
         setClickListeners()
-        presenter.subscribe(Consumer { t -> listener.onNumberTextChanged(t) })
     }
 
     private fun setClickListeners() {
@@ -44,47 +35,12 @@ class NumberKeyboardView : FrameLayout {
         numberKeyboardKey9.setOnClickListener({ presenter.handleNumber("9") })
         numberKeyboardKeyDot.setOnClickListener({ presenter.handleDot() })
         numberKeyboardKeyRemove.setOnClickListener({ presenter.handleBackspace() })
-        numberKeyboardShowHide.setOnClickListener({ handleShowHideAnimation() })
-    }
-
-    private fun handleShowHideAnimation() {
-        val keyboardHeight = numberKeyboardPanel.height.toFloat()
-        val from : Float
-        val to : Float
-        numberKeyboardShowHide.isEnabled = false
-        listener.onNumberKeyboardChanged(isVisible, keyboardHeight, animationDuration)
-        if (isVisible) {
-            from = 0f
-            to = -keyboardHeight
-        } else {
-            from = -keyboardHeight
-            to = 0f
-        }
-        ValueAnimator.ofFloat(from, to).apply {
-            duration = animationDuration
-            addUpdateListener {
-                val value = it.animatedValue as Float
-                numberKeyboardPanel.y = value
-                numberKeyboardShowHide.y = value + keyboardHeight
-            }
-            addListener(object : AnimatorListenerAdapter(){
-                override fun onAnimationEnd(animation: Animator?) {
-                    numberKeyboardShowHide.isEnabled = true
-                    numberKeyboardShowHide.setImageResource(
-                            if (isVisible)
-                                R.drawable.ic_keyboard_arrow_up_white_48dp
-                            else
-                                R.drawable.ic_keyboard_arrow_down_white_48dp
-                    )
-                }
-            })
-            start()
-            isVisible = !isVisible
-        }
+        numberKeyboardShowHide.setOnClickListener({ presenter.handleShowHideAnimation(numberKeyboardPanel, numberKeyboardShowHide) })
     }
 
     interface NumberListener {
         fun onNumberKeyboardChanged(isShowing: Boolean, height: Float, animationDuration: Long)
         fun onNumberTextChanged(changedText: String)
+        fun onShowMessage(message: String)
     }
 }

@@ -9,5 +9,6 @@ interface NewTransactionView {
     fun finishActivity()
     fun showDateChooser()
     fun showTimeChooser()
-    fun showMessage(message: String)
+    fun showError(message: String)
+    fun showError(message: Int)
 }

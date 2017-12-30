@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -56,6 +57,10 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         transactionCardDateText.setOnClickListener { presenter.chooseDate() }
         transactionCardTimeText.setOnClickListener { presenter.chooseTime() }
         transactionKeyboard.setNumberListener(object : NumberKeyboardView.NumberListener {
+            override fun onShowMessage(message: String) {
+                Toast.makeText(this@NewTransactionActivity, message, Toast.LENGTH_SHORT).show()
+            }
+
             override fun onNumberTextChanged(changedText: String) {
                 transactionAmount.text = changedText
             }
@@ -137,7 +142,11 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         setDateText()
     }
 
-    override fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    override fun showError(message: String) {
+        Snackbar.make(transactionAmount, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun showError(message: Int) {
+        Snackbar.make(transactionAmount, message, Snackbar.LENGTH_LONG).show()
     }
 }

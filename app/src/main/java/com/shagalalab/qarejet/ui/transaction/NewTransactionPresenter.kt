@@ -1,5 +1,6 @@
 package com.shagalalab.qarejet.ui.transaction
 
+import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
@@ -60,6 +61,10 @@ class NewTransactionPresenter constructor(
     }
 
     fun addNewTransaction(amount: Double, accountId: Long, categoryId: Long, note: String, date: Date) {
+        if (amount == 0.0) {
+            view.showError(R.string.enter_amount)
+            return
+        }
         addNewTransactionsUseCase.execute(Transaction(0, transactionType, date, accountId, categoryId, amount, note))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -68,10 +73,9 @@ class NewTransactionPresenter constructor(
 
     private fun onSuccess() {
         view.finishActivity()
-        view.showMessage("Transaction added")
     }
 
     private fun onFailure(throwable: Throwable) {
-        view.showMessage("Error happened")
+        view.showError("Error happened: " + throwable.localizedMessage)
     }
 }
