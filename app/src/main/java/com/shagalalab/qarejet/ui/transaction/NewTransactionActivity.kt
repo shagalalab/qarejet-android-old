@@ -16,8 +16,10 @@ import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.widget.DatePickerFragment
 import com.shagalalab.qarejet.ui.widget.NumberKeyboardView
 import com.shagalalab.qarejet.ui.widget.TimePickerFragment
+import com.shagalalab.qarejet.util.isToday
+import com.shagalalab.qarejet.util.toShortDate
+import com.shagalalab.qarejet.util.toShortTime
 import kotlinx.android.synthetic.main.activity_new_transaction.*
-import java.text.DateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -70,7 +72,6 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
                     start()
                 }
             }
-
         })
         addTransaction.setOnClickListener({
             presenter.addNewTransaction(
@@ -84,11 +85,15 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
     }
 
     private fun setDateText() {
-        transactionCardDateText.setText(DateFormat.getDateInstance(DateFormat.SHORT).format(selectedDate.time))
+        if (selectedDate.isToday()) {
+            transactionCardDateText.setText(R.string.today)
+        } else {
+            transactionCardDateText.setText(selectedDate.toShortDate())
+        }
     }
 
     private fun setTimeText() {
-        transactionCardTimeText.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(selectedDate.time))
+        transactionCardTimeText.setText(selectedDate.toShortTime())
     }
 
     override fun updateAccounts(accounts: List<Account>) {
@@ -109,13 +114,13 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
 
     override fun showDateChooser() {
         val datePicker = DatePickerFragment()
-        datePicker.setDateListener(this)
+        datePicker.init(selectedDate, this)
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
     override fun showTimeChooser() {
         val timePicker = TimePickerFragment()
-        timePicker.setTimeListener(this)
+        timePicker.init(selectedDate, this)
         timePicker.show(supportFragmentManager, "timePicker")
     }
 

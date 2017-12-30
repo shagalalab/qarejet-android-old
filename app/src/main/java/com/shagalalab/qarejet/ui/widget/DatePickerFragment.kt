@@ -8,16 +8,17 @@ import java.util.*
 
 class DatePickerFragment : DialogFragment() {
     lateinit var listener: DatePickerDialog.OnDateSetListener
+    lateinit var calendar: Calendar
 
-    fun setDateListener(dateListener: DatePickerDialog.OnDateSetListener) {
+    fun init(currentCalendar: Calendar, dateListener: DatePickerDialog.OnDateSetListener) {
         listener = dateListener
+        calendar = currentCalendar
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val cal = Calendar.getInstance()
-        val year = cal.get(Calendar.YEAR)
-        val month = cal.get(Calendar.MONTH)
-        val day = cal.get(Calendar.DAY_OF_MONTH)
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         return DatePickerDialog(context, listener, year, month, day)
     }
