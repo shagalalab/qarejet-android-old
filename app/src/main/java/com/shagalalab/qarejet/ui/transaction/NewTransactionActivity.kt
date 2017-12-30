@@ -53,8 +53,12 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         transactionTypeExpense.setOnClickListener { presenter.setTransactionTypeToExpense() }
         transactionCardDateText.setOnClickListener { presenter.chooseDate() }
         transactionCardTimeText.setOnClickListener { presenter.chooseTime() }
-        transactionKeyboard.setNumberListener(object : NumberKeyboardView.NumberVisibilityListener {
-            override fun onNumberKeyboardChange(isShowing: Boolean, height: Float, animationDuration: Long) {
+        transactionKeyboard.setNumberListener(object : NumberKeyboardView.NumberListener {
+            override fun onNumberTextChanged(changedText: String) {
+                transactionAmount.text = changedText
+            }
+
+            override fun onNumberKeyboardChanged(isShowing: Boolean, height: Float, animationDuration: Long) {
                 val h = if (isShowing) -height else height
 
                 ValueAnimator.ofFloat(0f, h).apply {
