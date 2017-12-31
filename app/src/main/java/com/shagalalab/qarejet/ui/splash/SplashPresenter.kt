@@ -6,6 +6,8 @@ import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
+import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -20,7 +22,7 @@ class SplashPresenter constructor(
         this.view = view
     }
 
-    fun checkDataPopulated(accounts: Array<String>, categories: Array<String>) {
+    fun checkDataPopulated(accounts: Array<String>, categoriesExpense: Array<String>, categoriesIncome: Array<String>) {
         val isPopulated = initialDataUseCase.isDataPopulated()
 
         if (isPopulated) {
@@ -28,7 +30,11 @@ class SplashPresenter constructor(
             view.goToNextScreen()
         } else {
             addAccountsUseCase.execute(accounts.map { Account(0, it) })
-                    .mergeWith(addCategoriesUseCase.execute(categories.map { Category(0, it) }))
+                    .mergeWith(addCategoriesUseCase.execute(
+                            categoriesExpense.map { Category(0, it, TRANSACTION_TYPE_EXPENSE) }.plus(
+                                    categoriesIncome.map { Category(0, it, TRANSACTION_TYPE_INCOME) }
+                            ))
+                    )
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::allDataSaved, this::failureToSaveData)

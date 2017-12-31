@@ -5,6 +5,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.widget.TextViewCompat
+import android.support.v4.widget.TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -14,9 +16,11 @@ import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.ui.widget.CategoryAdapter
 import com.shagalalab.qarejet.ui.widget.DatePickerFragment
 import com.shagalalab.qarejet.ui.widget.NumberKeyboardView
 import com.shagalalab.qarejet.ui.widget.TimePickerFragment
+import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.isToday
 import com.shagalalab.qarejet.util.toShortDate
 import com.shagalalab.qarejet.util.toShortTime
@@ -33,7 +37,7 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
     @Inject lateinit var presenter: NewTransactionPresenter
 
     private lateinit var accountsAdapter: ArrayAdapter<Account>
-    private lateinit var categoryAdapter: ArrayAdapter<Category>
+    private lateinit var categoryAdapter: CategoryAdapter
 
     private var selectedDate = Calendar.getInstance()
 
@@ -49,6 +53,8 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         setDateText()
         setTimeText()
         setClickListeners()
+
+        TextViewCompat.setAutoSizeTextTypeWithDefaults(transactionAmount, AUTO_SIZE_TEXT_TYPE_UNIFORM)
     }
 
     private fun setClickListeners() {
@@ -102,15 +108,28 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
     }
 
     override fun updateAccounts(accounts: List<Account>) {
-        accountsAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, accounts)
+        accountsAdapter = ArrayAdapter(this, R.layout.spinner_item, accounts)
         accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         transactionCardAccountSpinner.adapter = accountsAdapter
     }
 
     override fun updateCategories(categories: List<Category>) {
-        categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
-        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        categoryAdapter = CategoryAdapter(this, categories)
+        categoryAdapter.filterByType(TRANSACTION_TYPE_EXPENSE)
         transactionCardCategoryList.adapter = categoryAdapter
+    }
+
+    override fun setSignToPlus() {
+        transactionAmountSign.setImageResource(R.drawable.ic_add_white_24dp)
+    }
+
+    override fun setSignToMinus() {
+        transactionAmountSign.setImageResource(R.drawable.ic_remove_white_24dp)
+    }
+
+    override fun filterCategories(type: Int) {
+        transactionCardCategoryList.setSelection(0)
+        categoryAdapter.filterByType(type)
     }
 
     override fun finishActivity() {

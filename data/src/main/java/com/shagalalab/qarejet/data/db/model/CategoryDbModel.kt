@@ -8,4 +8,4 @@ import android.arch.persistence.room.PrimaryKey
  */
 
 @Entity(tableName = "categories")
-data class CategoryDbModel(@PrimaryKey(autoGenerate = true) val id: Long, val title: String)
+data class CategoryDbModel(@PrimaryKey(autoGenerate = true) val id: Long, val title: String, val type: Int)

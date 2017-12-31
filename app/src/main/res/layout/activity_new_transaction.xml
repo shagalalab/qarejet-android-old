@@ -11,16 +11,39 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/transactionAmount"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:gravity="end"
-            android:padding="@dimen/standard_margin"
-            android:text="@string/zero"
-            android:textSize="28sp"
-            android:textColor="@android:color/white"/>
+            android:layout_height="90dp"
+            android:background="@color/color_primary"
+            android:orientation="horizontal"
+            android:padding="@dimen/standard_margin">
+
+            <ImageView
+                android:id="@+id/transactionAmountSign"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_remove_white_24dp"/>
+
+            <TextView
+                android:id="@+id/transactionAmount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical|end"
+                android:lines="1"
+                android:text="@string/zero"
+                android:textColor="@android:color/white"
+                android:textSize="45sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/standard_margin_half"
+                android:gravity="center"
+                android:text="UZS"
+                android:textColor="@android:color/white"
+                android:textSize="25sp"/>
+        </LinearLayout>
 
         <com.shagalalab.qarejet.ui.widget.NumberKeyboardView
             android:id="@+id/transactionKeyboard"
@@ -79,7 +102,8 @@
                         android:id="@+id/transactionCardAccountSpinner"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_toEndOf="@id/transactionCardAccountIcon">
+                        android:layout_toEndOf="@id/transactionCardAccountIcon"
+                        android:textSize="@dimen/standard_text_size">
                     </Spinner>
 
                     <ImageView
@@ -117,7 +141,8 @@
                         android:hint="@string/add_note"
                         android:inputType="text"
                         android:lines="1"
-                        android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:textSize="@dimen/standard_text_size"/>
 
                     <View
                         android:id="@+id/transactionCardDivider"
@@ -144,7 +169,8 @@
                         android:layout_toStartOf="@id/transactionCardDivider"
                         android:focusable="false"
                         android:inputType="date"
-                        android:text="@string/today"/>
+                        android:text="@string/today"
+                        android:textSize="@dimen/standard_text_size"/>
 
                     <ImageView
                         android:id="@+id/transactionCardTimeIcon"
@@ -165,7 +191,8 @@
                         android:layout_below="@id/transactionCardNoteIcon"
                         android:layout_toEndOf="@id/transactionCardTimeIcon"
                         android:focusable="false"
-                        android:inputType="time"/>
+                        android:inputType="time"
+                        android:textSize="@dimen/standard_text_size"/>
 
                     <Button
                         android:id="@+id/addTransaction"

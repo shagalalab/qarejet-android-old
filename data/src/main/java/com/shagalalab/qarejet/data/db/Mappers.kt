@@ -35,7 +35,7 @@ object DbToDomainMapper {
     }
 
     fun mapCategory(dbModel: CategoryDbModel) : Category {
-        return Category(dbModel.id, dbModel.title)
+        return Category(dbModel.id, dbModel.title, dbModel.type)
     }
 
 }
@@ -60,7 +60,7 @@ object DomainToDbMapper {
     }
 
     fun mapCategory(model: Category) : CategoryDbModel {
-        return CategoryDbModel(0, model.title)
+        return CategoryDbModel(0, model.title, model.type)
     }
 
 }

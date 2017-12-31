@@ -5,6 +5,8 @@ import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
 import com.shagalalab.qarejet.domain.model.Transaction
+import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
+import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
@@ -18,11 +20,6 @@ class NewTransactionPresenter constructor(
         private val getAllAccountsUseCase: GetAllAccountsUseCase,
         private val getAllCategoriesUseCase: GetAllCategoriesUseCase
 ) {
-    companion object {
-        val TRANSACTION_TYPE_INCOME = "income"
-        val TRANSACTION_TYPE_EXPENSE = "expense"
-    }
-
     private lateinit var view: NewTransactionView
     private var transactionType = TRANSACTION_TYPE_EXPENSE
 
@@ -46,10 +43,14 @@ class NewTransactionPresenter constructor(
 
     fun setTransactionTypeToIncome() {
         transactionType = TRANSACTION_TYPE_INCOME
+        view.setSignToPlus()
+        view.filterCategories(transactionType)
     }
 
     fun setTransactionTypeToExpense() {
         transactionType = TRANSACTION_TYPE_EXPENSE
+        view.setSignToMinus()
+        view.filterCategories(transactionType)
     }
 
     fun chooseDate() {

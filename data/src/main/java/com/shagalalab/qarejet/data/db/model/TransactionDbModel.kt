@@ -26,7 +26,7 @@ import java.util.*
 @TypeConverters(DateConverter::class)
 data class TransactionDbModel(
         @PrimaryKey(autoGenerate = true) val id: Long,
-        val type: String,
+        val type: Int,
         val date: Date,
         @ColumnInfo(name = "account_id") val accountId: Long,
         @ColumnInfo(name = "category_id") val categoryId: Long,

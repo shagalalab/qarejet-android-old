@@ -19,8 +19,9 @@ class SplashActivity : AppCompatActivity(), SplashView {
 
         presenter.init(this)
         val accounts = resources.getStringArray(R.array.accounts)
-        val categories = resources.getStringArray(R.array.categories)
-        presenter.checkDataPopulated(accounts, categories)
+        val categoriesExpense = resources.getStringArray(R.array.categories_expense)
+        val categoriesIncome = resources.getStringArray(R.array.categories_income)
+        presenter.checkDataPopulated(accounts, categoriesExpense, categoriesIncome)
     }
 
     override fun goToNextScreen() {
