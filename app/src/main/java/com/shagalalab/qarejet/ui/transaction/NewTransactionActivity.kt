@@ -28,10 +28,6 @@ import kotlinx.android.synthetic.main.activity_new_transaction.*
 import java.util.*
 import javax.inject.Inject
 
-/**
- * Created by atabek on 12/11/2017.
- */
-
 class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener {
     @Inject lateinit var presenter: NewTransactionPresenter
@@ -46,6 +42,10 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         setContentView(R.layout.activity_new_transaction)
         (application as QarejetApp).component.inject(this)
 
+        setSupportActionBar(transactionToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         presenter.init(this)
         presenter.requestAccountData()
         presenter.requestCategoryData()
@@ -55,6 +55,11 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         setClickListeners()
 
         TextViewCompat.setAutoSizeTextTypeWithDefaults(transactionAmount, AUTO_SIZE_TEXT_TYPE_UNIFORM)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun setClickListeners() {

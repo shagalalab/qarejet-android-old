@@ -16,10 +16,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-/**
- * Created by atabek on 12/16/2017.
- */
-
 @Module
 class UseCaseModule {
 

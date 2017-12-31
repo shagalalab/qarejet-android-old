@@ -7,10 +7,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-/**
- * Created by atabek on 12/15/2017.
- */
-
 @Module
 class DataModule {
 

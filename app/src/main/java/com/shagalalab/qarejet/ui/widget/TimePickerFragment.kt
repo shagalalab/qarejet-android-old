@@ -8,8 +8,8 @@ import android.text.format.DateFormat
 import java.util.*
 
 class TimePickerFragment : DialogFragment() {
-    lateinit var listener: TimePickerDialog.OnTimeSetListener
-    lateinit var calendar: Calendar
+    private lateinit var listener: TimePickerDialog.OnTimeSetListener
+    private lateinit var calendar: Calendar
 
     fun init(currentCalendar: Calendar, timeListener: TimePickerDialog.OnTimeSetListener) {
         listener = timeListener

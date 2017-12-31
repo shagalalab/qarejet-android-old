@@ -34,6 +34,7 @@
     <string name="remove_previous_number">Remove previous number</string>
     <string name="enter_amount">Please enter transaction amount</string>
     <string name="maximum_digits_reached">You have reached maximum of %d digits</string>
+    <string name="new_transaction">New Transaction</string>
 
     <string-array name="accounts">
         <item>Cash</item>

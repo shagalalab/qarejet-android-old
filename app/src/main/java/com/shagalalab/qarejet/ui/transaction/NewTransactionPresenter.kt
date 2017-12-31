@@ -11,10 +11,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-/**
- * Created by atabek on 12/16/2017.
- */
-
 class NewTransactionPresenter constructor(
         private val addNewTransactionsUseCase: AddNewTransactionUseCase,
         private val getAllAccountsUseCase: GetAllAccountsUseCase,

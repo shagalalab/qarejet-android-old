@@ -1,214 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/transactionToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@color/color_primary"
-            android:orientation="horizontal"
-            android:padding="@dimen/standard_margin">
-
-            <ImageView
-                android:id="@+id/transactionAmountSign"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_remove_white_24dp"/>
-
-            <TextView
-                android:id="@+id/transactionAmount"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical|end"
-                android:lines="1"
-                android:text="@string/zero"
-                android:textColor="@android:color/white"
-                android:textSize="45sp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/standard_margin_half"
-                android:gravity="center"
-                android:text="UZS"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"/>
-        </LinearLayout>
-
-        <com.shagalalab.qarejet.ui.widget.NumberKeyboardView
-            android:id="@+id/transactionKeyboard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:id="@+id/transactionBelowKeyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/transactionType"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_margin="@dimen/standard_margin"
-                android:background="@drawable/tab_bordered_background"
-                android:checkedButton="@id/transactionTypeExpense"
-                android:orientation="horizontal">
+                android:layout_height="90dp"
+                android:background="@color/color_primary"
+                android:orientation="horizontal"
+                android:padding="@dimen/standard_margin">
 
-                <RadioButton
-                    android:id="@+id/transactionTypeIncome"
-                    style="@style/TabButtons"
-                    android:text="@string/income"/>
+                <ImageView
+                    android:id="@+id/transactionAmountSign"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_remove_white_24dp"/>
 
-                <RadioButton
-                    android:id="@+id/transactionTypeExpense"
-                    style="@style/TabButtons"
-                    android:text="@string/expense"/>
+                <TextView
+                    android:id="@+id/transactionAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|end"
+                    android:lines="1"
+                    android:text="@string/zero"
+                    android:textColor="@android:color/white"
+                    android:textSize="45sp"/>
 
-            </RadioGroup>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/standard_margin_half"
+                    android:gravity="center"
+                    android:text="UZS"
+                    android:textColor="@android:color/white"
+                    android:textSize="25sp"/>
+            </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <com.shagalalab.qarejet.ui.widget.NumberKeyboardView
+                android:id="@+id/transactionKeyboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/transactionBelowKeyboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standard_margin_half">
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
-                <RelativeLayout
+                <RadioGroup
+                    android:id="@+id/transactionType"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingEnd="@dimen/standard_margin"
-                    android:paddingStart="@dimen/standard_margin">
+                    android:layout_height="46dp"
+                    android:layout_margin="@dimen/standard_margin"
+                    android:background="@drawable/tab_bordered_background"
+                    android:checkedButton="@id/transactionTypeExpense"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/transactionCardAccountIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:contentDescription="@string/account"
-                        android:paddingEnd="@dimen/transaction_card_line_icon_margin"
-                        android:src="@drawable/ic_credit_card_black_24dp"/>
+                    <RadioButton
+                        android:id="@+id/transactionTypeIncome"
+                        style="@style/TabButtons"
+                        android:text="@string/income"/>
 
-                    <Spinner
-                        android:id="@+id/transactionCardAccountSpinner"
+                    <RadioButton
+                        android:id="@+id/transactionTypeExpense"
+                        style="@style/TabButtons"
+                        android:text="@string/expense"/>
+
+                </RadioGroup>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard_margin_half">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_toEndOf="@id/transactionCardAccountIcon"
-                        android:textSize="@dimen/standard_text_size">
-                    </Spinner>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingEnd="@dimen/standard_margin"
+                        android:paddingStart="@dimen/standard_margin">
 
-                    <ImageView
-                        android:id="@+id/transactionCardCategoryIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardAccountIcon"
-                        android:contentDescription="@string/category"
-                        android:paddingEnd="@dimen/transaction_card_line_icon_margin"
-                        android:src="@drawable/ic_label_outline_black_24dp"/>
+                        <ImageView
+                            android:id="@+id/transactionCardAccountIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:contentDescription="@string/account"
+                            android:paddingEnd="@dimen/transaction_card_line_icon_margin"
+                            android:src="@drawable/ic_credit_card_black_24dp"/>
 
-                    <Spinner
-                        android:id="@+id/transactionCardCategoryList"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardAccountIcon"
-                        android:layout_toEndOf="@id/transactionCardCategoryIcon">
-                    </Spinner>
+                        <Spinner
+                            android:id="@+id/transactionCardAccountSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_toEndOf="@id/transactionCardAccountIcon"
+                            android:textSize="@dimen/standard_text_size">
+                        </Spinner>
 
-                    <ImageView
-                        android:id="@+id/transactionCardNoteIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardCategoryIcon"
-                        android:contentDescription="@string/note"
-                        android:paddingEnd="@dimen/transaction_card_line_icon_margin"
-                        android:src="@drawable/ic_description_black_24dp"/>
+                        <ImageView
+                            android:id="@+id/transactionCardCategoryIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardAccountIcon"
+                            android:contentDescription="@string/category"
+                            android:paddingEnd="@dimen/transaction_card_line_icon_margin"
+                            android:src="@drawable/ic_label_outline_black_24dp"/>
 
-                    <EditText
-                        android:id="@+id/transactionCardNoteText"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardCategoryIcon"
-                        android:layout_toEndOf="@id/transactionCardNoteIcon"
-                        android:hint="@string/add_note"
-                        android:inputType="text"
-                        android:lines="1"
-                        android:maxLines="1"
-                        android:textSize="@dimen/standard_text_size"/>
+                        <Spinner
+                            android:id="@+id/transactionCardCategoryList"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardAccountIcon"
+                            android:layout_toEndOf="@id/transactionCardCategoryIcon">
+                        </Spinner>
 
-                    <View
-                        android:id="@+id/transactionCardDivider"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_below="@id/transactionCardNoteIcon"
-                        android:layout_centerHorizontal="true"/>
+                        <ImageView
+                            android:id="@+id/transactionCardNoteIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardCategoryIcon"
+                            android:contentDescription="@string/note"
+                            android:paddingEnd="@dimen/transaction_card_line_icon_margin"
+                            android:src="@drawable/ic_description_black_24dp"/>
 
-                    <ImageView
-                        android:id="@+id/transactionCardDateIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardNoteIcon"
-                        android:contentDescription="@string/date"
-                        android:paddingEnd="@dimen/transaction_card_line_icon_margin"
-                        android:src="@drawable/ic_date_range_black_24dp"/>
+                        <EditText
+                            android:id="@+id/transactionCardNoteText"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardCategoryIcon"
+                            android:layout_toEndOf="@id/transactionCardNoteIcon"
+                            android:hint="@string/add_note"
+                            android:inputType="text"
+                            android:lines="1"
+                            android:maxLines="1"
+                            android:textSize="@dimen/standard_text_size"/>
 
-                    <EditText
-                        android:id="@+id/transactionCardDateText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardNoteIcon"
-                        android:layout_toEndOf="@id/transactionCardDateIcon"
-                        android:layout_toStartOf="@id/transactionCardDivider"
-                        android:focusable="false"
-                        android:inputType="date"
-                        android:text="@string/today"
-                        android:textSize="@dimen/standard_text_size"/>
+                        <View
+                            android:id="@+id/transactionCardDivider"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_below="@id/transactionCardNoteIcon"
+                            android:layout_centerHorizontal="true"/>
 
-                    <ImageView
-                        android:id="@+id/transactionCardTimeIcon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_below="@id/transactionCardNoteIcon"
-                        android:layout_toEndOf="@id/transactionCardDivider"
-                        android:contentDescription="@string/time"
-                        android:paddingEnd="@dimen/transaction_card_line_icon_margin"
-                        android:paddingStart="@dimen/transaction_card_line_icon_margin"
-                        android:src="@drawable/ic_access_time_black_24dp"/>
+                        <ImageView
+                            android:id="@+id/transactionCardDateIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardNoteIcon"
+                            android:contentDescription="@string/date"
+                            android:paddingEnd="@dimen/transaction_card_line_icon_margin"
+                            android:src="@drawable/ic_date_range_black_24dp"/>
 
-                    <EditText
-                        android:id="@+id/transactionCardTimeText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/transaction_card_line_height"
-                        android:layout_alignParentEnd="true"
-                        android:layout_below="@id/transactionCardNoteIcon"
-                        android:layout_toEndOf="@id/transactionCardTimeIcon"
-                        android:focusable="false"
-                        android:inputType="time"
-                        android:textSize="@dimen/standard_text_size"/>
+                        <EditText
+                            android:id="@+id/transactionCardDateText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardNoteIcon"
+                            android:layout_toEndOf="@id/transactionCardDateIcon"
+                            android:layout_toStartOf="@id/transactionCardDivider"
+                            android:focusable="false"
+                            android:inputType="date"
+                            android:text="@string/today"
+                            android:textSize="@dimen/standard_text_size"/>
 
-                    <Button
-                        android:id="@+id/addTransaction"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_below="@id/transactionCardDateIcon"
-                        android:text="@string/add_transaction"
-                        android:theme="@style/PrimaryFlatButton"/>
+                        <ImageView
+                            android:id="@+id/transactionCardTimeIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_below="@id/transactionCardNoteIcon"
+                            android:layout_toEndOf="@id/transactionCardDivider"
+                            android:contentDescription="@string/time"
+                            android:paddingEnd="@dimen/transaction_card_line_icon_margin"
+                            android:paddingStart="@dimen/transaction_card_line_icon_margin"
+                            android:src="@drawable/ic_access_time_black_24dp"/>
 
-                </RelativeLayout>
+                        <EditText
+                            android:id="@+id/transactionCardTimeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/transaction_card_line_height"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/transactionCardNoteIcon"
+                            android:layout_toEndOf="@id/transactionCardTimeIcon"
+                            android:focusable="false"
+                            android:inputType="time"
+                            android:textSize="@dimen/standard_text_size"/>
 
-            </android.support.v7.widget.CardView>
+                        <Button
+                            android:id="@+id/addTransaction"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_below="@id/transactionCardDateIcon"
+                            android:text="@string/add_transaction"
+                            android:theme="@style/PrimaryFlatButton"/>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>
