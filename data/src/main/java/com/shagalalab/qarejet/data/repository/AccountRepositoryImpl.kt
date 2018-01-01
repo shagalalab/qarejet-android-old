@@ -40,7 +40,7 @@ class AccountRepositoryImpl constructor(var database: Database) : AccountReposit
         return Completable.fromAction({
             database
                     .accountDao
-                    .insertAccounts(DomainToDbMapper.mapAccounts(accounts))
+                    .insertAccounts(DomainToDbMapper.mapAccountsList(accounts))
         })
     }
 

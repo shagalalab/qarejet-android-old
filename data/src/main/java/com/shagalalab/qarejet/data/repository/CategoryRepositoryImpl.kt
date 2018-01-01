@@ -18,7 +18,7 @@ class CategoryRepositoryImpl constructor(var database: Database) : CategoryRepos
         return database
                 .categoryDao
                 .getCategories()
-                .map(DbToDomainMapper::mapCategories)
+                .map(DbToDomainMapper::mapCategoriesList)
     }
 
     override fun getCategory(id: Long): Single<Category> {
@@ -40,7 +40,7 @@ class CategoryRepositoryImpl constructor(var database: Database) : CategoryRepos
         return Completable.fromAction({
             database
                     .categoryDao
-                    .insertCategories(DomainToDbMapper.mapCategories(categories))
+                    .insertCategories(DomainToDbMapper.mapCategoriesList(categories))
         })
     }
 
