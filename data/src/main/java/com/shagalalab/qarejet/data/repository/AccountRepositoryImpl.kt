@@ -8,10 +8,6 @@ import com.shagalalab.qarejet.domain.repository.AccountRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
-/**
- * Created by atabek on 12/21/2017.
- */
-
 class AccountRepositoryImpl constructor(var database: Database) : AccountRepository {
 
     override fun getAllAccounts(): Single<List<Account>> {

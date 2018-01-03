@@ -6,10 +6,6 @@ import com.shagalalab.qarejet.data.db.model.CategoryDbModel
 import com.shagalalab.qarejet.data.db.model.TransactionDbModel
 import io.reactivex.Single
 
-/**
- * Created by atabek on 12/14/2017.
- */
-
 @Dao
 interface AccountDao {
     @Query("SELECT * from accounts")

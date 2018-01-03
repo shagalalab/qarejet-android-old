@@ -4,10 +4,6 @@ import com.shagalalab.qarejet.domain.model.Account
 import io.reactivex.Completable
 import io.reactivex.Single
 
-/**
- * Created by atabek on 12/14/2017.
- */
-
 interface AccountRepository {
 
     fun getAllAccounts(): Single<List<Account>>

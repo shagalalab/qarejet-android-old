@@ -8,10 +8,6 @@ import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
-/**
- * Created by atabek on 12/14/2017.
- */
-
 class TransactionRepositoryImpl (var database : Database) : TransactionRepository {
 
     override fun getTransaction(id: Long): Single<Transaction> {

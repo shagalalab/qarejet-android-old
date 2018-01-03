@@ -5,10 +5,6 @@ import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.repository.AccountRepository
 import io.reactivex.Completable
 
-/**
- * Created by atabek on 12/21/2017.
- */
-
 class AddAccountsUseCase(
         private val repository: AccountRepository
 ) : CompletableUseCaseWithParameters<List<Account>> {

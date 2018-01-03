@@ -8,10 +8,6 @@ import com.shagalalab.qarejet.domain.repository.CategoryRepository
 import io.reactivex.Completable
 import io.reactivex.Single
 
-/**
- * Created by atabek on 12/21/2017.
- */
-
 class CategoryRepositoryImpl constructor(var database: Database) : CategoryRepository {
 
     override fun getAllCategories(): Single<List<Category>> {

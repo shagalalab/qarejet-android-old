@@ -7,10 +7,6 @@ import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 
-/**
- * Created by atabek on 12/20/2017.
- */
-
 object DbToDomainMapper {
 
     fun mapTransactionList(dbModels: List<TransactionDbModel>): List<Transaction> {

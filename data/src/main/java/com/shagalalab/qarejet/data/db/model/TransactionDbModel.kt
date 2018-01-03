@@ -7,10 +7,6 @@ import android.arch.persistence.room.TypeConverters
 import com.shagalalab.qarejet.data.db.DateConverter
 import java.util.*
 
-/**
- * Created by atabek on 12/14/2017.
- */
-
 @Entity(tableName = "transactions"
 //        foreignKeys = arrayOf(
 //                ForeignKey(
