@@ -1,6 +1,5 @@
 package com.shagalalab.qarejet.ui.splash
 
-import android.util.Log
 import com.shagalalab.qarejet.domain.interactor.account.AddAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
@@ -8,13 +7,13 @@ import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.shagalalab.qarejet.util.SchedulersProvider
 
 class SplashPresenter constructor(
         private val initialDataUseCase: InitialDataUseCase,
         private val addAccountsUseCase: AddAccountsUseCase,
-        private val addCategoriesUseCase: AddCategoriesUseCase
+        private val addCategoriesUseCase: AddCategoriesUseCase,
+        private val schedulersProvider: SchedulersProvider
 ) {
     lateinit var view: SplashView
 
@@ -26,7 +25,6 @@ class SplashPresenter constructor(
         val isPopulated = initialDataUseCase.isDataPopulated()
 
         if (isPopulated) {
-            initialDataUseCase.setInitialDataPopulated()
             view.goToNextScreen()
         } else {
             addAccountsUseCase.execute(accounts.map { Account(0, it) })
@@ -35,21 +33,19 @@ class SplashPresenter constructor(
                                     categoriesIncome.map { Category(0, it, TRANSACTION_TYPE_INCOME) }
                             ))
                     )
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(schedulersProvider.io())
+                    .observeOn(schedulersProvider.ui())
                     .subscribe(this::allDataSaved, this::failureToSaveData)
         }
     }
 
     private fun allDataSaved() {
-        Log.d("mytest", "allDataSaved")
         initialDataUseCase.setInitialDataPopulated()
         view.goToNextScreen()
     }
 
     private fun failureToSaveData(throwable: Throwable) {
-        view.showError("Error saving data")
-        Log.e("mytest", "Error saving data", throwable)
+        view.showError("Error saving data: " + throwable.localizedMessage)
     }
 
 }
