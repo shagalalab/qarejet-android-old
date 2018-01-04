@@ -6,7 +6,7 @@ import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import io.reactivex.Completable
 
 class AddNewTransactionUseCase constructor(
-    private val transactionRepository: TransactionRepository
+        private val transactionRepository: TransactionRepository
 ) : CompletableUseCaseWithParameters<Transaction> {
 
     override fun execute(parameter: Transaction): Completable = transactionRepository.addTransaction(parameter)

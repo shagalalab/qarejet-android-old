@@ -7,14 +7,14 @@ import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUse
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.shagalalab.qarejet.util.SchedulersProvider
 import java.util.*
 
 class NewTransactionPresenter constructor(
         private val addNewTransactionsUseCase: AddNewTransactionUseCase,
         private val getAllAccountsUseCase: GetAllAccountsUseCase,
-        private val getAllCategoriesUseCase: GetAllCategoriesUseCase
+        private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+        private val schedulersProvider: SchedulersProvider
 ) {
     private lateinit var view: NewTransactionView
     private var transactionType = TRANSACTION_TYPE_EXPENSE
@@ -25,15 +25,15 @@ class NewTransactionPresenter constructor(
 
     fun requestAccountData() {
         getAllAccountsUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
                 .subscribe(view::updateAccounts)
     }
 
     fun requestCategoryData() {
         getAllCategoriesUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
                 .subscribe(view::updateCategories)
     }
 
@@ -63,8 +63,8 @@ class NewTransactionPresenter constructor(
             return
         }
         addNewTransactionsUseCase.execute(Transaction(0, transactionType, date, accountId, categoryId, amount, note))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulersProvider.io())
+                .observeOn(schedulersProvider.ui())
                 .subscribe(this::onSuccess, this::onFailure)
     }
 

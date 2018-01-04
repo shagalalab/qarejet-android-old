@@ -18,18 +18,19 @@ class SplashPresenterTest {
 
     @Mock private lateinit var view : SplashView
     @Mock private lateinit var addAccountsUseCase : AddAccountsUseCase
-    @Mock private lateinit var addCategoriesUseCase  : AddCategoriesUseCase
-    @Mock private lateinit var configRepository : ConfigRepository
+    @Mock private lateinit var addCategoriesUseCase : AddCategoriesUseCase
 
+    @Mock private lateinit var configRepository : ConfigRepository
     @Spy
     @InjectMocks private lateinit var initialDataUseCase : InitialDataUseCase
 
+    private val schedulersProvider = TestSchedulers()
     private lateinit var presenter: SplashPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = SplashPresenter(initialDataUseCase, addAccountsUseCase, addCategoriesUseCase, TestSchedulers())
+        presenter = SplashPresenter(initialDataUseCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
         presenter.init(view)
     }
 

@@ -5,13 +5,10 @@ import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.repository.CategoryRepository
 import io.reactivex.Single
 
-class GetAllCategoriesUseCase(
+class GetAllCategoriesUseCase constructor(
         private val repository: CategoryRepository
 ) : SingleUseCase<List<Category>> {
 
-    override fun execute(): Single<List<Category>> {
-        return repository
-                .getAllCategories()
-    }
+    override fun execute(): Single<List<Category>>  = repository.getAllCategories()
 
 }

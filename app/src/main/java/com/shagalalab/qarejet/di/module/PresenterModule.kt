@@ -26,8 +26,9 @@ class PresenterModule {
     fun providesNewTransactionPresenter(
             addNewTransactionUseCase: AddNewTransactionUseCase,
             getAllAccountsUseCase: GetAllAccountsUseCase,
-            getAllCategoriesUseCase: GetAllCategoriesUseCase
-    ) = NewTransactionPresenter(addNewTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase)
+            getAllCategoriesUseCase: GetAllCategoriesUseCase,
+            schedulersProvider: SchedulersProvider
+    ) = NewTransactionPresenter(addNewTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton

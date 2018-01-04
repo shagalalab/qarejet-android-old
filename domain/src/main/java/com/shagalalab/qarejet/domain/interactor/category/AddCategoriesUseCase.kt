@@ -9,8 +9,6 @@ class AddCategoriesUseCase constructor(
         private val categoryRepository: CategoryRepository
 ) : CompletableUseCaseWithParameters<List<Category>> {
 
-    override fun execute(parameter: List<Category>): Completable {
-        return categoryRepository.addCategories(parameter)
-    }
+    override fun execute(parameter: List<Category>): Completable = categoryRepository.addCategories(parameter)
 
 }
