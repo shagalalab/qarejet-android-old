@@ -47,5 +47,4 @@ class SplashPresenter constructor(
     private fun failureToSaveData(throwable: Throwable) {
         view.showError("Error saving data: " + throwable.localizedMessage)
     }
-
 }

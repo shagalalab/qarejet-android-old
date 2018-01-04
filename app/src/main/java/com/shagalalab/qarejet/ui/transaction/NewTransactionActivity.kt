@@ -25,7 +25,7 @@ import com.shagalalab.qarejet.util.isToday
 import com.shagalalab.qarejet.util.toShortDate
 import com.shagalalab.qarejet.util.toShortTime
 import kotlinx.android.synthetic.main.activity_new_transaction.*
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePickerDialog.OnTimeSetListener,

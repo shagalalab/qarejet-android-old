@@ -1,7 +1,7 @@
 package com.shagalalab.qarejet.util
 
 import java.text.DateFormat
-import java.util.*
+import java.util.Calendar
 
 fun Calendar.toShortDate(): String {
     return DateFormat.getDateInstance(DateFormat.SHORT).format(this.time)

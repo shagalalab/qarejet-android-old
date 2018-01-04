@@ -8,7 +8,7 @@ import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import com.shagalalab.qarejet.util.SchedulersProvider
-import java.util.*
+import java.util.Date
 
 class NewTransactionPresenter constructor(
         private val addNewTransactionsUseCase: AddNewTransactionUseCase,

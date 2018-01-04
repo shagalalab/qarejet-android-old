@@ -19,7 +19,7 @@ class PresenterModule {
 
     @Provides
     @Singleton
-    fun providesSchedulers() : SchedulersProvider = AppSchedulers()
+    fun providesSchedulers(): SchedulersProvider = AppSchedulers()
 
     @Provides
     @Singleton
@@ -37,5 +37,4 @@ class PresenterModule {
                                 addCategoriesUseCase: AddCategoriesUseCase,
                                 schedulersProvider: SchedulersProvider) =
             SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
-
 }

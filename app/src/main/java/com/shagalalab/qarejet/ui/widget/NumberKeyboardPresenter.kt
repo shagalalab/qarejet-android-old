@@ -59,8 +59,8 @@ class NumberKeyboardPresenter(
 
     fun handleShowHideAnimation(numberKeyboardPanel: ViewGroup, numberKeyboardShowHide: ImageView) {
         val keyboardHeight = numberKeyboardPanel.height.toFloat()
-        val from : Float
-        val to : Float
+        val from: Float
+        val to: Float
         numberKeyboardShowHide.isEnabled = false
         listener.onNumberKeyboardChanged(isVisible, keyboardHeight, DURATION)
         if (isVisible) {
@@ -77,7 +77,7 @@ class NumberKeyboardPresenter(
                 numberKeyboardPanel.y = value
                 numberKeyboardShowHide.y = value + keyboardHeight
             }
-            addListener(object : AnimatorListenerAdapter(){
+            addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
                     numberKeyboardShowHide.isEnabled = true
                     numberKeyboardShowHide.setImageResource(

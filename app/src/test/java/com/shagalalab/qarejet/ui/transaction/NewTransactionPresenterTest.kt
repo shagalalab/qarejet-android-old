@@ -1,6 +1,10 @@
 package com.shagalalab.qarejet.ui.transaction
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
+import com.nhaarman.mockito_kotlin.whenever
 import com.shagalalab.qarejet.TestSchedulers
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
@@ -19,7 +23,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import java.util.*
+import java.util.Date
 
 class NewTransactionPresenterTest {
 

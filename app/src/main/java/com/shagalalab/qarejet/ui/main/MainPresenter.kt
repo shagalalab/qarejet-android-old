@@ -9,5 +9,4 @@ class MainPresenter : MvpPresenter<MainView>() {
     fun openNewTransactionScreen() {
         viewState.addNewTransaction()
     }
-
 }

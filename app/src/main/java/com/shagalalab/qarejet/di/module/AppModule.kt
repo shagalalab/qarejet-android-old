@@ -15,5 +15,4 @@ class AppModule(val app: QarejetApp) {
     @Provides
     @Singleton
     fun providesContext() = app.applicationContext
-
 }

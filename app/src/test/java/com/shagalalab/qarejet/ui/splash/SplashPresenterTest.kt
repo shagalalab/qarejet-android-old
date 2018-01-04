@@ -1,6 +1,10 @@
 package com.shagalalab.qarejet.ui.splash
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.times
+import com.nhaarman.mockito_kotlin.verify
+import com.nhaarman.mockito_kotlin.verifyNoMoreInteractions
+import com.nhaarman.mockito_kotlin.whenever
 import com.shagalalab.qarejet.TestSchedulers
 import com.shagalalab.qarejet.domain.interactor.account.AddAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
@@ -16,13 +20,13 @@ import org.mockito.Spy
 
 class SplashPresenterTest {
 
-    @Mock private lateinit var view : SplashView
-    @Mock private lateinit var addAccountsUseCase : AddAccountsUseCase
-    @Mock private lateinit var addCategoriesUseCase : AddCategoriesUseCase
+    @Mock private lateinit var view: SplashView
+    @Mock private lateinit var addAccountsUseCase: AddAccountsUseCase
+    @Mock private lateinit var addCategoriesUseCase: AddCategoriesUseCase
 
-    @Mock private lateinit var configRepository : ConfigRepository
+    @Mock private lateinit var configRepository: ConfigRepository
     @Spy
-    @InjectMocks private lateinit var initialDataUseCase : InitialDataUseCase
+    @InjectMocks private lateinit var initialDataUseCase: InitialDataUseCase
 
     private val schedulersProvider = TestSchedulers()
     private lateinit var presenter: SplashPresenter
@@ -65,5 +69,4 @@ class SplashPresenterTest {
         verify(view, times(1)).showError(any())
         verifyNoMoreInteractions(view)
     }
-
 }

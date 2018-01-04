@@ -19,7 +19,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun providesTransactionRepository(database : Database): TransactionRepository = TransactionRepositoryImpl(database)
+    fun providesTransactionRepository(database: Database): TransactionRepository = TransactionRepositoryImpl(database)
 
     @Provides
     @Singleton
@@ -32,5 +32,4 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun providesConfigRepository(sharedPreferences: SharedPreferences): ConfigRepository = ConfigRepositoryImpl(sharedPreferences)
-
 }
