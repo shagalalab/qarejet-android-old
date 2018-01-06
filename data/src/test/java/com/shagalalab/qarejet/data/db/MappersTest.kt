@@ -2,51 +2,54 @@ package com.shagalalab.qarejet.data.db
 
 import com.shagalalab.qarejet.data.db.model.AccountDbModel
 import com.shagalalab.qarejet.data.db.model.CategoryDbModel
+import com.shagalalab.qarejet.data.db.model.FullTransactionModel
 import com.shagalalab.qarejet.data.db.model.TransactionDbModel
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 import org.junit.Assert
 import org.junit.Test
-import java.util.*
+import java.util.Date
 
 class MappersTest {
 
     private val date = Date()
-    private val transaction1 = Transaction(0, 1, date, 1, 1, 1.0, "transaction1")
-    private val transaction2 = Transaction(0, 2, date, 2, 2, 2.0, "transaction2")
-    private val transactionList = listOf(transaction1, transaction2)
     private val account1 = Account(0, "account1")
     private val account2 = Account(0, "account2")
     private val accountList = listOf(account1, account2)
     private val category1 = Category(0, "category1", 1)
     private val category2 = Category(0, "category2", 2)
     private val categoryList = listOf(category1, category2)
+    private val transaction1 = Transaction(0, 1, date, account1, category1, 1.0, "transaction1")
+    private val transaction2 = Transaction(0, 2, date, account2, category2, 2.0, "transaction2")
+    private val transactionList = listOf(transaction1, transaction2)
 
-    private val transactionDbModel1 = TransactionDbModel(0, 1, date, 1, 1, 1.0, "transaction1")
-    private val transactionDbModel2 = TransactionDbModel(0, 2, date, 2, 2, 2.0, "transaction2")
-    private val transactionDbModelList = listOf(transactionDbModel1, transactionDbModel2)
+    private val transactionDbModel1 = TransactionDbModel(0, 1, date, account1.id, category1.id, 1.0, "transaction1")
+    private val transactionDbModel2 = TransactionDbModel(0, 2, date, account2.id, category2.id, 2.0, "transaction2")
     private val accountDbModel1 = AccountDbModel(0, "account1")
     private val accountDbModel2 = AccountDbModel(0, "account2")
     private val accountDbModelList = listOf(accountDbModel1, accountDbModel2)
     private val categoryDbModel1 = CategoryDbModel(0, "category1", 1)
     private val categoryDbModel2 = CategoryDbModel(0, "category2", 2)
     private val categoryDbModelList = listOf(categoryDbModel1, categoryDbModel2)
+    private val transactionFullModel1 = FullTransactionModel(transactionDbModel1, categoryDbModel1, accountDbModel1)
+    private val transactionFullModel2 = FullTransactionModel(transactionDbModel2, categoryDbModel2, accountDbModel2)
+    private val transactionFullModelList = listOf(transactionFullModel1, transactionFullModel2)
 
     // DB -> Domain
     @Test
     fun shouldConvertTransactionFromDbToDomain() {
-        Assert.assertEquals(DbToDomainMapper.mapTransaction(transactionDbModel1), transaction1)
+        Assert.assertEquals(DbToDomainMapper.mapTransaction(transactionFullModel1), transaction1)
     }
 
     @Test
     fun shouldNotConvertTransactionFromDbToDomain() {
-        Assert.assertNotEquals(DbToDomainMapper.mapTransaction(transactionDbModel1), transaction2)
+        Assert.assertNotEquals(DbToDomainMapper.mapTransaction(transactionFullModel1), transaction2)
     }
 
     @Test
     fun shouldConvertTransactionListFromDbToDomain() {
-        Assert.assertEquals(DbToDomainMapper.mapTransactionList(transactionDbModelList), transactionList)
+        Assert.assertEquals(DbToDomainMapper.mapTransactionList(transactionFullModelList), transactionList)
     }
 
     @Test

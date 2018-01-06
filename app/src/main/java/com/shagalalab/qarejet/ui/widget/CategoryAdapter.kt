@@ -14,7 +14,7 @@ class CategoryAdapter(context: Context, private val categories: List<Category>) 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = convertView ?: inflater.inflate(R.layout.spinner_item, parent, false)
+        val view: View = convertView ?: inflater.inflate(R.layout.item_spinner, parent, false)
         val text = view as TextView
         text.text = getItem(position).title
 

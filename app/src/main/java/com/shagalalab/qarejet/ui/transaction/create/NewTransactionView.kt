@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction
+package com.shagalalab.qarejet.ui.transaction.create
 
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category

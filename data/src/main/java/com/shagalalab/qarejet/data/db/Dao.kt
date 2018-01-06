@@ -1,17 +1,22 @@
 package com.shagalalab.qarejet.data.db
 
-import android.arch.persistence.room.*
+import android.arch.persistence.room.Dao
+import android.arch.persistence.room.Delete
+import android.arch.persistence.room.Insert
+import android.arch.persistence.room.OnConflictStrategy
+import android.arch.persistence.room.Query
 import com.shagalalab.qarejet.data.db.model.AccountDbModel
 import com.shagalalab.qarejet.data.db.model.CategoryDbModel
+import com.shagalalab.qarejet.data.db.model.FullTransactionModel
 import com.shagalalab.qarejet.data.db.model.TransactionDbModel
 import io.reactivex.Single
 
 @Dao
 interface AccountDao {
-    @Query("SELECT * from accounts")
+    @Query("SELECT * FROM accounts")
     fun getAccounts(): Single<List<AccountDbModel>>
 
-    @Query("SELECT * from accounts where id = :id")
+    @Query("SELECT * FROM accounts WHERE account_id = :id")
     fun getAccount(id: Long): Single<AccountDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -26,10 +31,10 @@ interface AccountDao {
 
 @Dao
 interface CategoryDao {
-    @Query("SELECT * from categories")
+    @Query("SELECT * FROM categories")
     fun getCategories(): Single<List<CategoryDbModel>>
 
-    @Query("SELECT * from categories where id = :id")
+    @Query("SELECT * FROM categories WHERE category_id = :id")
     fun getCategory(id: Long): Single<CategoryDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -44,11 +49,18 @@ interface CategoryDao {
 
 @Dao
 interface TransactionDao {
-    @Query("SELECT * from transactions")
-    fun getTransactions(): Single<List<TransactionDbModel>>
+    @Query("SELECT transactions.*, accounts.*, categories.*\n" +
+        "FROM transactions\n" +
+        "INNER JOIN accounts ON transactions.acc_id = accounts.account_id\n" +
+        "INNER JOIN categories ON transactions.cat_id = categories.category_id")
+    fun getTransactions(): Single<List<FullTransactionModel>>
 
-    @Query("SELECT * from transactions where id = :id")
-    fun getTransaction(id: Long): Single<TransactionDbModel>
+    @Query("SELECT transactions.*, accounts.*, categories.*\n" +
+        "FROM transactions\n" +
+        "INNER JOIN accounts ON transactions.acc_id = accounts.account_id\n" +
+        "INNER JOIN categories ON transactions.cat_id = categories.category_id\n" +
+        "WHERE id = :id")
+    fun getTransaction(id: Long): Single<FullTransactionModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTransaction(transaction: TransactionDbModel)

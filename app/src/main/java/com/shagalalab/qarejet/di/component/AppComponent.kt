@@ -7,7 +7,8 @@ import com.shagalalab.qarejet.di.module.PresenterModule
 import com.shagalalab.qarejet.di.module.RepositoryModule
 import com.shagalalab.qarejet.di.module.UseCaseModule
 import com.shagalalab.qarejet.ui.splash.SplashActivity
-import com.shagalalab.qarejet.ui.transaction.NewTransactionActivity
+import com.shagalalab.qarejet.ui.transaction.create.NewTransactionActivity
+import com.shagalalab.qarejet.ui.transaction.list.TransactionListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,4 +18,5 @@ interface AppComponent {
     fun inject(app: QarejetApp)
     fun inject(activity: SplashActivity)
     fun inject(activity: NewTransactionActivity)
+    fun inject(fragment: TransactionListFragment)
 }

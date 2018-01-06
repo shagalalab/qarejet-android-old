@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction
+package com.shagalalab.qarejet.ui.transaction.create
 
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
@@ -92,8 +92,8 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         addTransaction.setOnClickListener({
             presenter.addNewTransaction(
                     transactionAmount.text.toString().toDouble(),
-                    (transactionCardAccountSpinner.selectedItem as Account).id,
-                    (transactionCardCategoryList.selectedItem as Category).id,
+                    transactionCardAccountSpinner.selectedItem as Account,
+                    transactionCardCategoryList.selectedItem as Category,
                     transactionCardNoteText.text.toString(),
                     selectedDate.time
             )
@@ -113,7 +113,7 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
     }
 
     override fun updateAccounts(accounts: List<Account>) {
-        accountsAdapter = ArrayAdapter(this, R.layout.spinner_item, accounts)
+        accountsAdapter = ArrayAdapter(this, R.layout.item_spinner, accounts)
         accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         transactionCardAccountSpinner.adapter = accountsAdapter
     }

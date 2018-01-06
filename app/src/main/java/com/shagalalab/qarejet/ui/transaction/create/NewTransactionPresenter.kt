@@ -1,9 +1,11 @@
-package com.shagalalab.qarejet.ui.transaction
+package com.shagalalab.qarejet.ui.transaction.create
 
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
+import com.shagalalab.qarejet.domain.model.Account
+import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
@@ -57,12 +59,12 @@ class NewTransactionPresenter constructor(
         view.showTimeChooser()
     }
 
-    fun addNewTransaction(amount: Double, accountId: Long, categoryId: Long, note: String, date: Date) {
+    fun addNewTransaction(amount: Double, account: Account, category: Category, note: String, date: Date) {
         if (amount == 0.0) {
             view.showError(R.string.enter_amount)
             return
         }
-        addNewTransactionsUseCase.execute(Transaction(0, transactionType, date, accountId, categoryId, amount, note))
+        addNewTransactionsUseCase.execute(Transaction(0, transactionType, date, account, category, amount, note))
                 .subscribeOn(schedulersProvider.io())
                 .observeOn(schedulersProvider.ui())
                 .subscribe(this::onSuccess, this::onFailure)

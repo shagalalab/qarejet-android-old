@@ -13,6 +13,8 @@ import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.domain.repository.AccountRepository
+import com.shagalalab.qarejet.ui.transaction.create.NewTransactionPresenter
+import com.shagalalab.qarejet.ui.transaction.create.NewTransactionView
 import com.shagalalab.qarejet.util.Constants
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -29,7 +31,7 @@ class NewTransactionPresenterTest {
 
     private val accounts = listOf(Account(1, "one"), Account(2, "two"))
     private val categories = listOf(Category(1, "one", 1), Category(2, "two", 2))
-    private val transaction = Transaction(1, 1, Date(), 1, 1, 1.0, "")
+    private val transaction = Transaction(1, 1, Date(), accounts[0], categories[0], 1.0, "")
     private val schedulersProvider = TestSchedulers()
 
     @Mock private lateinit var view: NewTransactionView
@@ -97,7 +99,7 @@ class NewTransactionPresenterTest {
 
     @Test
     fun shouldShowErrorIfNewTransactionAmountIsZero() {
-        presenter.addNewTransaction(0.0, transaction.accountId, transaction.categoryId, transaction.memo, transaction.date)
+        presenter.addNewTransaction(0.0, transaction.account, transaction.category, transaction.memo, transaction.date)
         verify(view, times(1)).showError(anyInt())
         verifyNoMoreInteractions(view)
     }
@@ -105,7 +107,7 @@ class NewTransactionPresenterTest {
     @Test
     fun shouldAddNewTransaction() {
         whenever(addNewTransactionsUseCase.execute(any())).thenReturn(Completable.complete())
-        presenter.addNewTransaction(transaction.amount, transaction.accountId, transaction.categoryId, transaction.memo, transaction.date)
+        presenter.addNewTransaction(transaction.amount, transaction.account, transaction.category, transaction.memo, transaction.date)
         verify(view, times(1)).finishActivity()
         verifyNoMoreInteractions(view)
     }
@@ -113,7 +115,7 @@ class NewTransactionPresenterTest {
     @Test
     fun shouldShowErrorIfAddNewTransactionIsFailed() {
         whenever(addNewTransactionsUseCase.execute(any())).thenReturn(Completable.error(Throwable()))
-        presenter.addNewTransaction(transaction.amount, transaction.accountId, transaction.categoryId, transaction.memo, transaction.date)
+        presenter.addNewTransaction(transaction.amount, transaction.account, transaction.category, transaction.memo, transaction.date)
         verify(view, times(1)).showError(anyString())
         verifyNoMoreInteractions(view)
     }

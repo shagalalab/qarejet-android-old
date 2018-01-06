@@ -10,7 +10,8 @@ import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.ui.transaction.NewTransactionActivity
+import com.shagalalab.qarejet.ui.transaction.create.NewTransactionActivity
+import com.shagalalab.qarejet.ui.transaction.list.TransactionListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -32,6 +33,11 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.mainLayout, TransactionListFragment())
+            .commit()
     }
 
     override fun onBackPressed() {
