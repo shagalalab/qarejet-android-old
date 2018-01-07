@@ -13,13 +13,13 @@ import java.util.Date
 
 class TransactionsUseCasesTest {
 
-    private val transaction = Transaction(1, 1, Date(), Account(1, ""), Category(1, "", 1), 1.2, "")
+    private val transaction = Transaction(1, 1, Date(), Account(1, ""), Category(1, "", 1, 1, 1), 1.2, "")
     private val transactionId = 1L
     private val repositoryMock = mock<TransactionRepository>()
 
     @Test
     fun shouldAddNewTransaction() {
-        val useCase = AddNewTransactionUseCase(repositoryMock)
+        val useCase = AddTransactionUseCase(repositoryMock)
         useCase.execute(transaction)
         verify(repositoryMock, times(1)).addTransaction(transaction)
         verifyNoMoreInteractions(repositoryMock)

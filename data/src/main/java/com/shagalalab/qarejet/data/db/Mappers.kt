@@ -32,12 +32,16 @@ object DbToDomainMapper {
     }
 
     fun mapCategory(dbModel: CategoryDbModel): Category {
-        return Category(dbModel.id, dbModel.title, dbModel.type)
+        return Category(dbModel.id, dbModel.title, dbModel.icon, dbModel.color, dbModel.type)
     }
 
 }
 
 object DomainToDbMapper {
+
+    fun mapTransactionsList(models: List<Transaction>): List<TransactionDbModel> {
+        return models.map { mapTransaction(it) }
+    }
 
     fun mapTransaction(model: Transaction): TransactionDbModel {
         return TransactionDbModel(0, model.type, model.date, model.account.id,
@@ -57,7 +61,7 @@ object DomainToDbMapper {
     }
 
     fun mapCategory(model: Category): CategoryDbModel {
-        return CategoryDbModel(0, model.title, model.type)
+        return CategoryDbModel(0, model.title, model.icon, model.color, model.type)
     }
 
 }

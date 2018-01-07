@@ -65,6 +65,9 @@ interface TransactionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertTransaction(transaction: TransactionDbModel)
 
+    @Insert
+    fun insertTransactions(transactions: List<TransactionDbModel>)
+
     @Delete
     fun deleteTransaction(transaction: TransactionDbModel)
 }

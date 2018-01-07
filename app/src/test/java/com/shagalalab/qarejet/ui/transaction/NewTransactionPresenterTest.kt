@@ -8,7 +8,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import com.shagalalab.qarejet.TestSchedulers
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
@@ -30,13 +30,13 @@ import java.util.Date
 class NewTransactionPresenterTest {
 
     private val accounts = listOf(Account(1, "one"), Account(2, "two"))
-    private val categories = listOf(Category(1, "one", 1), Category(2, "two", 2))
+    private val categories = listOf(Category(1, "one", 1, 1, 1), Category(2, "two", 2, 2, 2))
     private val transaction = Transaction(1, 1, Date(), accounts[0], categories[0], 1.0, "")
     private val schedulersProvider = TestSchedulers()
 
     @Mock private lateinit var view: NewTransactionView
     @Mock private lateinit var getAllCategoriesUseCase: GetAllCategoriesUseCase
-    @Mock private lateinit var addNewTransactionsUseCase: AddNewTransactionUseCase
+    @Mock private lateinit var addTransactionsUseCase: AddTransactionUseCase
     @Mock private lateinit var accountRepository: AccountRepository
     @InjectMocks private lateinit var getAllAccountsUseCase: GetAllAccountsUseCase
 
@@ -45,7 +45,7 @@ class NewTransactionPresenterTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = NewTransactionPresenter(addNewTransactionsUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+        presenter = NewTransactionPresenter(addTransactionsUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
         presenter.init(view)
     }
 
@@ -106,7 +106,7 @@ class NewTransactionPresenterTest {
 
     @Test
     fun shouldAddNewTransaction() {
-        whenever(addNewTransactionsUseCase.execute(any())).thenReturn(Completable.complete())
+        whenever(addTransactionsUseCase.execute(any())).thenReturn(Completable.complete())
         presenter.addNewTransaction(transaction.amount, transaction.account, transaction.category, transaction.memo, transaction.date)
         verify(view, times(1)).finishActivity()
         verifyNoMoreInteractions(view)
@@ -114,7 +114,7 @@ class NewTransactionPresenterTest {
 
     @Test
     fun shouldShowErrorIfAddNewTransactionIsFailed() {
-        whenever(addNewTransactionsUseCase.execute(any())).thenReturn(Completable.error(Throwable()))
+        whenever(addTransactionsUseCase.execute(any())).thenReturn(Completable.error(Throwable()))
         presenter.addNewTransaction(transaction.amount, transaction.account, transaction.category, transaction.memo, transaction.date)
         verify(view, times(1)).showError(anyString())
         verifyNoMoreInteractions(view)

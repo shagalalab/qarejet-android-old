@@ -15,10 +15,10 @@ class CategoryRepositoryTest {
 
     private val db = mock<Database>()
     private val categoryDao = mock<CategoryDao>()
-    private val categoryDbModel = CategoryDbModel(1, "one", 1)
-    private val categoryDbModelList = listOf(categoryDbModel, CategoryDbModel(2, "two", 2))
-    private val category = Category(1, "one", 1)
-    private val categoryList = listOf(category, Category(2, "two", 2))
+    private val categoryDbModel = CategoryDbModel(1, "one", 1, 1, 1)
+    private val categoryDbModelList = listOf(categoryDbModel, CategoryDbModel(2, "two", 2, 2, 2))
+    private val category = Category(1, "one", 1, 1, 1)
+    private val categoryList = listOf(category, Category(2, "two", 2, 2, 2))
     private val categoryId = 1L
     private val singleCategoryDbModel = Single.just(categoryDbModel)
     private val singleCategoryDbModelList = Single.just(categoryDbModelList)

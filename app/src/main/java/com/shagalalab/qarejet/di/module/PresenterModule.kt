@@ -6,7 +6,7 @@ import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetAllTransactionsUseCase
 import com.shagalalab.qarejet.ui.splash.SplashPresenter
 import com.shagalalab.qarejet.ui.transaction.create.NewTransactionPresenter
@@ -26,11 +26,11 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesNewTransactionPresenter(
-        addNewTransactionUseCase: AddNewTransactionUseCase,
+        addTransactionUseCase: AddTransactionUseCase,
         getAllAccountsUseCase: GetAllAccountsUseCase,
         getAllCategoriesUseCase: GetAllCategoriesUseCase,
         schedulersProvider: SchedulersProvider
-    ) = NewTransactionPresenter(addNewTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+    ) = NewTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton

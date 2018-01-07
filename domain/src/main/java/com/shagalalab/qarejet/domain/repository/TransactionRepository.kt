@@ -9,4 +9,5 @@ interface TransactionRepository {
     fun getAllTransactions(): Single<List<Transaction>>
     fun getTransaction(id: Long): Single<Transaction>
     fun addTransaction(transaction: Transaction): Completable
+    fun addTransactions(transactions: List<Transaction>): Completable
 }

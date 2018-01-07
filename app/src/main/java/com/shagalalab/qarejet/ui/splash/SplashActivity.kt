@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import com.shagalalab.qarejet.QarejetApp
-import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.domain.model.Account
+import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.main.MainActivity
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity(), SplashView {
+    @Inject lateinit var accounts: List<Account>
+    @Inject lateinit var categories: List<Category>
     @Inject lateinit var presenter: SplashPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +21,7 @@ class SplashActivity : AppCompatActivity(), SplashView {
         (application as QarejetApp).component.inject(this)
 
         presenter.init(this)
-        val accounts = resources.getStringArray(R.array.accounts)
-        val categoriesExpense = resources.getStringArray(R.array.categories_expense)
-        val categoriesIncome = resources.getStringArray(R.array.categories_income)
-        presenter.checkDataPopulated(accounts, categoriesExpense, categoriesIncome)
+        presenter.checkDataPopulated(accounts, categories)
     }
 
     override fun goToNextScreen() {

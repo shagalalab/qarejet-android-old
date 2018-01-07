@@ -36,28 +36,21 @@
     <string name="maximum_digits_reached">You have reached maximum of %d digits</string>
     <string name="new_transaction">New Transaction</string>
 
-    <string-array name="accounts">
-        <item>Cash</item>
-    </string-array>
+    <string name="account_cash">Cash</string>
+    <string name="category_expense_food">Food</string>
+    <string name="category_expense_leisure">Leisure</string>
+    <string name="category_expense_education">Education</string>
+    <string name="category_expense_shopping">Shopping</string>
+    <string name="category_expense_transport">Transportation</string>
+    <string name="category_expense_bills">Bills/Utilities</string>local atm/
+    <string name="category_expense_health">Health</string>
+    <string name="category_expense_vehicle">Vehicle</string>
+    <string name="category_expense_other">Other</string>
+    <string name="category_income_salary">Salary</string>
+    <string name="category_income_gift">Gift</string>
+    <string name="category_income_rental">Rental Income</string>
+    <string name="category_income_sale">Sale</string>
+    <string name="category_income_interest">Interest/Dividend</string>
+    <string name="category_income_other">Other</string>
 
-    <string-array name="categories_expense">
-        <item>Food</item>
-        <item>Leisure</item>
-        <item>Education</item>
-        <item>Shopping</item>
-        <item>Transportation</item>
-        <item>Bills/Utilities</item>
-        <item>Health</item>
-        <item>Vehicle</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="categories_income">
-        <item>Salary</item>
-        <item>Gift</item>
-        <item>Rental Income</item>
-        <item>Sale</item>
-        <item>Interest/Dividend</item>
-        <item>Other</item>
-    </string-array>
 </resources>

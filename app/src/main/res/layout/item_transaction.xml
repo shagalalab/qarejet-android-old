@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/standard_margin">
+
+    <ImageView
+        android:id="@+id/transactionIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="6dp"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:background="@color/black30"
+        android:layout_centerVertical="true"/>
 
     <TextView
         android:id="@+id/transactionCategoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Food"/>
+        android:layout_toEndOf="@id/transactionIcon"
+        tools:text="@string/category_expense_food"/>
 
     <TextView
         android:id="@+id/transactionAccountName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/transactionCategoryName"
-        android:text="Cash"/>
+        android:layout_toEndOf="@id/transactionIcon"
+        tools:text="@string/account_cash"/>
 
     <TextView
         android:id="@+id/transactionAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:text="-123UZS"/>
+        tools:text="-123UZS"/>
 
     <TextView
         android:id="@+id/transactionDate"
@@ -29,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/transactionAmount"
-        android:text="Cash"/>
-
+        tools:text="17/01/2018, 14:32"/>
 
 </RelativeLayout>

@@ -10,7 +10,8 @@ import org.junit.Test
 
 class CategoriesUseCasesTest {
 
-    private val categoriesList = listOf(Category(1, "one", 1), Category(2, "two", 1))
+    private val categoriesList = listOf(Category(1, "one", 1, 1, 1),
+        Category(2, "two", 1, 1, 1))
     private val repositoryMock = mock<CategoryRepository>()
 
     @Test

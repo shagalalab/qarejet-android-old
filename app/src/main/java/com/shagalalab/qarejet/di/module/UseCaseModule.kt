@@ -5,7 +5,7 @@ import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.AddNewTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetAllTransactionsUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionUseCase
 import com.shagalalab.qarejet.domain.repository.AccountRepository
@@ -21,7 +21,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun providesNewTransactionUseCase(repository: TransactionRepository) = AddNewTransactionUseCase(repository)
+    fun providesNewTransactionUseCase(repository: TransactionRepository) = AddTransactionUseCase(repository)
 
     @Provides
     @Singleton

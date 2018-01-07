@@ -5,8 +5,6 @@ import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
-import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
-import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import com.shagalalab.qarejet.util.SchedulersProvider
 
 class SplashPresenter constructor(
@@ -21,18 +19,14 @@ class SplashPresenter constructor(
         this.view = view
     }
 
-    fun checkDataPopulated(accounts: Array<String>, categoriesExpense: Array<String>, categoriesIncome: Array<String>) {
+    fun checkDataPopulated(accounts: List<Account>, categories: List<Category>) {
         val isPopulated = initialDataUseCase.isDataPopulated()
 
         if (isPopulated) {
             view.goToNextScreen()
         } else {
-            addAccountsUseCase.execute(accounts.map { Account(0, it) })
-                    .mergeWith(addCategoriesUseCase.execute(
-                            categoriesExpense.map { Category(0, it, TRANSACTION_TYPE_EXPENSE) }.plus(
-                                    categoriesIncome.map { Category(0, it, TRANSACTION_TYPE_INCOME) }
-                            ))
-                    )
+            addAccountsUseCase.execute(accounts)
+                    .mergeWith(addCategoriesUseCase.execute(categories))
                     .subscribeOn(schedulersProvider.io())
                     .observeOn(schedulersProvider.ui())
                     .subscribe(this::allDataSaved, this::failureToSaveData)

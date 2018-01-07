@@ -31,4 +31,12 @@ class TransactionRepositoryImpl (private val database : Database) : TransactionR
                     .insertTransaction(DomainToDbMapper.mapTransaction(transaction))
         })
     }
+
+    override fun addTransactions(transactions: List<Transaction>): Completable {
+        return Completable.fromAction({
+            database
+                .transactionDao
+                .insertTransactions(DomainToDbMapper.mapTransactionsList(transactions))
+        })
+    }
 }

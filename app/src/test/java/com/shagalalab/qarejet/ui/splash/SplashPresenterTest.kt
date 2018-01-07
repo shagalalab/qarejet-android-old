@@ -41,7 +41,7 @@ class SplashPresenterTest {
     @Test
     fun shouldGoToNextScreenIfDataExists() {
         whenever(initialDataUseCase.isDataPopulated()).thenReturn(true)
-        presenter.checkDataPopulated(arrayOf(), arrayOf(), arrayOf())
+        presenter.checkDataPopulated(listOf(), listOf())
 
         verify(view, times(1)).goToNextScreen()
         verifyNoMoreInteractions(view)
@@ -52,7 +52,7 @@ class SplashPresenterTest {
         whenever(initialDataUseCase.isDataPopulated()).thenReturn(false)
         whenever(addAccountsUseCase.execute(listOf())).thenReturn(Completable.complete())
         whenever(addCategoriesUseCase.execute(listOf())).thenReturn(Completable.complete())
-        presenter.checkDataPopulated(arrayOf(), arrayOf(), arrayOf())
+        presenter.checkDataPopulated(listOf(), listOf())
 
         verify(initialDataUseCase, times(1)).setInitialDataPopulated()
         verify(view, times(1)).goToNextScreen()
@@ -64,7 +64,7 @@ class SplashPresenterTest {
         whenever(initialDataUseCase.isDataPopulated()).thenReturn(false)
         whenever(addAccountsUseCase.execute(listOf())).thenReturn(Completable.error(Throwable()))
         whenever(addCategoriesUseCase.execute(listOf())).thenReturn(Completable.complete())
-        presenter.checkDataPopulated(arrayOf(), arrayOf(), arrayOf())
+        presenter.checkDataPopulated(listOf(), listOf())
 
         verify(view, times(1)).showError(any())
         verifyNoMoreInteractions(view)
