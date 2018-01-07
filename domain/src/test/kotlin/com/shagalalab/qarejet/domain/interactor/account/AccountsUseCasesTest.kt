@@ -10,7 +10,7 @@ import org.junit.Test
 
 class AccountsUseCasesTest {
 
-    private val accountsList = listOf(Account(1, "one"), Account(2, "two"))
+    private val accountsList = listOf(Account(1, "one", "one"), Account(2, "two", "two"))
     private val repositoryMock = mock<AccountRepository>()
 
     @Test

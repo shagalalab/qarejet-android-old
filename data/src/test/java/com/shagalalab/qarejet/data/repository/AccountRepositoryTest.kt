@@ -15,10 +15,10 @@ class AccountRepositoryTest {
 
     private val db = mock<Database>()
     private val accountDao = mock<AccountDao>()
-    private val accountDbModel = AccountDbModel(1, "one")
-    private val accountDbModelList = listOf(accountDbModel, AccountDbModel(2, "two"))
-    private val account = Account(1, "one")
-    private val accountList = listOf(account, Account(2, "two"))
+    private val accountDbModel = AccountDbModel(1, "one", "currency1")
+    private val accountDbModelList = listOf(accountDbModel, AccountDbModel(2, "two", "currency2"))
+    private val account = Account(1, "one", "currency1")
+    private val accountList = listOf(account, Account(2, "two", "currency2"))
     private val accountId = 1L
     private val singleAccountDbModel = Single.just(accountDbModel)
     private val singleAccountDbModelList = Single.just(accountDbModelList)

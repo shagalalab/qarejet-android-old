@@ -29,7 +29,7 @@ import java.util.Date
 
 class NewTransactionPresenterTest {
 
-    private val accounts = listOf(Account(1, "one"), Account(2, "two"))
+    private val accounts = listOf(Account(1, "one", "one"), Account(2, "two", "two"))
     private val categories = listOf(Category(1, "one", 1, 1, 1), Category(2, "two", 2, 2, 2))
     private val transaction = Transaction(1, 1, Date(), accounts[0], categories[0], 1.0, "")
     private val schedulersProvider = TestSchedulers()

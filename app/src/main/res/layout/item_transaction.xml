@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/transactionIcon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:padding="6dp"
+        android:layout_width="@dimen/transaction_item_icon_size"
+        android:layout_height="@dimen/transaction_item_icon_size"
+        android:padding="@dimen/transaction_item_icon_padding"
         android:layout_marginEnd="@dimen/standard_margin"
-        android:background="@color/black30"
+        android:background="@drawable/circle"
         android:layout_centerVertical="true"/>
 
     <TextView
@@ -19,6 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/transactionIcon"
+        android:textSize="16sp"
+        android:textColor="@color/default_text_dark"
         tools:text="@string/category_expense_food"/>
 
     <TextView
@@ -34,6 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:textColor="@color/default_text_dark"
+        android:textStyle="bold"
+        android:textSize="16sp"
         tools:text="-123UZS"/>
 
     <TextView
@@ -42,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/transactionAmount"
+        android:textSize="14sp"
         tools:text="17/01/2018, 14:32"/>
 
 </RelativeLayout>

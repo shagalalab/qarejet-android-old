@@ -17,7 +17,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providesAccounts(context: Context) = listOf(Account(0, context.getString(R.string.account_cash)))
+    fun providesAccounts(context: Context) = listOf(Account(0, context.getString(R.string.account_cash), "UZS"))
 
     @Provides
     @Singleton

@@ -21,8 +21,8 @@ class TransactionRepositoryTest {
 
     private val db = mock<Database>()
     private val date = Date()
-    private val accountDbModel1 = AccountDbModel(1, "account1")
-    private val accountDbModel2 = AccountDbModel(2, "account2")
+    private val accountDbModel1 = AccountDbModel(1, "account1", "currency1")
+    private val accountDbModel2 = AccountDbModel(2, "account2", "currency2")
     private val categoryDbModel1 = CategoryDbModel(1, "category1", 1, 1, 1)
     private val categoryDbModel2 = CategoryDbModel(2, "category2", 2, 2, 2)
     private val transactionDao = mock<TransactionDao>()
@@ -31,8 +31,8 @@ class TransactionRepositoryTest {
     private val transactionDbModelList = listOf(FullTransactionModel(transactionDbModel1, categoryDbModel1, accountDbModel1),
         FullTransactionModel(transactionDbModel2, categoryDbModel2, accountDbModel2))
 
-    private val account1 = Account(1, "account1")
-    private val account2 = Account(2, "account2")
+    private val account1 = Account(1, "account1", "currency1")
+    private val account2 = Account(2, "account2", "currency2")
     private val category1 = Category(1, "category1", 1, 1, 1)
     private val category2 = Category(2, "category2", 2, 2, 2)
     private val transaction1 = Transaction(1, 1, date, account1, category1, 1.0, "")

@@ -24,7 +24,7 @@ object DbToDomainMapper {
     }
 
     fun mapAccount(dbModel: AccountDbModel): Account {
-        return Account(dbModel.id, dbModel.title)
+        return Account(dbModel.id, dbModel.title, dbModel.currency, dbModel.sign)
     }
 
     fun mapCategoriesList(dbModels: List<CategoryDbModel>): List<Category> {
@@ -53,7 +53,7 @@ object DomainToDbMapper {
     }
 
     fun mapAccount(model: Account): AccountDbModel {
-        return AccountDbModel(0, model.title)
+        return AccountDbModel(0, model.title, model.currency, model.sign)
     }
 
     fun mapCategoriesList(models: List<Category>): List<CategoryDbModel> {

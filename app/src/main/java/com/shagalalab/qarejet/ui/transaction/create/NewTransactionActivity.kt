@@ -21,6 +21,7 @@ import com.shagalalab.qarejet.ui.widget.DatePickerFragment
 import com.shagalalab.qarejet.ui.widget.NumberKeyboardView
 import com.shagalalab.qarejet.ui.widget.TimePickerFragment
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
+import com.shagalalab.qarejet.util.getCurrencySign
 import com.shagalalab.qarejet.util.isToday
 import com.shagalalab.qarejet.util.toShortDate
 import com.shagalalab.qarejet.util.toShortTime
@@ -116,6 +117,8 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         accountsAdapter = ArrayAdapter(this, R.layout.item_spinner, accounts)
         accountsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         transactionCardAccountSpinner.adapter = accountsAdapter
+
+        transactionCurrencySign.text = accounts[0].getCurrencySign()
     }
 
     override fun updateCategories(categories: List<Category>) {

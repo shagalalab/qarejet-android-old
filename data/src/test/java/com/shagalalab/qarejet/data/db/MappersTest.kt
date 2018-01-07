@@ -14,8 +14,8 @@ import java.util.Date
 class MappersTest {
 
     private val date = Date()
-    private val account1 = Account(0, "account1")
-    private val account2 = Account(0, "account2")
+    private val account1 = Account(0, "account1", "currency1")
+    private val account2 = Account(0, "account2", "currency2")
     private val accountList = listOf(account1, account2)
     private val category1 = Category(0, "category1", 1, 1, 1)
     private val category2 = Category(0, "category2", 2, 2, 2)
@@ -26,8 +26,8 @@ class MappersTest {
 
     private val transactionDbModel1 = TransactionDbModel(0, 1, date, account1.id, category1.id, 1.0, "transaction1")
     private val transactionDbModel2 = TransactionDbModel(0, 2, date, account2.id, category2.id, 2.0, "transaction2")
-    private val accountDbModel1 = AccountDbModel(0, "account1")
-    private val accountDbModel2 = AccountDbModel(0, "account2")
+    private val accountDbModel1 = AccountDbModel(0, "account1", "currency1")
+    private val accountDbModel2 = AccountDbModel(0, "account2", "currency2")
     private val accountDbModelList = listOf(accountDbModel1, accountDbModel2)
     private val categoryDbModel1 = CategoryDbModel(0, "category1", 1, 1, 1)
     private val categoryDbModel2 = CategoryDbModel(0, "category2", 2, 2, 2)

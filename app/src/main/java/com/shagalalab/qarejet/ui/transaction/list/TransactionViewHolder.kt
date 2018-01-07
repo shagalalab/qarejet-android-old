@@ -1,5 +1,6 @@
 package com.shagalalab.qarejet.ui.transaction.list
 
+import android.graphics.PorterDuff
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -7,16 +8,31 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Transaction
+import com.shagalalab.qarejet.util.getCurrencySign
+import com.shagalalab.qarejet.util.getSign
+import com.shagalalab.qarejet.util.isIncome
+import com.shagalalab.qarejet.util.toShortDateTime
+import java.util.Calendar
 
 class TransactionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(transaction: Transaction) {
-        itemView.findViewById<ImageView>(R.id.transactionIcon)
-            .setBackgroundColor(ContextCompat.getColor(itemView.context, transaction.category.color))
-        itemView.findViewById<ImageView>(R.id.transactionIcon).setImageResource(transaction.category.icon)
+        val icon: ImageView = itemView.findViewById(R.id.transactionIcon)
+        icon.background.setColorFilter(ContextCompat.getColor(itemView.context, transaction.category.color), PorterDuff.Mode.SRC_OVER)
+        icon.setImageResource(transaction.category.icon)
+
         itemView.findViewById<TextView>(R.id.transactionCategoryName).text = transaction.category.title
         itemView.findViewById<TextView>(R.id.transactionAccountName).text = transaction.account.title
-        itemView.findViewById<TextView>(R.id.transactionAmount).text = transaction.amount.toString()
-        itemView.findViewById<TextView>(R.id.transactionDate).text = transaction.date.toString()
+        itemView.findViewById<TextView>(R.id.transactionAmount).setTextColor(
+            ContextCompat.getColor(itemView.context, if (transaction.isIncome()) R.color.green else R.color.red)
+        )
+        itemView.findViewById<TextView>(R.id.transactionAmount).text = transaction.getSign()
+            .plus(transaction.amount)
+            .plus(" ")
+            .plus(transaction.account.getCurrencySign())
+
+        val calendar = Calendar.getInstance()
+        calendar.time = transaction.date
+        itemView.findViewById<TextView>(R.id.transactionDate).text = calendar.toShortDateTime()
     }
 }

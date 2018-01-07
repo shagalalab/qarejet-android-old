@@ -28,10 +28,13 @@ class TransactionListFragment : Fragment(), TransactionListView {
         return inflater?.inflate(R.layout.fragment_transactions, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.requestAllTransactions()
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        presenter.requestAllTransactions()
 
         if (transactionRecyclerView.adapter == null) {
             transactionAdapter = TransactionListAdapter()
