@@ -67,12 +67,14 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.nav_dashboard -> {
                 // Handle the camera action
             }
-            R.id.nav_share -> {
+            R.id.nav_records -> {
             }
-            R.id.nav_send -> {
+            R.id.nav_charts -> {
+            }
+            R.id.nav_settings -> {
             }
         }
 

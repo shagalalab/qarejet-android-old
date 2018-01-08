@@ -53,4 +53,9 @@
     <string name="category_income_interest">Interest/Dividend</string>
     <string name="category_income_other">Other</string>
 
+    <string name="dashboard">Dashboard</string>
+    <string name="charts">Charts</string>
+    <string name="records">Records</string>
+    <string name="settings">Settings</string>
+
 </resources>
