@@ -7,10 +7,10 @@ import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.GetAllTransactionsUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.ui.record.RecordsPresenter
 import com.shagalalab.qarejet.ui.splash.SplashPresenter
-import com.shagalalab.qarejet.ui.transaction.create.NewTransactionPresenter
-import com.shagalalab.qarejet.ui.transaction.list.TransactionListPresenter
+import com.shagalalab.qarejet.ui.transaction.AddTransactionPresenter
 import com.shagalalab.qarejet.util.SchedulersProvider
 import dagger.Module
 import dagger.Provides
@@ -30,7 +30,7 @@ class PresenterModule {
         getAllAccountsUseCase: GetAllAccountsUseCase,
         getAllCategoriesUseCase: GetAllCategoriesUseCase,
         schedulersProvider: SchedulersProvider
-    ) = NewTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+    ) = AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
@@ -42,6 +42,6 @@ class PresenterModule {
 
     @Provides
     @Singleton
-    fun providesTransactionListPresenter(getAllTransactionsUseCase: GetAllTransactionsUseCase,
-        schedulersProvider: SchedulersProvider) = TransactionListPresenter(getAllTransactionsUseCase, schedulersProvider)
+    fun providesTransactionListPresenter(getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
+        schedulersProvider: SchedulersProvider) = RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
 }

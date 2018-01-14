@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction.create
+package com.shagalalab.qarejet.ui.transaction
 
 import android.animation.ValueAnimator
 import android.app.DatePickerDialog
@@ -29,9 +29,9 @@ import kotlinx.android.synthetic.main.activity_new_transaction.*
 import java.util.Calendar
 import javax.inject.Inject
 
-class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePickerDialog.OnTimeSetListener,
+class AddTransactionActivity : AppCompatActivity(), AddTransactionView, TimePickerDialog.OnTimeSetListener,
         DatePickerDialog.OnDateSetListener {
-    @Inject lateinit var presenter: NewTransactionPresenter
+    @Inject lateinit var presenter: AddTransactionPresenter
 
     private lateinit var accountsAdapter: ArrayAdapter<Account>
     private lateinit var categoryAdapter: CategoryAdapter
@@ -70,7 +70,7 @@ class NewTransactionActivity : AppCompatActivity(), NewTransactionView, TimePick
         transactionCardTimeText.setOnClickListener { presenter.chooseTime() }
         transactionKeyboard.setNumberListener(object : NumberKeyboardView.NumberListener {
             override fun onShowMessage(message: String) {
-                Toast.makeText(this@NewTransactionActivity, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AddTransactionActivity, message, Toast.LENGTH_SHORT).show()
             }
 
             override fun onNumberTextChanged(changedText: String) {

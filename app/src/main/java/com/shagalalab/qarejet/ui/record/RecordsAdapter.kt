@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction.list
+package com.shagalalab.qarejet.ui.record
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Transaction
 
-class TransactionListAdapter : RecyclerView.Adapter<TransactionViewHolder>() {
+class RecordsAdapter : RecyclerView.Adapter<RecordsViewHolder>() {
     private var transactionsList = listOf<Transaction>()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransactionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecordsViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_transaction, parent, false)
-        return TransactionViewHolder(view)
+        return RecordsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TransactionViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecordsViewHolder?, position: Int) {
         holder?.setItem(transactionsList[position])
     }
 

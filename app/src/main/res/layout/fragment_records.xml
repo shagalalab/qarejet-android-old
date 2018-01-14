@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/recordsPreviousMonth"
+        android:layout_width="@dimen/records_header_height"
+        android:layout_height="@dimen/records_header_height"
+        android:background="@color/color_primary"
+        android:contentDescription="@string/previous_month"
+        android:padding="@dimen/standard_margin_half"
+        android:src="@drawable/ic_chevron_left_white_24dp"/>
+
+    <ImageView
+        android:id="@+id/recordsNextMonth"
+        android:layout_width="@dimen/records_header_height"
+        android:layout_height="@dimen/records_header_height"
+        android:layout_alignParentEnd="true"
+        android:background="@color/color_primary"
+        android:contentDescription="@string/next_month"
+        android:padding="@dimen/standard_margin_half"
+        android:src="@drawable/ic_chevron_right_white_24dp"/>
+
+    <TextView
+        android:id="@+id/recordsMonthYear"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/records_header_height"
+        android:layout_toEndOf="@id/recordsPreviousMonth"
+        android:layout_toStartOf="@id/recordsNextMonth"
+        android:background="@color/color_primary"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/records_header_text_size"
+        tools:text="January"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recordsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/recordsPreviousMonth"/>
+
+</RelativeLayout>

@@ -6,12 +6,13 @@ ext {
     rxAndroidVersion = '2.0.1'
     jUnitVersion = '4.12'
     mockitoKotlinVersion = '1.5.0'
+    jodaVersion = '2.9.9.1'
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
-
     implementation "io.reactivex.rxjava2:rxjava:$rxAndroidVersion"
+    implementation "net.danlew:android.joda:$jodaVersion"
 
     testImplementation "junit:junit:$jUnitVersion"
     testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"

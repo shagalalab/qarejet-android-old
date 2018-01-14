@@ -10,8 +10,8 @@ import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.ui.transaction.create.NewTransactionActivity
-import com.shagalalab.qarejet.ui.transaction.list.TransactionListFragment
+import com.shagalalab.qarejet.ui.record.RecordsFragment
+import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -33,11 +33,6 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.mainLayout, TransactionListFragment())
-            .commit()
     }
 
     override fun onBackPressed() {
@@ -71,6 +66,10 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
                 // Handle the camera action
             }
             R.id.nav_records -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mainLayout, RecordsFragment())
+                    .commit()
             }
             R.id.nav_charts -> {
             }
@@ -83,7 +82,7 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
     }
 
     override fun addNewTransaction() {
-        intent = Intent(this, NewTransactionActivity::class.java)
+        intent = Intent(this, AddTransactionActivity::class.java)
         startActivity(intent)
     }
 }

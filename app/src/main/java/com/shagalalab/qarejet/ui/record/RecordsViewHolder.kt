@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction.list
+package com.shagalalab.qarejet.ui.record
 
 import android.graphics.PorterDuff
 import android.support.v4.content.ContextCompat
@@ -14,10 +14,10 @@ import com.shagalalab.qarejet.util.isIncome
 import com.shagalalab.qarejet.util.toShortDateTime
 import java.util.Calendar
 
-class TransactionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class RecordsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(transaction: Transaction) {
-        val icon: ImageView = itemView.findViewById(R.id.transactionIcon)
+        val icon = itemView.findViewById<ImageView>(R.id.transactionIcon)
         icon.background.setColorFilter(ContextCompat.getColor(itemView.context, transaction.category.color), PorterDuff.Mode.SRC_OVER)
         icon.setImageResource(transaction.category.icon)
 

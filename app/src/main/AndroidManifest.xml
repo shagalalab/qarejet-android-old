@@ -25,7 +25,7 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.transaction.create.NewTransactionActivity"
+            android:name=".ui.transaction.AddTransactionActivity"
             android:label="@string/new_transaction"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden"/>

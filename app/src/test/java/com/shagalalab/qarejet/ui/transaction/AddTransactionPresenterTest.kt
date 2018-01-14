@@ -13,8 +13,6 @@ import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.domain.repository.AccountRepository
-import com.shagalalab.qarejet.ui.transaction.create.NewTransactionPresenter
-import com.shagalalab.qarejet.ui.transaction.create.NewTransactionView
 import com.shagalalab.qarejet.util.Constants
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -27,25 +25,25 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import java.util.Date
 
-class NewTransactionPresenterTest {
+class AddTransactionPresenterTest {
 
     private val accounts = listOf(Account(1, "one", "one"), Account(2, "two", "two"))
     private val categories = listOf(Category(1, "one", 1, 1, 1), Category(2, "two", 2, 2, 2))
     private val transaction = Transaction(1, 1, Date(), accounts[0], categories[0], 1.0, "")
     private val schedulersProvider = TestSchedulers()
 
-    @Mock private lateinit var view: NewTransactionView
+    @Mock private lateinit var view: AddTransactionView
     @Mock private lateinit var getAllCategoriesUseCase: GetAllCategoriesUseCase
     @Mock private lateinit var addTransactionsUseCase: AddTransactionUseCase
     @Mock private lateinit var accountRepository: AccountRepository
     @InjectMocks private lateinit var getAllAccountsUseCase: GetAllAccountsUseCase
 
-    private lateinit var presenter: NewTransactionPresenter
+    private lateinit var presenter: AddTransactionPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = NewTransactionPresenter(addTransactionsUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+        presenter = AddTransactionPresenter(addTransactionsUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
         presenter.init(view)
     }
 

@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.transaction.create
+package com.shagalalab.qarejet.ui.transaction
 
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
@@ -12,16 +12,16 @@ import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import com.shagalalab.qarejet.util.SchedulersProvider
 import java.util.Date
 
-class NewTransactionPresenter constructor(
+class AddTransactionPresenter constructor(
         private val addTransactionsUseCase: AddTransactionUseCase,
         private val getAllAccountsUseCase: GetAllAccountsUseCase,
         private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
         private val schedulersProvider: SchedulersProvider
 ) {
-    private lateinit var view: NewTransactionView
+    private lateinit var view: AddTransactionView
     private var transactionType = TRANSACTION_TYPE_EXPENSE
 
-    fun init(view: NewTransactionView) {
+    fun init(view: AddTransactionView) {
         this.view = view
     }
 
