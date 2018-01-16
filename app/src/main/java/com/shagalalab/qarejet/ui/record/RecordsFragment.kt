@@ -23,7 +23,7 @@ class RecordsFragment : Fragment(), RecordsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity.application as QarejetApp).component.inject(this)
-        presenter.init(this, DateTime.now())
+        presenter.init(this, DateTime.now(), DateTime.now().year().get())
         months = resources.getStringArray(R.array.months)
     }
 
@@ -43,8 +43,8 @@ class RecordsFragment : Fragment(), RecordsView {
         recordsRecyclerView.layoutManager = LinearLayoutManager(context)
         recordsRecyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        recordsPreviousMonth.setOnClickListener{ presenter.requestTransactions(Month.PREVIOUS) }
-        recordsNextMonth.setOnClickListener{ presenter.requestTransactions(Month.NEXT) }
+        recordsPreviousMonth.setOnClickListener { presenter.requestTransactions(Month.PREVIOUS) }
+        recordsNextMonth.setOnClickListener { presenter.requestTransactions(Month.NEXT) }
     }
 
     override fun onResume() {

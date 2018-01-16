@@ -18,6 +18,6 @@ class QarejetApp : Application() {
     override fun onCreate() {
         super.onCreate()
         component.inject(this)
-        JodaTimeAndroid.init(this);
+        JodaTimeAndroid.init(this)
     }
 }

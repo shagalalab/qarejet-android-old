@@ -12,10 +12,10 @@ class RecordsPresenter constructor(
     private lateinit var currentDate: DateTime
     private var currentYear: Int = 0
 
-    fun init(view: RecordsView, currentDate: DateTime) {
+    fun init(view: RecordsView, currentDate: DateTime, year: Int) {
         this.view = view
         this.currentDate = currentDate
-        this.currentYear = currentDate.year().get()
+        this.currentYear = year
     }
 
     fun requestTransactions(type: Month) {
