@@ -50,7 +50,7 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun providesGEtAllAccountsUseCase(repository: AccountRepository) = GetAllAccountsUseCase(repository)
+    fun providesGetAllAccountsUseCase(repository: AccountRepository) = GetAllAccountsUseCase(repository)
 
     @Provides
     @Singleton

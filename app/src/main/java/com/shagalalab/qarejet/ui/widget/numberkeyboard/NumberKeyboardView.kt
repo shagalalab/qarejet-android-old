@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.widget
+package com.shagalalab.qarejet.ui.widget.numberkeyboard
 
 import android.content.Context
 import android.util.AttributeSet

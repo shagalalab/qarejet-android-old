@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.widget
+package com.shagalalab.qarejet.ui.widget.numberkeyboard
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -14,9 +14,9 @@ class NumberKeyboardPresenter(
 ) {
 
     companion object {
-        private val INTEGER_LIMIT = 12
-        private val FRACTION_LIMIT = 2
-        private val DURATION = 500L
+        private const val INTEGER_LIMIT = 12
+        private const val FRACTION_LIMIT = 2
+        private const val DURATION = 500L
     }
     private var valueText = "0"
     private var isVisible = true

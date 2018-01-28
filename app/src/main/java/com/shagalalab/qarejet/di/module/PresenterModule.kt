@@ -7,7 +7,9 @@ import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.ui.chart.ChartsPresenter
 import com.shagalalab.qarejet.ui.record.RecordsPresenter
 import com.shagalalab.qarejet.ui.splash.SplashPresenter
 import com.shagalalab.qarejet.ui.transaction.AddTransactionPresenter
@@ -29,12 +31,13 @@ class PresenterModule {
         addTransactionUseCase: AddTransactionUseCase,
         getAllAccountsUseCase: GetAllAccountsUseCase,
         getAllCategoriesUseCase: GetAllCategoriesUseCase,
-        schedulersProvider: SchedulersProvider
-    ) = AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+        schedulersProvider: SchedulersProvider) =
+        AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
-    fun providesSplashPresenter(initialDataCase: InitialDataUseCase,
+    fun providesSplashPresenter(
+        initialDataCase: InitialDataUseCase,
         addAccountsUseCase: AddAccountsUseCase,
         addCategoriesUseCase: AddCategoriesUseCase,
         schedulersProvider: SchedulersProvider) =
@@ -42,6 +45,15 @@ class PresenterModule {
 
     @Provides
     @Singleton
-    fun providesTransactionListPresenter(getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
-        schedulersProvider: SchedulersProvider) = RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
+    fun providesTransactionListPresenter(
+        getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
+        schedulersProvider: SchedulersProvider) =
+        RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
+
+    @Provides
+    @Singleton
+    fun providesChartsPresenter(
+        getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
+        schedulersProvider: SchedulersProvider) =
+        ChartsPresenter(getGetCategoriesWithAmountUseCase, schedulersProvider)
 }

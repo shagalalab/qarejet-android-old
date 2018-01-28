@@ -6,9 +6,8 @@ import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import io.reactivex.Observable
 import org.joda.time.DateTime
 
-class GetTransactionsByDateUseCase constructor(
-    private val transactionRepository: TransactionRepository
-) : SingleUseCaseWithParameters<DateTime, List<Transaction>> {
+class GetTransactionsByDateUseCase(private val transactionRepository: TransactionRepository)
+    : SingleUseCaseWithParameters<DateTime, List<Transaction>> {
 
     override fun execute(parameter: DateTime) =
         transactionRepository

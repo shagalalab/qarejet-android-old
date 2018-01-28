@@ -17,9 +17,9 @@ import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.widget.CategoryAdapter
-import com.shagalalab.qarejet.ui.widget.DatePickerFragment
-import com.shagalalab.qarejet.ui.widget.NumberKeyboardView
-import com.shagalalab.qarejet.ui.widget.TimePickerFragment
+import com.shagalalab.qarejet.ui.widget.picker.DatePickerFragment
+import com.shagalalab.qarejet.ui.widget.numberkeyboard.NumberKeyboardView
+import com.shagalalab.qarejet.ui.widget.picker.TimePickerFragment
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.getCurrencySign
 import com.shagalalab.qarejet.util.isToday

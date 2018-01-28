@@ -10,21 +10,20 @@ import android.view.ViewGroup
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Transaction
+import com.shagalalab.qarejet.ui.widget.monthview.Month
+import com.shagalalab.qarejet.ui.widget.monthview.MonthView
 import kotlinx.android.synthetic.main.fragment_records.*
 import org.joda.time.DateTime
 import javax.inject.Inject
 
 class RecordsFragment : Fragment(), RecordsView {
     private lateinit var transactionAdapter: RecordsAdapter
-    private lateinit var months: Array<String>
-
     @Inject lateinit var presenter: RecordsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity.application as QarejetApp).component.inject(this)
-        presenter.init(this, DateTime.now(), DateTime.now().year().get())
-        months = resources.getStringArray(R.array.months)
+        presenter.init(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,6 +32,7 @@ class RecordsFragment : Fragment(), RecordsView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        monthView.init(DateTime.now(), DateTime.now().year().get(), monthListener)
 
         if (recordsRecyclerView.adapter == null) {
             transactionAdapter = RecordsAdapter()
@@ -42,21 +42,20 @@ class RecordsFragment : Fragment(), RecordsView {
         }
         recordsRecyclerView.layoutManager = LinearLayoutManager(context)
         recordsRecyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-
-        recordsPreviousMonth.setOnClickListener { presenter.requestTransactions(Month.PREVIOUS) }
-        recordsNextMonth.setOnClickListener { presenter.requestTransactions(Month.NEXT) }
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.requestTransactions(Month.CURRENT)
+        monthView.setMonth(Month.CURRENT)
     }
 
     override fun updateTransactions(transactions: List<Transaction>) {
         transactionAdapter.update(transactions)
     }
 
-    override fun changeMonthText(month: Int, year: String) {
-        recordsMonthYear.text = months[month - 1].plus(" ").plus(year)
+    private val monthListener = object : MonthView.MonthListener {
+        override fun changeMonthText(date: DateTime) {
+            presenter.requestData(date)
+        }
     }
 }

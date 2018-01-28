@@ -1,4 +1,4 @@
-package com.shagalalab.qarejet.ui.widget
+package com.shagalalab.qarejet.ui.widget.picker
 
 import android.app.Dialog
 import android.app.TimePickerDialog
