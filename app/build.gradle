@@ -40,6 +40,7 @@ ext {
     roomVersion = '1.0.0'
     mockitoKotlinVersion = '1.5.0'
     jodaVersion = '2.9.9.1'
+    mpAndroidChartVersion = 'v3.0.3'
 }
 
 dependencies {
@@ -74,6 +75,9 @@ dependencies {
 
     // JodaTime for better date processing
     implementation "net.danlew:android.joda:$jodaVersion"
+
+    // Charts
+    implementation "com.github.PhilJay:MPAndroidChart:$mpAndroidChartVersion"
 
     // Testing
     testImplementation "junit:junit:$jUnitVersion"

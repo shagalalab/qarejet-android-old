@@ -32,7 +32,7 @@ class RecordsFragment : Fragment(), RecordsView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        monthView.init(DateTime.now(), DateTime.now().year().get(), monthListener)
+        recordsMonthView.init(DateTime.now(), DateTime.now().year().get(), monthListener)
 
         if (recordsRecyclerView.adapter == null) {
             transactionAdapter = RecordsAdapter()
@@ -46,7 +46,7 @@ class RecordsFragment : Fragment(), RecordsView {
 
     override fun onResume() {
         super.onResume()
-        monthView.setMonth(Month.CURRENT)
+        recordsMonthView.setMonth(Month.CURRENT)
     }
 
     override fun updateTransactions(transactions: List<Transaction>) {

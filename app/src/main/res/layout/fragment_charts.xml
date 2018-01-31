@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <com.shagalalab.qarejet.ui.widget.monthview.MonthView
-        android:id="@+id/recordsMonthView"
+        android:id="@+id/chartsMonthView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recordsRecyclerView"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="300dp" />
 
 </LinearLayout>

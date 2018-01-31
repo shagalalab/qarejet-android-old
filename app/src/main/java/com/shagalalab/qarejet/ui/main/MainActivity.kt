@@ -10,6 +10,7 @@ import android.view.MenuItem
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.ui.chart.ChartsFragment
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -72,6 +73,10 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
                     .commit()
             }
             R.id.nav_charts -> {
+                supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.mainLayout, ChartsFragment())
+                    .commit()
             }
             R.id.nav_settings -> {
             }

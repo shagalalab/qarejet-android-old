@@ -7,6 +7,7 @@ import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetAllTransactionsUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
 import com.shagalalab.qarejet.domain.repository.AccountRepository
@@ -27,6 +28,10 @@ class UseCaseModule {
     @Provides
     @Singleton
     fun providesGetTransactionsByDateUseCase(repository: TransactionRepository) = GetTransactionsByDateUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun providesGetCategoriesWithAmountUseCase(repository: TransactionRepository) = GetCategoriesWithAmountUseCase(repository)
 
     @Provides
     @Singleton
