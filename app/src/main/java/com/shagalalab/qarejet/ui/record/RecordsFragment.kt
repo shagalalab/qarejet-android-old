@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Transaction
-import com.shagalalab.qarejet.ui.widget.monthview.Month
-import com.shagalalab.qarejet.ui.widget.monthview.MonthView
+import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import kotlinx.android.synthetic.main.fragment_records.*
 import org.joda.time.DateTime
 import javax.inject.Inject
@@ -32,7 +31,7 @@ class RecordsFragment : Fragment(), RecordsView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recordsMonthView.init(DateTime.now(), DateTime.now().year().get(), monthListener)
+        recordsMonthView.init(DateTime.now(), monthListener)
 
         if (recordsRecyclerView.adapter == null) {
             transactionAdapter = RecordsAdapter()
@@ -46,15 +45,15 @@ class RecordsFragment : Fragment(), RecordsView {
 
     override fun onResume() {
         super.onResume()
-        recordsMonthView.setMonth(Month.CURRENT)
+        recordsMonthView.setCurrentMonth()
     }
 
     override fun updateTransactions(transactions: List<Transaction>) {
         transactionAdapter.update(transactions)
     }
 
-    private val monthListener = object : MonthView.MonthListener {
-        override fun changeMonthText(date: DateTime) {
+    private val monthListener = object : MonthListener {
+        override fun onMonthChanged(date: DateTime) {
             presenter.requestData(date)
         }
     }

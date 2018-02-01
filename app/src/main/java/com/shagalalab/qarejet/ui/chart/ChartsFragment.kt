@@ -14,8 +14,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
-import com.shagalalab.qarejet.ui.widget.monthview.Month
-import com.shagalalab.qarejet.ui.widget.monthview.MonthView
+import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import com.shagalalab.qarejet.util.Constants
 import kotlinx.android.synthetic.main.fragment_charts.*
 import org.joda.time.DateTime
@@ -36,12 +35,12 @@ class ChartsFragment : Fragment(), ChartsView {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chartsMonthView.init(DateTime.now(), DateTime.now().year().get(), monthListener)
+        chartsMonthView.init(DateTime.now(), monthListener)
     }
 
     override fun onResume() {
         super.onResume()
-        chartsMonthView.setMonth(Month.CURRENT)
+        chartsMonthView.setCurrentMonth()
     }
 
     override fun updateData(categories: List<CategoryWithAmount>) {
@@ -49,7 +48,7 @@ class ChartsFragment : Fragment(), ChartsView {
             .filter { it.type == Constants.TRANSACTION_TYPE_EXPENSE }
             .map { PieEntry(it.amount.toFloat(), it.category.title) }
 
-        val set = PieDataSet(entries, "Expenses")
+        val set = PieDataSet(entries, "")
         set.colors = categories.map { ContextCompat.getColor(activity, it.category.color) }
         set.valueTextColor = Color.WHITE
         set.valueTextSize = 13f
@@ -68,8 +67,8 @@ class ChartsFragment : Fragment(), ChartsView {
         legend.setDrawInside(false)
     }
 
-    private val monthListener = object : MonthView.MonthListener {
-        override fun changeMonthText(date: DateTime) {
+    private val monthListener = object : MonthListener {
+        override fun onMonthChanged(date: DateTime) {
             presenter.requestData(date)
         }
     }
