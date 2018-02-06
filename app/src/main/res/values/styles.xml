@@ -53,4 +53,17 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="ChartsTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/color_accent</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabBackground">@color/color_primary</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/ChartsTabTextAppearance</item>
+    </style>
+    <style name="ChartsTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_70</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 </resources>

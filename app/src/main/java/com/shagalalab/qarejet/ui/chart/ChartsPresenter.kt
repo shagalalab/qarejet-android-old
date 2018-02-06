@@ -14,8 +14,8 @@ class ChartsPresenter(
         this.view = view
     }
 
-    fun requestData(date: DateTime) {
-        getGetCategoriesWithAmountUseCase.execute(date)
+    fun requestData(date: DateTime, transactionType: Int) {
+        getGetCategoriesWithAmountUseCase.execute(Pair(date, transactionType))
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.ui())
             .subscribe(view::updateData)

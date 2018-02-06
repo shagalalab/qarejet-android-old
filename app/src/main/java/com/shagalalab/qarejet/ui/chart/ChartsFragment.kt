@@ -2,6 +2,7 @@ package com.shagalalab.qarejet.ui.chart
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import javax.inject.Inject
 
 class ChartsFragment : Fragment(), ChartsView {
     @Inject lateinit var presenter: ChartsPresenter
+    private var transactionType = Constants.TRANSACTION_TYPE_EXPENSE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,32 @@ class ChartsFragment : Fragment(), ChartsView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chartsMonthView.init(DateTime.now(), monthListener)
+
+        chartsTabLayout.getTabAt(Constants.TRANSACTION_TYPE_EXPENSE)?.select()
+        chartsTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                transactionType = tab!!.position
+                chartsMonthView.setCurrentMonth()
+            }
+        })
+
+        val legend = pieChart.legend
+        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
+        legend.orientation = Legend.LegendOrientation.VERTICAL
+        legend.setDrawInside(false)
+
+        pieChart.isDrawHoleEnabled = false
+        pieChart.transparentCircleRadius = 0f
+        pieChart.description.isEnabled = false
+//        pieChart.setExtraOffsets(15f, 0f, 0f, 0f)
+        pieChart.setDrawEntryLabels(false)
     }
 
     override fun onResume() {
@@ -45,31 +73,20 @@ class ChartsFragment : Fragment(), ChartsView {
 
     override fun updateData(categories: List<CategoryWithAmount>) {
         val entries = categories
-            .filter { it.type == Constants.TRANSACTION_TYPE_EXPENSE }
             .map { PieEntry(it.amount.toFloat(), it.category.title) }
 
         val set = PieDataSet(entries, "")
         set.colors = categories.map { ContextCompat.getColor(activity, it.category.color) }
         set.valueTextColor = Color.WHITE
         set.valueTextSize = 13f
-        pieChart.isDrawHoleEnabled = false
-        pieChart.transparentCircleRadius = 0f
         pieChart.data = PieData(set)
-        pieChart.description.isEnabled = false
-//        pieChart.setExtraOffsets(15f, 0f, 0f, 0f)
-        pieChart.setDrawEntryLabels(false)
+        pieChart.animateY(1000)
         pieChart.invalidate()
-
-        val legend = pieChart.legend
-        legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
-        legend.horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
-        legend.orientation = Legend.LegendOrientation.VERTICAL
-        legend.setDrawInside(false)
     }
 
     private val monthListener = object : MonthListener {
         override fun onMonthChanged(date: DateTime) {
-            presenter.requestData(date)
+            presenter.requestData(date, transactionType)
         }
     }
 }

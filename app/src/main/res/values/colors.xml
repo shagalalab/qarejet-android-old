@@ -6,6 +6,7 @@
     <color name="black30">#4D000000</color>
     <color name="default_text_dark">#de000000</color>
     <color name="default_text_light">#ffffffff</color>
+    <color name="white_70">#b3ffffff</color>
     
     <color name="red">#F44336</color>
     <color name="pink">#E91E63</color>

@@ -8,6 +8,11 @@ class MonthPresenter(
     private val monthListener: MonthListener,
     private val internalListener: MonthView.Listener
 ) {
+    private var currentYear = 0
+
+    init {
+        currentYear = currentDate.year
+    }
 
     fun switchToPrev() {
         setMonth(Month.PREVIOUS)
@@ -27,7 +32,10 @@ class MonthPresenter(
         } else if (type == Month.NEXT) {
             currentDate = currentDate.plusMonths(1)
         }
-        val monthYearText = months[currentDate.monthOfYear - 1].plus(" ").plus(currentDate.year.toString())
+        var monthYearText = months[currentDate.monthOfYear - 1]
+        if (currentDate.year != currentYear) {
+            monthYearText += " " + currentDate.year.toString()
+        }
         monthListener.onMonthChanged(currentDate)
         internalListener.onMonthTextChanged(monthYearText)
     }

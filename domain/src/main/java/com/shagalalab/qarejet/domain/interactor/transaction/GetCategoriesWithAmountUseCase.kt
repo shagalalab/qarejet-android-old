@@ -7,14 +7,15 @@ import io.reactivex.Observable
 import org.joda.time.DateTime
 
 class GetCategoriesWithAmountUseCase(private val transactionRepository: TransactionRepository)
-    : SingleUseCaseWithParameters<DateTime, List<CategoryWithAmount>> {
+    : SingleUseCaseWithParameters<Pair<DateTime, Int>, List<CategoryWithAmount>> {
 
-    override fun execute(parameter: DateTime) =
+    override fun execute(parameter: Pair<DateTime, Int>) =
         transactionRepository
             .getAllTransactions()
             .toObservable()
             .flatMap { Observable.fromIterable(it) }
-            .filter { DateTime(it.date.time).monthOfYear() == parameter.monthOfYear() && DateTime(it.date.time).year() == parameter.year() }
+            .filter { DateTime(it.date.time).monthOfYear() == parameter.first.monthOfYear() && DateTime(it.date.time).year() == parameter.first.year() }
+            .filter { it.type == parameter.second }
             .toList()
             .map {
                 val categoriesList = hashMapOf<Long, CategoryWithAmount>()

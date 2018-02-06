@@ -9,9 +9,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <android.support.design.widget.TabLayout
+        style="@style/ChartsTabLayout"
+        android:id="@+id/chartsTabLayout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <android.support.design.widget.TabItem
+            android:layout_height="wrap_content"
+            android:text="@string/income"
+            android:layout_width="wrap_content"/>
+
+        <android.support.design.widget.TabItem
+            android:text="@string/expense"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+
+    </android.support.design.widget.TabLayout>
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="240dp" />
 
 </LinearLayout>
