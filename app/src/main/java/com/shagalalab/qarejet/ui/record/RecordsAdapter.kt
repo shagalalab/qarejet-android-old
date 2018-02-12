@@ -18,9 +18,7 @@ class RecordsAdapter : RecyclerView.Adapter<RecordsViewHolder>() {
         holder?.setItem(transactionsList[position])
     }
 
-    override fun getItemCount(): Int {
-        return transactionsList.size
-    }
+    override fun getItemCount()= transactionsList.size
 
     fun update(transactions: List<Transaction>) {
         transactionsList = transactions

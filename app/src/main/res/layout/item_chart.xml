@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/standard_margin_half"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/itemChartPercent"
+        android:layout_width="44dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/percent_background"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        tools:text="12%"/>
+
+    <TextView
+        android:id="@+id/itemChartCategory"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_marginEnd="@dimen/standard_margin"
+        android:layout_height="wrap_content"
+        android:textColor="@color/default_text_dark"
+        tools:text="Transportation"/>
+
+    <TextView
+        android:id="@+id/itemChartAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/default_text_dark"
+        tools:text="4563 UZS"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+
+</LinearLayout>

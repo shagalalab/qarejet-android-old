@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +26,7 @@ import javax.inject.Inject
 class ChartsFragment : Fragment(), ChartsView {
     @Inject lateinit var presenter: ChartsPresenter
     private var transactionType = Constants.TRANSACTION_TYPE_EXPENSE
+    private val adapter = ChartsDistributionAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,10 @@ class ChartsFragment : Fragment(), ChartsView {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chartsMonthView.init(DateTime.now(), monthListener)
+
+        chartsDistribution.layoutManager = LinearLayoutManager(context)
+        chartsDistribution.adapter = adapter
+        chartsDistribution.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         chartsTabLayout.getTabAt(Constants.TRANSACTION_TYPE_EXPENSE)?.select()
         chartsTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -72,6 +79,11 @@ class ChartsFragment : Fragment(), ChartsView {
     }
 
     override fun updateData(categories: List<CategoryWithAmount>) {
+        updatePieChart(categories)
+        updateList(categories.sortedByDescending { it.amount })
+    }
+
+    private fun updatePieChart(categories: List<CategoryWithAmount>) {
         val entries = categories
             .map { PieEntry(it.amount.toFloat(), it.category.title) }
 
@@ -82,6 +94,10 @@ class ChartsFragment : Fragment(), ChartsView {
         pieChart.data = PieData(set)
         pieChart.animateY(1000)
         pieChart.invalidate()
+    }
+
+    private fun updateList(categories: List<CategoryWithAmount>) {
+        adapter.updateData(categories)
     }
 
     private val monthListener = object : MonthListener {

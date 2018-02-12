@@ -17,6 +17,7 @@ class MonthPresenterTest {
     private val months = arrayOf("January", "February", "March", "April", "May", "June", "July", "August",
         "September", "October", "November", "December")
     private val dateTime = DateTime.now()
+    private val currentYear = dateTime.year
 
     @Before
     fun setUp() {
@@ -44,6 +45,12 @@ class MonthPresenterTest {
 
     private fun verifyDateChanged(modifiedDate: DateTime) {
         verify(monthListener, times(1)).onMonthChanged(modifiedDate)
-        verify(internalListener, times(1)).onMonthTextChanged(months[modifiedDate.monthOfYear - 1] + " " + modifiedDate.year)
+
+        var monthYearText = months[modifiedDate.monthOfYear - 1]
+        if (modifiedDate.year != currentYear) {
+            monthYearText += " " + modifiedDate.year.toString()
+        }
+
+        verify(internalListener, times(1)).onMonthTextChanged(monthYearText)
     }
 }
