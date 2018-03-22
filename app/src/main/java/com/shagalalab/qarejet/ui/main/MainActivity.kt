@@ -1,27 +1,36 @@
 package com.shagalalab.qarejet.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
+import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
+import com.shagalalab.qarejet.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.android.SupportAppNavigator
+import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigationItemSelectedListener {
-    @InjectPresenter lateinit var presenter: MainPresenter
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var navigatorHolder: NavigatorHolder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        (application as QarejetApp).component.inject(this)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
@@ -34,6 +43,16 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onBackPressed() {
@@ -62,32 +81,27 @@ class MainActivity : MvpAppCompatActivity(), MainView, NavigationView.OnNavigati
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
-        when (item.itemId) {
-            R.id.nav_dashboard -> {
-                // Handle the camera action
-            }
-            R.id.nav_records -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mainLayout, RecordsFragment())
-                    .commit()
-            }
-            R.id.nav_charts -> {
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.mainLayout, ChartsFragment())
-                    .commit()
-            }
-            R.id.nav_settings -> {
-            }
-        }
-
+        presenter.handleDrawerItemSelection(item.itemId)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    override fun addNewTransaction() {
-        intent = Intent(this, AddTransactionActivity::class.java)
-        startActivity(intent)
+    private val navigator: Navigator = object : SupportAppNavigator(this, supportFragmentManager, R.id.mainLayout) {
+        override fun createActivityIntent(context: Context?, screenKey: String?, data: Any?): Intent? {
+            return when (screenKey) {
+                Constants.SCREEN_ADD_TRANSACTION -> Intent(this@MainActivity, AddTransactionActivity::class.java)
+                else -> null
+            }
+        }
+
+        override fun createFragment(screenKey: String?, data: Any?): Fragment {
+            return when (screenKey) {
+                Constants.SCREEN_DASHBOARD -> Fragment()
+                Constants.SCREEN_RECORDS -> RecordsFragment()
+                Constants.SCREEN_CHARTS -> ChartsFragment()
+                Constants.SCREEN_SETTINGS -> Fragment()
+                else -> Fragment()
+            }
+        }
     }
 }

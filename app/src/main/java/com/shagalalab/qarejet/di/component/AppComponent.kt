@@ -7,6 +7,7 @@ import com.shagalalab.qarejet.di.module.PresenterModule
 import com.shagalalab.qarejet.di.module.RepositoryModule
 import com.shagalalab.qarejet.di.module.UseCaseModule
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
+import com.shagalalab.qarejet.ui.main.MainActivity
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.splash.SplashActivity
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
@@ -18,6 +19,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(app: QarejetApp)
     fun inject(activity: SplashActivity)
+    fun inject(activity: MainActivity)
     fun inject(activity: AddTransactionActivity)
     fun inject(fragment: RecordsFragment)
     fun inject(fragment: ChartsFragment)

@@ -15,4 +15,12 @@ class AppModule(val app: QarejetApp) {
     @Provides
     @Singleton
     fun providesContext() = app.applicationContext
+
+    @Provides
+    @Singleton
+    fun providesRouter(app: QarejetApp) = app.getRouter()
+
+    @Provides
+    @Singleton
+    fun providesNavigationHolder(app: QarejetApp) = app.getNavigationHolder()
 }

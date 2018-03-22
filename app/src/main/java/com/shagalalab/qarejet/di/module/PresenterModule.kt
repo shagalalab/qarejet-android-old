@@ -10,12 +10,14 @@ import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCas
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
 import com.shagalalab.qarejet.ui.chart.ChartsPresenter
+import com.shagalalab.qarejet.ui.main.MainPresenter
 import com.shagalalab.qarejet.ui.record.RecordsPresenter
 import com.shagalalab.qarejet.ui.splash.SplashPresenter
 import com.shagalalab.qarejet.ui.transaction.AddTransactionPresenter
 import com.shagalalab.qarejet.util.SchedulersProvider
 import dagger.Module
 import dagger.Provides
+import ru.terrakok.cicerone.Router
 import javax.inject.Singleton
 
 @Module
@@ -42,6 +44,10 @@ class PresenterModule {
         addCategoriesUseCase: AddCategoriesUseCase,
         schedulersProvider: SchedulersProvider) =
         SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
+
+    @Provides
+    @Singleton
+    fun providesMainPresenter(router: Router) = MainPresenter(router)
 
     @Provides
     @Singleton
