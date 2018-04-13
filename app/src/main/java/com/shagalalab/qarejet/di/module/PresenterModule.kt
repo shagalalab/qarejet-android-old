@@ -8,7 +8,9 @@ import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByCategoryUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.ui.category.CategoryPresenter
 import com.shagalalab.qarejet.ui.chart.ChartsPresenter
 import com.shagalalab.qarejet.ui.main.MainPresenter
 import com.shagalalab.qarejet.ui.record.RecordsPresenter
@@ -59,7 +61,15 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesChartsPresenter(
+        router: Router,
         getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
         schedulersProvider: SchedulersProvider) =
-        ChartsPresenter(getGetCategoriesWithAmountUseCase, schedulersProvider)
+        ChartsPresenter(router, getGetCategoriesWithAmountUseCase, schedulersProvider)
+
+    @Provides
+    @Singleton
+    fun providesCategoryPresenter(
+        getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
+        schedulersProvider: SchedulersProvider
+    ) = CategoryPresenter(getTransactionsByCategoryUseCase, schedulersProvider)
 }

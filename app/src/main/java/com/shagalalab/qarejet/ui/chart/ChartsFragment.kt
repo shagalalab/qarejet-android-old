@@ -26,7 +26,12 @@ import javax.inject.Inject
 class ChartsFragment : Fragment(), ChartsView {
     @Inject lateinit var presenter: ChartsPresenter
     private var transactionType = Constants.TRANSACTION_TYPE_EXPENSE
-    private val adapter = ChartsDistributionAdapter()
+    private val chartItemListener = object : Listener {
+        override fun onChartItemClicked(id: Long) {
+            presenter.handleChartItemClick(id, chartsMonthView.getCurrentDate())
+        }
+    }
+    private val adapter = ChartsDistributionAdapter(chartItemListener)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,5 +109,9 @@ class ChartsFragment : Fragment(), ChartsView {
         override fun onMonthChanged(date: DateTime) {
             presenter.requestData(date, transactionType)
         }
+    }
+
+    interface Listener {
+        fun onChartItemClicked(id: Long)
     }
 }

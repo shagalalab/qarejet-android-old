@@ -12,12 +12,14 @@ import android.view.Menu
 import android.view.MenuItem
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.ui.category.CategoryFragment
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
 import com.shagalalab.qarejet.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.joda.time.DateTime
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.SupportAppNavigator
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Constants.SCREEN_DASHBOARD -> Fragment()
                 Constants.SCREEN_RECORDS -> RecordsFragment()
                 Constants.SCREEN_CHARTS -> ChartsFragment()
+                Constants.SCREEN_CATEGORY -> CategoryFragment.newInstance(data as Pair<Long, DateTime>)
                 Constants.SCREEN_SETTINGS -> Fragment()
                 else -> Fragment()
             }

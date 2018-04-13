@@ -27,7 +27,7 @@ class TransactionsUseCasesTest {
 
     @Test
     fun shouldGetAllTransactions() {
-        val useCase = GetAllTransactionsUseCase(repositoryMock)
+        val useCase = GetTransactionsUseCase(repositoryMock)
         useCase.execute()
         verify(repositoryMock, times(1)).getAllTransactions()
         verifyNoMoreInteractions(repositoryMock)

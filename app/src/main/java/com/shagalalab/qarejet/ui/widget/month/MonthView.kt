@@ -40,6 +40,8 @@ class MonthView : FrameLayout {
         presenter.switchToCurrent()
     }
 
+    fun getCurrentDate() = presenter.getCurrentDate()
+
     interface Listener {
         fun onMonthTextChanged(date: String)
     }

@@ -5,9 +5,8 @@ import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import io.reactivex.Single
 
-class GetTransactionUseCase constructor(
-    private val transactionRepository: TransactionRepository
-) : SingleUseCaseWithParameters<Long, Transaction> {
+class GetTransactionUseCase(private val transactionRepository: TransactionRepository)
+    : SingleUseCaseWithParameters<Long, Transaction> {
 
     override fun execute(parameter: Long): Single<Transaction> {
         return transactionRepository.getTransaction(parameter)

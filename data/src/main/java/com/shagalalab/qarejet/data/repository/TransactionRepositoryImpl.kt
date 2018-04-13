@@ -24,6 +24,20 @@ class TransactionRepositoryImpl (private val database : Database) : TransactionR
                 .map(DbToDomainMapper::mapTransactionList)
     }
 
+    override fun getTransactionsWithinDateByType(from: Long, to: Long, categoryType: Int): Single<List<Transaction>> {
+        return database
+            .transactionDao
+            .getTransactionsWithinDateByType(from, to, categoryType)
+            .map(DbToDomainMapper::mapTransactionList)
+    }
+
+    override fun getTransactionsWithinDateByCategory(from: Long, to: Long, categoryId: Long): Single<List<Transaction>> {
+        return database
+            .transactionDao
+            .getTransactionsWithinDateByCategory(from, to, categoryId)
+            .map(DbToDomainMapper::mapTransactionList)
+    }
+
     override fun addTransaction(transaction: Transaction): Completable {
         return Completable.fromAction({
             database

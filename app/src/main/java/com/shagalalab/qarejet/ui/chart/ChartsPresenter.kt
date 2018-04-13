@@ -1,11 +1,14 @@
 package com.shagalalab.qarejet.ui.chart
 
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
+import com.shagalalab.qarejet.util.Constants
 import com.shagalalab.qarejet.util.SchedulersProvider
 import org.joda.time.DateTime
+import ru.terrakok.cicerone.Router
 
 class ChartsPresenter(
-    private val getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
+    private val router: Router,
+    private val getCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
     private val schedulersProvider: SchedulersProvider
 ) {
     lateinit var view: ChartsView
@@ -15,9 +18,13 @@ class ChartsPresenter(
     }
 
     fun requestData(date: DateTime, transactionType: Int) {
-        getGetCategoriesWithAmountUseCase.execute(Pair(date, transactionType))
+        getCategoriesWithAmountUseCase.execute(Pair(date, transactionType))
             .subscribeOn(schedulersProvider.io())
             .observeOn(schedulersProvider.ui())
             .subscribe(view::updateData)
+    }
+
+    fun handleChartItemClick(id: Long, currentDate: DateTime) {
+        router.navigateTo(Constants.SCREEN_CATEGORY, Pair(id, currentDate))
     }
 }

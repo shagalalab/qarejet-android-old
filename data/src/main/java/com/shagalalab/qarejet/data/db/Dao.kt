@@ -59,6 +59,20 @@ interface TransactionDao {
         "FROM transactions\n" +
         "INNER JOIN accounts ON transactions.acc_id = accounts.account_id\n" +
         "INNER JOIN categories ON transactions.cat_id = categories.category_id\n" +
+        "WHERE date > :from AND date < :to AND categories.category_id = :categoryId")
+    fun getTransactionsWithinDateByCategory(from: Long, to: Long, categoryId: Long): Single<List<FullTransactionModel>>
+
+    @Query("SELECT transactions.*, accounts.*, categories.*\n" +
+        "FROM transactions\n" +
+        "INNER JOIN accounts ON transactions.acc_id = accounts.account_id\n" +
+        "INNER JOIN categories ON transactions.cat_id = categories.category_id\n" +
+        "WHERE date > :from AND date < :to AND categories.category_type = :categoryType")
+    fun getTransactionsWithinDateByType(from: Long, to: Long, categoryType: Int): Single<List<FullTransactionModel>>
+
+    @Query("SELECT transactions.*, accounts.*, categories.*\n" +
+        "FROM transactions\n" +
+        "INNER JOIN accounts ON transactions.acc_id = accounts.account_id\n" +
+        "INNER JOIN categories ON transactions.cat_id = categories.category_id\n" +
         "WHERE id = :id")
     fun getTransaction(id: Long): Single<FullTransactionModel>
 

@@ -9,4 +9,5 @@ object Constants {
     const val SCREEN_CHARTS = "screen_charts"
     const val SCREEN_ADD_TRANSACTION = "screen_add_transaction"
     const val SCREEN_SETTINGS = "screen_settings"
+    const val SCREEN_CATEGORY = "screen_category"
 }

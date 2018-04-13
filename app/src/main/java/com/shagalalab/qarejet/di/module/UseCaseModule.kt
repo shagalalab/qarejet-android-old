@@ -6,10 +6,11 @@ import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.GetAllTransactionsUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByCategoryUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsUseCase
 import com.shagalalab.qarejet.domain.repository.AccountRepository
 import com.shagalalab.qarejet.domain.repository.CategoryRepository
 import com.shagalalab.qarejet.domain.repository.ConfigRepository
@@ -35,11 +36,15 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun providesGetAllTransactionsUseCase(repository: TransactionRepository) = GetAllTransactionsUseCase(repository)
+    fun providesGetTransactionsUseCase(repository: TransactionRepository) = GetTransactionsUseCase(repository)
 
     @Provides
     @Singleton
     fun providesGetTransactionUseCase(repository: TransactionRepository) = GetTransactionUseCase(repository)
+
+    @Provides
+    @Singleton
+    fun providesGetTransactionsByCategoryUseCase(repository: TransactionRepository) = GetTransactionsByCategoryUseCase(repository)
 
     @Provides
     @Singleton

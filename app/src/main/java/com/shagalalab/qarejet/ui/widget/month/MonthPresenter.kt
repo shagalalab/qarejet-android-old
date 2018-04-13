@@ -26,6 +26,8 @@ class MonthPresenter(
         setMonth(Month.CURRENT)
     }
 
+    fun getCurrentDate() = currentDate
+
     private fun setMonth(type: Month) {
         if (type == Month.PREVIOUS) {
             currentDate = currentDate.minusMonths(1)

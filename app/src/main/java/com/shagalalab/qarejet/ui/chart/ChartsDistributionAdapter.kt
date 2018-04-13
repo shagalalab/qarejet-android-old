@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 
-class ChartsDistributionAdapter: RecyclerView.Adapter<ChartsDistributionViewHolder>() {
+class ChartsDistributionAdapter(private val listener: ChartsFragment.Listener) : RecyclerView.Adapter<ChartsDistributionViewHolder>() {
     private var categoriesList = listOf<CategoryWithAmount>()
     private var totalAmount = 0.0
 
@@ -20,7 +20,7 @@ class ChartsDistributionAdapter: RecyclerView.Adapter<ChartsDistributionViewHold
     }
 
     override fun onBindViewHolder(holder: ChartsDistributionViewHolder?, position: Int) {
-        holder?.setItem(categoriesList[position], totalAmount)
+        holder?.setItem(categoriesList[position], totalAmount, listener)
     }
 
     override fun getItemCount() = categoriesList.size
@@ -32,15 +32,16 @@ class ChartsDistributionAdapter: RecyclerView.Adapter<ChartsDistributionViewHold
     }
 }
 
-class ChartsDistributionViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView) {
+class ChartsDistributionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
-    fun setItem(categoryWithAmount: CategoryWithAmount, totalAmount: Double) {
-        val ratio = categoryWithAmount.amount * 100/ totalAmount
+    fun setItem(categoryWithAmount: CategoryWithAmount, totalAmount: Double, listener: ChartsFragment.Listener) {
+        itemView.setOnClickListener { listener.onChartItemClicked(categoryWithAmount.category.id) }
+
+        val ratio = categoryWithAmount.amount * 100 / totalAmount
         itemView.findViewById<TextView>(R.id.itemChartPercent).text = "%.0f".format(ratio).plus("%")
         (itemView.findViewById<TextView>(R.id.itemChartPercent).background as GradientDrawable)
             .setColor(ContextCompat.getColor(itemView.context, categoryWithAmount.category.color))
         itemView.findViewById<TextView>(R.id.itemChartCategory).text = categoryWithAmount.category.title
         itemView.findViewById<TextView>(R.id.itemChartAmount).text = "%.2f".format(categoryWithAmount.amount)
     }
-
 }
