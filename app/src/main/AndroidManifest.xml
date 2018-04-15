@@ -29,6 +29,7 @@
             android:label="@string/new_transaction"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".ui.category.CategoryActivity"/>
     </application>
 
 </manifest>

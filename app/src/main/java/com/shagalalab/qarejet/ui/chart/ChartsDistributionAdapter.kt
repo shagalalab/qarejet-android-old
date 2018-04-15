@@ -35,7 +35,7 @@ class ChartsDistributionAdapter(private val listener: ChartsFragment.Listener) :
 class ChartsDistributionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(categoryWithAmount: CategoryWithAmount, totalAmount: Double, listener: ChartsFragment.Listener) {
-        itemView.setOnClickListener { listener.onChartItemClicked(categoryWithAmount.category.id) }
+        itemView.setOnClickListener { listener.onChartItemClicked(categoryWithAmount.category) }
 
         val ratio = categoryWithAmount.amount * 100 / totalAmount
         itemView.findViewById<TextView>(R.id.itemChartPercent).text = "%.0f".format(ratio).plus("%")

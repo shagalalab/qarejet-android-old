@@ -12,7 +12,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.ui.category.CategoryFragment
+import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.ui.category.CategoryActivity
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
@@ -92,6 +93,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         override fun createActivityIntent(context: Context?, screenKey: String?, data: Any?): Intent? {
             return when (screenKey) {
                 Constants.SCREEN_ADD_TRANSACTION -> Intent(this@MainActivity, AddTransactionActivity::class.java)
+                Constants.SCREEN_CATEGORY -> {
+                    val intent = Intent(this@MainActivity, CategoryActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putSerializable("data", data as Pair<Category, DateTime>)
+                    intent.putExtras(bundle)
+                    intent
+                }
                 else -> null
             }
         }
@@ -101,7 +109,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Constants.SCREEN_DASHBOARD -> Fragment()
                 Constants.SCREEN_RECORDS -> RecordsFragment()
                 Constants.SCREEN_CHARTS -> ChartsFragment()
-                Constants.SCREEN_CATEGORY -> CategoryFragment.newInstance(data as Pair<Long, DateTime>)
                 Constants.SCREEN_SETTINGS -> Fragment()
                 else -> Fragment()
             }

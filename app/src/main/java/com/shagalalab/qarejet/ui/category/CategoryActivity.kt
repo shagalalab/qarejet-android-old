@@ -1,13 +1,10 @@
 package com.shagalalab.qarejet.ui.category
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -15,6 +12,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.ui.widget.month.MonthListener
@@ -22,44 +20,32 @@ import kotlinx.android.synthetic.main.fragment_category.*
 import org.joda.time.DateTime
 import javax.inject.Inject
 
-class CategoryFragment : Fragment(), CategoryView {
-    @Inject lateinit var presenter: CategoryPresenter
+class CategoryActivity : AppCompatActivity(), CategoryView {
+    @Inject  lateinit var presenter: CategoryPresenter
     private lateinit var date: DateTime
     private var categoryId = 0L
     private val adapter = CategoryAdapter()
     private val chartMonthSize = 8
 
-    companion object {
-        fun newInstance(data: Pair<Long, DateTime>): CategoryFragment {
-            val fragment = CategoryFragment()
-            val args = Bundle()
-            args.putSerializable("data", data)
-
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val data = arguments.getSerializable("data") as Pair<Long, DateTime>
-        categoryId = data.first
+        setContentView(R.layout.fragment_category)
+        (application as QarejetApp).component.inject(this)
+
+        val data = intent.extras.getSerializable("data") as Pair<Category, DateTime>
+        categoryId = data.first.id
         date = data.second
-        (activity.application as QarejetApp).component.inject(this)
         presenter.init(this)
-    }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_category, container, false)
-    }
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = data.first.title
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         categoryMonthView.init(date, monthListener)
 
-        categoryList.layoutManager = LinearLayoutManager(context)
+        categoryList.layoutManager = LinearLayoutManager(this)
         categoryList.adapter = adapter
-        categoryList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        categoryList.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         categoryChart.legend.isEnabled = false
         categoryChart.xAxis.setDrawGridLines(false)
@@ -75,6 +61,11 @@ class CategoryFragment : Fragment(), CategoryView {
     override fun onResume() {
         super.onResume()
         categoryMonthView.setCurrentMonth()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     override fun updateData(data: Pair<List<Transaction>, List<CategoryWithAmount>>) {
@@ -114,11 +105,11 @@ class CategoryFragment : Fragment(), CategoryView {
         categoryChart.xAxis.valueFormatter = formatter
 
         val set1 = LineDataSet(entries, "")
-        set1.setCircleColor(ContextCompat.getColor(activity, R.color.color_primary))
+        set1.setCircleColor(ContextCompat.getColor(this, R.color.color_primary))
         set1.setDrawCircles(true)
         set1.setDrawValues(false)
         set1.circleHoleRadius = 12f
-        set1.color = ContextCompat.getColor(activity, R.color.color_primary)
+        set1.color = ContextCompat.getColor(this, R.color.color_primary)
         set1.lineWidth = 2f
 
         categoryChart.data = LineData(set1)

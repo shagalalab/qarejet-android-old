@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import com.shagalalab.qarejet.util.Constants
@@ -27,8 +28,8 @@ class ChartsFragment : Fragment(), ChartsView {
     @Inject lateinit var presenter: ChartsPresenter
     private var transactionType = Constants.TRANSACTION_TYPE_EXPENSE
     private val chartItemListener = object : Listener {
-        override fun onChartItemClicked(id: Long) {
-            presenter.handleChartItemClick(id, chartsMonthView.getCurrentDate())
+        override fun onChartItemClicked(category: Category) {
+            presenter.handleChartItemClick(category, chartsMonthView.getCurrentDate())
         }
     }
     private val adapter = ChartsDistributionAdapter(chartItemListener)
@@ -112,6 +113,6 @@ class ChartsFragment : Fragment(), ChartsView {
     }
 
     interface Listener {
-        fun onChartItemClicked(id: Long)
+        fun onChartItemClicked(category: Category)
     }
 }
