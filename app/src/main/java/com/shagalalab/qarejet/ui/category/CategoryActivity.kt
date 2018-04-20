@@ -15,21 +15,22 @@ import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.domain.model.Transaction
+import com.shagalalab.qarejet.ui.record.RecordsAdapter
 import com.shagalalab.qarejet.ui.widget.month.MonthListener
-import kotlinx.android.synthetic.main.fragment_category.*
+import kotlinx.android.synthetic.main.activity_category.*
 import org.joda.time.DateTime
 import javax.inject.Inject
 
 class CategoryActivity : AppCompatActivity(), CategoryView {
-    @Inject  lateinit var presenter: CategoryPresenter
+    @Inject lateinit var presenter: CategoryPresenter
     private lateinit var date: DateTime
     private var categoryId = 0L
-    private val adapter = CategoryAdapter()
+    private val adapter = RecordsAdapter()
     private val chartMonthSize = 8
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_category)
+        setContentView(R.layout.activity_category)
         (application as QarejetApp).component.inject(this)
 
         val data = intent.extras.getSerializable("data") as Pair<Category, DateTime>
@@ -69,16 +70,31 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
     }
 
     override fun updateData(data: Pair<List<Transaction>, List<CategoryWithAmount>>) {
-        adapter.updateData(data.first)
-        updateChart(data.second)
-    }
+        adapter.update(data.first)
 
-    private fun updateChart(categories: List<CategoryWithAmount>) {
         val categoriesMap = HashMap<Int, Float>()
-        for (c in categories) {
+        for (c in data.second) {
             val monthIndex = DateTime(c.date).monthOfYear
             categoriesMap[monthIndex] = c.amount.toFloat()
         }
+
+        updateChart(categoriesMap)
+
+        var currentMonthIndex = -1
+        var currency = ""
+        if (!data.first.isEmpty()) {
+            currentMonthIndex = DateTime(data.first.first().date).monthOfYear
+            currency = data.first.first().account.currency
+        }
+
+        if (currentMonthIndex == -1) {
+            categoryTotalBalance.text = "0"
+        } else {
+            categoryTotalBalance.text = categoriesMap[currentMonthIndex].toString().plus(" ").plus(currency)
+        }
+    }
+
+    private fun updateChart(categoriesMap: HashMap<Int, Float>) {
         val entries = ArrayList<Entry>()
 
         // prepare month as axis title
@@ -117,9 +133,15 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
         categoryChart.invalidate()
     }
 
+    private fun updateMonthText(date: DateTime) {
+        categoryTotalYear.text = date.year.toString()
+        categoryTotalMonth.text = date.monthOfYear.toString()
+    }
+
     private val monthListener = object : MonthListener {
         override fun onMonthChanged(date: DateTime) {
             presenter.requestData(date, categoryId)
+            updateMonthText(date)
         }
     }
 }

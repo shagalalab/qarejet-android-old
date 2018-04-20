@@ -12,4 +12,5 @@
     <dimen name="transaction_item_icon_padding">8dp</dimen>
     <dimen name="records_header_height">56dp</dimen>
     <dimen name="records_header_text_size">20sp</dimen>
+    <dimen name="category_total_date_width">50dp</dimen>
 </resources>

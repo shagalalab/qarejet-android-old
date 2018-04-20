@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.shagalalab.qarejet.ui.widget.month.MonthView
+        android:id="@+id/categoryMonthView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/categoryChart"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey2"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:paddingStart="@dimen/standard_margin"
+                android:paddingEnd="@dimen/standard_margin"
+                android:paddingTop="@dimen/standard_margin_half"
+                android:paddingBottom="@dimen/standard_margin_half">
+
+                <TextView
+                    android:id="@+id/categoryTotalYear"
+                    android:layout_width="@dimen/category_total_date_width"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/category_year_background"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:text="2018"/>
+
+                <TextView
+                    android:id="@+id/categoryTotalMonth"
+                    android:layout_width="@dimen/category_total_date_width"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_below="@id/categoryTotalYear"
+                    android:background="@drawable/category_month_background"
+                    android:gravity="center"
+                    android:text="03"/>
+
+                <TextView
+                    android:id="@+id/categoryTotalTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/categoryTotalYear"
+                    android:layout_marginStart="@dimen/standard_margin"
+                    android:layout_marginEnd="@dimen/standard_margin"
+                    android:textSize="12sp"
+                    android:text="@string/total_balance"/>
+
+                <TextView
+                    android:id="@+id/categoryTotalBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/categoryTotalMonth"
+                    android:layout_below="@id/categoryTotalTitle"
+                    android:layout_marginStart="@dimen/standard_margin"
+                    android:layout_marginEnd="@dimen/standard_margin"
+                    android:textSize="12sp"
+                    android:text="$-331.32"/>
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/categoryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
