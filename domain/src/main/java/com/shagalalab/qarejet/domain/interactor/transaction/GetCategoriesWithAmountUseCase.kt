@@ -20,10 +20,10 @@ class GetCategoriesWithAmountUseCase(private val transactionRepository: Transact
                 val categoriesList = hashMapOf<Long, CategoryWithAmount>()
 
                 for (t in it) {
-                    if (categoriesList.containsKey<Long>(t.id)) {
-                        categoriesList[t.id]?.increaseAmount(t.amount)
+                    if (categoriesList.containsKey<Long>(t.category.id)) {
+                        categoriesList[t.category.id]?.increaseAmount(t.amount)
                     } else {
-                        categoriesList[t.id] = CategoryWithAmount(t.type, t.category, t.amount, t.date.time)
+                        categoriesList[t.category.id] = CategoryWithAmount(t.type, t.category, t.amount, t.date.time)
                     }
                 }
                 return@map categoriesList.values.toList()

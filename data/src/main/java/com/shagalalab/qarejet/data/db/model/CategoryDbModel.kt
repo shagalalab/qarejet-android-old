@@ -9,7 +9,7 @@ data class CategoryDbModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "category_id") val id: Long,
     @ColumnInfo(name = "category_title") val title: String,
-    @ColumnInfo(name = "category_icon") val icon: Int,
-    @ColumnInfo(name = "category_color") val color: Int,
+    @ColumnInfo(name = "category_icon") val icon: String,
+    @ColumnInfo(name = "category_color") val color: String,
     @ColumnInfo(name = "category_type") val type: Int
 )

@@ -75,7 +75,6 @@ class ChartsFragment : Fragment(), ChartsView {
         pieChart.isDrawHoleEnabled = false
         pieChart.transparentCircleRadius = 0f
         pieChart.description.isEnabled = false
-//        pieChart.setExtraOffsets(15f, 0f, 0f, 0f)
         pieChart.setDrawEntryLabels(false)
     }
 
@@ -94,7 +93,7 @@ class ChartsFragment : Fragment(), ChartsView {
             .map { PieEntry(it.amount.toFloat(), it.category.title) }
 
         val set = PieDataSet(entries, "")
-        set.colors = categories.map { ContextCompat.getColor(activity, it.category.color) }
+        set.colors = categories.map { ContextCompat.getColor(activity, resources.getIdentifier(it.category.color, "color", activity.packageName)) }
         set.valueTextColor = Color.WHITE
         set.valueTextSize = 13f
         pieChart.data = PieData(set)

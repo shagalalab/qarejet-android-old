@@ -18,8 +18,8 @@ class RecordsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(transaction: Transaction) {
         val icon = itemView.findViewById<ImageView>(R.id.transactionIcon)
-        icon.background.setColorFilter(ContextCompat.getColor(itemView.context, transaction.category.color), PorterDuff.Mode.SRC_OVER)
-        icon.setImageResource(transaction.category.icon)
+        icon.background.setColorFilter(ContextCompat.getColor(itemView.context, itemView.resources.getIdentifier(transaction.category.color, "color", itemView.context.packageName)), PorterDuff.Mode.SRC_OVER)
+        icon.setImageResource(itemView.resources.getIdentifier(transaction.category.icon, "drawable", itemView.context.packageName))
 
         itemView.findViewById<TextView>(R.id.transactionCategoryName).text = transaction.category.title
         itemView.findViewById<TextView>(R.id.transactionAccountName).text = transaction.account.title

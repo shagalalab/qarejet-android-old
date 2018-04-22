@@ -40,7 +40,7 @@ class ChartsDistributionViewHolder(itemView: View?) : RecyclerView.ViewHolder(it
         val ratio = categoryWithAmount.amount * 100 / totalAmount
         itemView.findViewById<TextView>(R.id.itemChartPercent).text = "%.0f".format(ratio).plus("%")
         (itemView.findViewById<TextView>(R.id.itemChartPercent).background as GradientDrawable)
-            .setColor(ContextCompat.getColor(itemView.context, categoryWithAmount.category.color))
+            .setColor(ContextCompat.getColor(itemView.context, itemView.resources.getIdentifier(categoryWithAmount.category.color, "color", itemView.context.packageName)))
         itemView.findViewById<TextView>(R.id.itemChartCategory).text = categoryWithAmount.category.title
         itemView.findViewById<TextView>(R.id.itemChartAmount).text = "%.2f".format(categoryWithAmount.amount)
     }
