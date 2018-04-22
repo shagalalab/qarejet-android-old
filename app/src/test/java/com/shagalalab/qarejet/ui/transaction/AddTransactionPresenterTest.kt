@@ -28,7 +28,7 @@ import java.util.Date
 class AddTransactionPresenterTest {
 
     private val accounts = listOf(Account(1, "one", "one"), Account(2, "two", "two"))
-    private val categories = listOf(Category(1, "one", 1, 1, 1), Category(2, "two", 2, 2, 2))
+    private val categories = listOf(Category(1, "one", "icon_one", "color_one", 1), Category(2, "two", "icon_two", "color_two", 2))
     private val transaction = Transaction(1, 1, Date(), accounts[0], categories[0], 1.0, "")
     private val schedulersProvider = TestSchedulers()
 

@@ -13,7 +13,7 @@ import java.util.Date
 
 class TransactionsUseCasesTest {
 
-    private val transaction = Transaction(1, 1, Date(), Account(1, "one", "one"), Category(1, "", 1, 1, 1), 1.2, "")
+    private val transaction = Transaction(1, 1, Date(), Account(1, "one", "one"), Category(1, "", "icon", "color", 1), 1.2, "")
     private val transactionId = 1L
     private val repositoryMock = mock<TransactionRepository>()
 

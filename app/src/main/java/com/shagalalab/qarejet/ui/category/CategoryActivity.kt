@@ -12,6 +12,12 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.R.id.categoryChart
+import com.shagalalab.qarejet.R.id.categoryList
+import com.shagalalab.qarejet.R.id.categoryMonthView
+import com.shagalalab.qarejet.R.id.categoryTotalBalance
+import com.shagalalab.qarejet.R.id.categoryTotalMonth
+import com.shagalalab.qarejet.R.id.categoryTotalYear
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.domain.model.Transaction
@@ -78,12 +84,12 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
             categoriesMap[monthIndex] = c.amount.toFloat()
         }
 
-        updateChart(categoriesMap)
-
         var currentMonthIndex = -1
+        var currentColor = R.color.color_primary
         var currency = ""
         if (!data.first.isEmpty()) {
             currentMonthIndex = DateTime(data.first.first().date).monthOfYear
+            currentColor = resources.getIdentifier(data.first.first().category.color, "color", packageName)
             currency = data.first.first().account.currency
         }
 
@@ -92,9 +98,11 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
         } else {
             categoryTotalBalance.text = categoriesMap[currentMonthIndex].toString().plus(" ").plus(currency)
         }
+
+        updateChart(categoriesMap, currentColor)
     }
 
-    private fun updateChart(categoriesMap: HashMap<Int, Float>) {
+    private fun updateChart(categoriesMap: HashMap<Int, Float>, chartLineColor: Int) {
         val entries = ArrayList<Entry>()
 
         // prepare month as axis title
@@ -121,11 +129,11 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
         categoryChart.xAxis.valueFormatter = formatter
 
         val set1 = LineDataSet(entries, "")
-        set1.setCircleColor(ContextCompat.getColor(this, R.color.color_primary))
+        set1.setCircleColor(ContextCompat.getColor(this, chartLineColor))
         set1.setDrawCircles(true)
         set1.setDrawValues(false)
         set1.circleHoleRadius = 12f
-        set1.color = ContextCompat.getColor(this, R.color.color_primary)
+        set1.color = ContextCompat.getColor(this, chartLineColor)
         set1.lineWidth = 2f
 
         categoryChart.data = LineData(set1)
