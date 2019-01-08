@@ -8,6 +8,7 @@ import com.shagalalab.qarejet.di.module.RepositoryModule
 import com.shagalalab.qarejet.di.module.UseCaseModule
 import com.shagalalab.qarejet.ui.category.CategoryActivity
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
+import com.shagalalab.qarejet.ui.dashboard.DashboardFragment
 import com.shagalalab.qarejet.ui.main.MainActivity
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.splash.SplashActivity
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(fragment: RecordsFragment)
     fun inject(fragment: ChartsFragment)
     fun inject(fragment: CategoryActivity)
+    fun inject(fragment: DashboardFragment)
 }

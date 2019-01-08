@@ -59,6 +59,7 @@ dependencies {
     // Room
     implementation "android.arch.persistence.room:runtime:$roomVersion"
     implementation "android.arch.persistence.room:rxjava2:$roomVersion"
+    implementation 'com.android.support:support-v4:26.1.0'
     kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     // Dagger
