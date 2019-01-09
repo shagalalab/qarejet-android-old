@@ -19,5 +19,4 @@ class DashboardPresenter(
                 .observeOn(schedulersProvider.ui())
                 .subscribe(view::setCashFlow)
     }
-
 }

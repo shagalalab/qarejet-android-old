@@ -10,7 +10,7 @@ ext {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxAndroidVersion"
     implementation "net.danlew:android.joda:$jodaVersion"
 

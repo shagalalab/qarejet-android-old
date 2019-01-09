@@ -1,6 +1,5 @@
 package com.shagalalab.qarejet.ui.dashboard
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -31,7 +30,6 @@ class DashboardFragment : Fragment(), DashboardView {
         super.onResume()
         presenter.requestData()
     }
-
 
     override fun setCashFlow(totalCash: TotalCash) {
         cash_amount.text = getString(R.string.cash_flow_value).format(totalCash.incomeAmount - totalCash.expenseAmount)

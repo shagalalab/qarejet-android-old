@@ -6,7 +6,11 @@ import com.shagalalab.qarejet.domain.interactor.account.GetAllAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.category.GetAllCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
-import com.shagalalab.qarejet.domain.interactor.transaction.*
+import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByCategoryUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTotalCashUseCase
 import com.shagalalab.qarejet.ui.category.CategoryPresenter
 import com.shagalalab.qarejet.ui.chart.ChartsPresenter
 import com.shagalalab.qarejet.ui.dashboard.DashboardPresenter
@@ -30,20 +34,20 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesNewTransactionPresenter(
-        addTransactionUseCase: AddTransactionUseCase,
-        getAllAccountsUseCase: GetAllAccountsUseCase,
-        getAllCategoriesUseCase: GetAllCategoriesUseCase,
-        schedulersProvider: SchedulersProvider) =
-        AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+            addTransactionUseCase: AddTransactionUseCase,
+            getAllAccountsUseCase: GetAllAccountsUseCase,
+            getAllCategoriesUseCase: GetAllCategoriesUseCase,
+            schedulersProvider: SchedulersProvider) =
+            AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesSplashPresenter(
-        initialDataCase: InitialDataUseCase,
-        addAccountsUseCase: AddAccountsUseCase,
-        addCategoriesUseCase: AddCategoriesUseCase,
-        schedulersProvider: SchedulersProvider) =
-        SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
+            initialDataCase: InitialDataUseCase,
+            addAccountsUseCase: AddAccountsUseCase,
+            addCategoriesUseCase: AddCategoriesUseCase,
+            schedulersProvider: SchedulersProvider) =
+            SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
@@ -52,29 +56,29 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesTransactionListPresenter(
-        getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
-        schedulersProvider: SchedulersProvider) =
-        RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
+            getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
+            schedulersProvider: SchedulersProvider) =
+            RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesChartsPresenter(
-        router: Router,
-        getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
-        schedulersProvider: SchedulersProvider) =
-        ChartsPresenter(router, getGetCategoriesWithAmountUseCase, schedulersProvider)
+            router: Router,
+            getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
+            schedulersProvider: SchedulersProvider) =
+            ChartsPresenter(router, getGetCategoriesWithAmountUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesCategoryPresenter(
-        getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
-        schedulersProvider: SchedulersProvider
+            getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
+            schedulersProvider: SchedulersProvider
     ) = CategoryPresenter(getTransactionsByCategoryUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesDashboardPresenter(
-        getTotalCashUseCase: GetTotalCashUseCase,
-        schedulersProvider: SchedulersProvider
+            getTotalCashUseCase: GetTotalCashUseCase,
+            schedulersProvider: SchedulersProvider
     ) = DashboardPresenter(getTotalCashUseCase, schedulersProvider)
 }
