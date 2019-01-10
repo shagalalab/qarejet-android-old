@@ -13,4 +13,7 @@
     <dimen name="records_header_height">56dp</dimen>
     <dimen name="records_header_text_size">20sp</dimen>
     <dimen name="category_total_date_width">50dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="vertical_padding">8dp</dimen>
+    <dimen name="layout_padding">8dp</dimen>
 </resources>

@@ -34,20 +34,20 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesNewTransactionPresenter(
-            addTransactionUseCase: AddTransactionUseCase,
-            getAllAccountsUseCase: GetAllAccountsUseCase,
-            getAllCategoriesUseCase: GetAllCategoriesUseCase,
-            schedulersProvider: SchedulersProvider) =
-            AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
+        addTransactionUseCase: AddTransactionUseCase,
+        getAllAccountsUseCase: GetAllAccountsUseCase,
+        getAllCategoriesUseCase: GetAllCategoriesUseCase,
+        schedulersProvider: SchedulersProvider) =
+        AddTransactionPresenter(addTransactionUseCase, getAllAccountsUseCase, getAllCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesSplashPresenter(
-            initialDataCase: InitialDataUseCase,
-            addAccountsUseCase: AddAccountsUseCase,
-            addCategoriesUseCase: AddCategoriesUseCase,
-            schedulersProvider: SchedulersProvider) =
-            SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
+        initialDataCase: InitialDataUseCase,
+        addAccountsUseCase: AddAccountsUseCase,
+        addCategoriesUseCase: AddCategoriesUseCase,
+        schedulersProvider: SchedulersProvider) =
+        SplashPresenter(initialDataCase, addAccountsUseCase, addCategoriesUseCase, schedulersProvider)
 
     @Provides
     @Singleton
@@ -56,29 +56,29 @@ class PresenterModule {
     @Provides
     @Singleton
     fun providesTransactionListPresenter(
-            getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
-            schedulersProvider: SchedulersProvider) =
-            RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
+        getTransactionsByDateUseCase: GetTransactionsByDateUseCase,
+        schedulersProvider: SchedulersProvider) =
+        RecordsPresenter(getTransactionsByDateUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesChartsPresenter(
-            router: Router,
-            getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
-            schedulersProvider: SchedulersProvider) =
-            ChartsPresenter(router, getGetCategoriesWithAmountUseCase, schedulersProvider)
+        router: Router,
+        getGetCategoriesWithAmountUseCase: GetCategoriesWithAmountUseCase,
+        schedulersProvider: SchedulersProvider) =
+        ChartsPresenter(router, getGetCategoriesWithAmountUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesCategoryPresenter(
-            getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
-            schedulersProvider: SchedulersProvider
+        getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
+        schedulersProvider: SchedulersProvider
     ) = CategoryPresenter(getTransactionsByCategoryUseCase, schedulersProvider)
 
     @Provides
     @Singleton
     fun providesDashboardPresenter(
-            getTotalCashUseCase: GetTotalCashUseCase,
-            schedulersProvider: SchedulersProvider
+        getTotalCashUseCase: GetTotalCashUseCase,
+        schedulersProvider: SchedulersProvider
     ) = DashboardPresenter(getTotalCashUseCase, schedulersProvider)
 }

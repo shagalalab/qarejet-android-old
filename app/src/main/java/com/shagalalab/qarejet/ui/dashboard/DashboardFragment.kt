@@ -21,8 +21,7 @@ class DashboardFragment : Fragment(), DashboardView {
         presenter.init(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
@@ -32,8 +31,8 @@ class DashboardFragment : Fragment(), DashboardView {
     }
 
     override fun setCashFlow(totalCash: TotalCash) {
-        cash_amount.text = getString(R.string.cash_flow_value).format(totalCash.incomeAmount - totalCash.expenseAmount)
-        income_text.text = getString(R.string.income_value).format(totalCash.incomeAmount)
-        expense_text.text = getString(R.string.expense_value).format(totalCash.expenseAmount)
+        cashAmount.text = getString(R.string.cash_flow_value).format(totalCash.incomeAmount - totalCash.expenseAmount)
+        incomeText.text = getString(R.string.income_value).format(totalCash.incomeAmount)
+        expenseText.text = getString(R.string.expense_value).format(totalCash.expenseAmount)
     }
 }
