@@ -15,6 +15,7 @@ import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.category.CategoryActivity
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
+import com.shagalalab.qarejet.ui.dashboard.DashboardFragment
 import com.shagalalab.qarejet.ui.record.RecordsFragment
 import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
 import com.shagalalab.qarejet.util.Constants
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         override fun createFragment(screenKey: String?, data: Any?): Fragment {
             return when (screenKey) {
-                Constants.SCREEN_DASHBOARD -> Fragment()
+                Constants.SCREEN_DASHBOARD -> DashboardFragment()
                 Constants.SCREEN_RECORDS -> RecordsFragment()
                 Constants.SCREEN_CHARTS -> ChartsFragment()
                 Constants.SCREEN_SETTINGS -> Fragment()

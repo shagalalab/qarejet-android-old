@@ -10,8 +10,10 @@ import com.shagalalab.qarejet.domain.interactor.transaction.AddTransactionUseCas
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByCategoryUseCase
 import com.shagalalab.qarejet.domain.interactor.transaction.GetTransactionsByDateUseCase
+import com.shagalalab.qarejet.domain.interactor.transaction.GetTotalCashUseCase
 import com.shagalalab.qarejet.ui.category.CategoryPresenter
 import com.shagalalab.qarejet.ui.chart.ChartsPresenter
+import com.shagalalab.qarejet.ui.dashboard.DashboardPresenter
 import com.shagalalab.qarejet.ui.main.MainPresenter
 import com.shagalalab.qarejet.ui.record.RecordsPresenter
 import com.shagalalab.qarejet.ui.splash.SplashPresenter
@@ -72,4 +74,11 @@ class PresenterModule {
         getTransactionsByCategoryUseCase: GetTransactionsByCategoryUseCase,
         schedulersProvider: SchedulersProvider
     ) = CategoryPresenter(getTransactionsByCategoryUseCase, schedulersProvider)
+
+    @Provides
+    @Singleton
+    fun providesDashboardPresenter(
+        getTotalCashUseCase: GetTotalCashUseCase,
+        schedulersProvider: SchedulersProvider
+    ) = DashboardPresenter(getTotalCashUseCase, schedulersProvider)
 }

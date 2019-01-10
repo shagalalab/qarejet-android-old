@@ -76,4 +76,10 @@
         <item>December</item>
     </string-array>
 
+    <string name="cash_flow">Cash Flow</string>
+
+    <string name="cash_flow_value">%.1f UZS</string>
+    <string name="income_value">+%.1f income</string>
+    <string name="expense_value">-%.1f expense</string>
+
 </resources>
