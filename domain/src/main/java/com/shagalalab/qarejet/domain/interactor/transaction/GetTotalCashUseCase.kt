@@ -2,6 +2,7 @@ package com.shagalalab.qarejet.domain.interactor.transaction
 
 import com.shagalalab.qarejet.domain.interactor.type.SingleUseCase
 import com.shagalalab.qarejet.domain.model.TotalCash
+import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.domain.model.TransactionType
 import com.shagalalab.qarejet.domain.repository.TransactionRepository
 import io.reactivex.Single
@@ -14,13 +15,24 @@ class GetTotalCashUseCase(private val transactionRepository: TransactionReposito
             .map { it ->
                 var income = 0.0
                 var expense = 0.0
+                var cash = 0.0
+                var card = 0.0
                 it.forEach {
-                    if (it.type == TransactionType.INCOME.ordinal)
+                    if (it.type == TransactionType.INCOME.ordinal) {
                         income += it.amount
-                    else
+                        if (it.account.title == "Cash")
+                            cash += it.amount
+                        if (it.account.title == "Card")
+                            card += it.amount
+                    } else {
                         expense += it.amount
+                        if (it.account.title == "Cash")
+                            cash -= it.amount
+                        if (it.account.title == "Card")
+                            card -= it.amount
+                    }
                 }
-                return@map TotalCash(income, expense)
+                return@map TotalCash(income, expense, cash, card, it.takeLast(5))
             }
     }
 

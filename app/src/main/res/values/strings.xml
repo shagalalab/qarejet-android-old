@@ -37,6 +37,7 @@
     <string name="new_transaction">New Transaction</string>
 
     <string name="account_cash">Cash</string>
+    <string name="account_card">Card</string>
     <string name="category_expense_food">Food</string>
     <string name="category_expense_leisure">Leisure</string>
     <string name="category_expense_education">Education</string>
@@ -81,5 +82,12 @@
     <string name="cash_flow_value">%.1f UZS</string>
     <string name="income_value">+%.1f income</string>
     <string name="expense_value">-%.1f expense</string>
+    <string name="card_text">Card</string>
+    <string name="cash_text">Cash</string>
+    <string name="accounts_text">Accounts</string>
+    <string name="budget_text">Budget</string>
+    <string name="total_budget_value">Total: %.1f</string>
+    <string name="progress_value">%.1f spent, %.1f left</string>
+    <string name="last_transactions_text">Last transactions</string>
 
 </resources>
