@@ -18,6 +18,7 @@ class DashboardFragment : Fragment(), DashboardView {
     @Inject
     lateinit var presenter: DashboardPresenter
     private lateinit var lastTransactionsAdapter: RecordsAdapter
+    private lateinit var accountsAdapter: AccountsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +26,19 @@ class DashboardFragment : Fragment(), DashboardView {
         presenter.init(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater?.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (lastTransactionsRecyclerView.adapter == null) {
-            lastTransactionsAdapter = RecordsAdapter()
-            lastTransactionsRecyclerView.adapter = lastTransactionsAdapter
-        } else {
-            lastTransactionsRecyclerView.adapter = lastTransactionsAdapter
-        }
+        accountsAdapter = AccountsAdapter()
+        accountList.adapter = accountsAdapter
+        accountList.layoutManager = LinearLayoutManager(context)
+        accountList.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        lastTransactionsAdapter = RecordsAdapter()
+        lastTransactionsRecyclerView.adapter = lastTransactionsAdapter
         lastTransactionsRecyclerView.layoutManager = LinearLayoutManager(context)
         lastTransactionsRecyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
     }
@@ -51,12 +53,11 @@ class DashboardFragment : Fragment(), DashboardView {
         cashAmount.text = getString(R.string.cash_flow_value).format(leftAmount)
         incomeText.text = getString(R.string.income_value).format(totalCash.incomeAmount)
         expenseText.text = getString(R.string.expense_value).format(totalCash.expenseAmount)
-        cashAccount.text = getString(R.string.cash_flow_value).format(totalCash.cashAmount)
-        cardAccount.text = getString(R.string.cash_flow_value).format(totalCash.cardAmount)
         totalBudget.text = getString(R.string.total_budget_value).format(totalCash.incomeAmount)
         progressText.text = getString(R.string.progress_value).format(totalCash.incomeAmount, leftAmount)
         budgetProgress.max = totalCash.incomeAmount.toInt()
         budgetProgress.progress = totalCash.expenseAmount.toInt()
+        accountsAdapter.updateData(totalCash.accountList)
         lastTransactionsAdapter.update(totalCash.lastTransactions)
     }
 }
