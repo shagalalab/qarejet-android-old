@@ -10,6 +10,10 @@ class MainPresenter(private val router: Router) {
         router.navigateTo(Constants.SCREEN_ADD_TRANSACTION)
     }
 
+    fun openDashboardScreen() {
+        router.newRootScreen(Constants.SCREEN_DASHBOARD)
+    }
+
     fun handleDrawerItemSelection(itemId: Int) {
         val screenKey = when (itemId) {
             R.id.nav_dashboard -> Constants.SCREEN_DASHBOARD

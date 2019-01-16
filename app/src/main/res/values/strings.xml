@@ -79,7 +79,7 @@
 
     <string name="cash_flow">Cash Flow</string>
 
-    <string name="cash_flow_value">%.1f UZS</string>
+    <string name="cash_flow_value">%.1f</string>
     <string name="income_value">+%.1f income</string>
     <string name="expense_value">-%.1f expense</string>
     <string name="card_text">Card</string>

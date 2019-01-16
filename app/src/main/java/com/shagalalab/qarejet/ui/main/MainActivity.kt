@@ -47,8 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
-        navView.setCheckedItem(R.id.nav_dashboard)
-        supportFragmentManager.beginTransaction().replace(R.id.mainLayout, DashboardFragment()).commit()
+        presenter.openDashboardScreen()
     }
 
     override fun onResume() {
