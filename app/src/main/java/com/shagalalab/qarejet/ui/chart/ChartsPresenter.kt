@@ -1,7 +1,7 @@
 package com.shagalalab.qarejet.ui.chart
 
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.util.SchedulersProvider
 import com.shagalalab.qarejet.util.Screens
 import org.joda.time.DateTime

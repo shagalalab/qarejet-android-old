@@ -1,7 +1,7 @@
 package com.shagalalab.qarejet.ui.transaction
 
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
 
 interface AddTransactionView {
     fun updateAccounts(accounts: List<Account>)

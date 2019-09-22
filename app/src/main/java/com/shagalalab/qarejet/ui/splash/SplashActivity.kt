@@ -6,8 +6,8 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.appcompat.app.AppCompatActivity
 import com.shagalalab.qarejet.QarejetApp
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.ui.main.MainActivity
 import javax.inject.Inject
 

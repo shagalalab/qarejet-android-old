@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.data.db.Database
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import dagger.Module

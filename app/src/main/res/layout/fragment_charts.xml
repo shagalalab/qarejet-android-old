@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.shagalalab.qarejet.ui.widget.month.MonthView
+    <com.shagalalab.qarejet.core.widgets.month.MonthView
         android:id="@+id/chartsMonthView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

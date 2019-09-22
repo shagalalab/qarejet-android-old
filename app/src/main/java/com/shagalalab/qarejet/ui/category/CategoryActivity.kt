@@ -12,11 +12,11 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.core.utils.Category
+import com.shagalalab.qarejet.core.widgets.month.MonthListener
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.ui.record.RecordsAdapter
-import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import kotlinx.android.synthetic.main.activity_category.*
 import org.joda.time.DateTime
 import javax.inject.Inject

@@ -1,11 +1,11 @@
 package com.shagalalab.qarejet.data.db
 
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.data.db.model.AccountDbModel
 import com.shagalalab.qarejet.data.db.model.CategoryDbModel
 import com.shagalalab.qarejet.data.db.model.FullTransactionModel
 import com.shagalalab.qarejet.data.db.model.TransactionDbModel
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.Transaction
 
 object DbToDomainMapper {

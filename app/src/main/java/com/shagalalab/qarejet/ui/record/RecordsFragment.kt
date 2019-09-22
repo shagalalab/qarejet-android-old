@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.core.widgets.month.MonthListener
 import com.shagalalab.qarejet.domain.model.Transaction
-import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import kotlinx.android.synthetic.main.fragment_records.*
 import org.joda.time.DateTime
 import javax.inject.Inject

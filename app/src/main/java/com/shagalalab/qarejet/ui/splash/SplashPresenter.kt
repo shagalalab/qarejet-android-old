@@ -1,10 +1,10 @@
 package com.shagalalab.qarejet.ui.splash
 
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.domain.interactor.account.AddAccountsUseCase
 import com.shagalalab.qarejet.domain.interactor.category.AddCategoriesUseCase
 import com.shagalalab.qarejet.domain.interactor.config.InitialDataUseCase
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.util.SchedulersProvider
 
 class SplashPresenter constructor(

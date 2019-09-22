@@ -67,7 +67,7 @@
                     tools:text="UZS"/>
             </LinearLayout>
 
-            <com.shagalalab.qarejet.ui.widget.numberkeyboard.NumberKeyboardView
+            <com.shagalalab.qarejet.core.widgets.numberkeyboard.NumberKeyboardView
                 android:id="@+id/transactionKeyboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

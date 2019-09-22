@@ -16,9 +16,9 @@ import com.github.mikephil.charting.data.PieEntry
 import com.google.android.material.tabs.TabLayout
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.core.utils.Category
+import com.shagalalab.qarejet.core.widgets.month.MonthListener
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
-import com.shagalalab.qarejet.ui.widget.month.MonthListener
 import com.shagalalab.qarejet.util.Constants
 import kotlinx.android.synthetic.main.fragment_charts.*
 import org.joda.time.DateTime

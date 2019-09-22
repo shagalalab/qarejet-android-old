@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_margin">16dp</dimen>
+    <dimen name="standard_margin_half">8dp</dimen>
+    <dimen name="standard_text_size">16sp</dimen>
+    <dimen name="records_header_height">56dp</dimen>
+    <dimen name="records_header_text_size">20sp</dimen>
+    <dimen name="category_total_date_width">50dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="vertical_padding">8dp</dimen>
+    <dimen name="layout_padding">8dp</dimen>
+</resources>

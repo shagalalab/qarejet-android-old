@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.ui.category.CategoryActivity
 import com.shagalalab.qarejet.ui.chart.ChartsFragment
 import com.shagalalab.qarejet.ui.dashboard.DashboardFragment

@@ -14,12 +14,12 @@ import androidx.core.widget.TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM
 import com.google.android.material.snackbar.Snackbar
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
+import com.shagalalab.qarejet.core.utils.Category
+import com.shagalalab.qarejet.core.widgets.CategoryAdapter
+import com.shagalalab.qarejet.core.widgets.numberkeyboard.NumberKeyboardView
+import com.shagalalab.qarejet.core.widgets.picker.DatePickerFragment
+import com.shagalalab.qarejet.core.widgets.picker.TimePickerFragment
 import com.shagalalab.qarejet.domain.model.Account
-import com.shagalalab.qarejet.domain.model.Category
-import com.shagalalab.qarejet.ui.widget.CategoryAdapter
-import com.shagalalab.qarejet.ui.widget.numberkeyboard.NumberKeyboardView
-import com.shagalalab.qarejet.ui.widget.picker.DatePickerFragment
-import com.shagalalab.qarejet.ui.widget.picker.TimePickerFragment
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.getCurrencySign
 import com.shagalalab.qarejet.util.isToday
@@ -90,15 +90,15 @@ class AddTransactionActivity : AppCompatActivity(), AddTransactionView, TimePick
                 }
             }
         })
-        addTransaction.setOnClickListener({
+        addTransaction.setOnClickListener {
             presenter.addNewTransaction(
-                    transactionAmount.text.toString().toDouble(),
-                    transactionCardAccountSpinner.selectedItem as Account,
-                    transactionCardCategoryList.selectedItem as Category,
-                    transactionCardNoteText.text.toString(),
-                    selectedDate.time
+                transactionAmount.text.toString().toDouble(),
+                transactionCardAccountSpinner.selectedItem as Account,
+                transactionCardCategoryList.selectedItem as Category,
+                transactionCardNoteText.text.toString(),
+                selectedDate.time
             )
-        })
+        }
     }
 
     private fun setDateText() {

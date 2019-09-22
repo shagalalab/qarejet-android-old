@@ -1,6 +1,6 @@
 package com.shagalalab.qarejet.domain.repository
 
-import com.shagalalab.qarejet.domain.model.Category
+import com.shagalalab.qarejet.core.utils.Category
 import io.reactivex.Completable
 import io.reactivex.Single
 

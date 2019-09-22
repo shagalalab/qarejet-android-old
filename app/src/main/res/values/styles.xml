@@ -39,20 +39,6 @@
         <item name="colorAccent">@color/color_accent</item>
     </style>
 
-    <style name="KeyboardButtonBase">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">50dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">?android:attr/selectableItemBackground</item>
-        <item name="android:clickable">true</item>
-    </style>
-
-    <style name="KeyboardTextButton" parent="KeyboardButtonBase">
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@android:color/white</item>
-    </style>
-
     <style name="ChartsTabLayout" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/color_accent</item>
         <item name="tabIndicatorHeight">4dp</item>

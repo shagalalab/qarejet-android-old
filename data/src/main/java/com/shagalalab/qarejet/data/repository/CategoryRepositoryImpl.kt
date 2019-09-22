@@ -1,9 +1,9 @@
 package com.shagalalab.qarejet.data.repository
 
+import com.shagalalab.qarejet.core.utils.Category
 import com.shagalalab.qarejet.data.db.Database
 import com.shagalalab.qarejet.data.db.DbToDomainMapper
 import com.shagalalab.qarejet.data.db.DomainToDbMapper
-import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.repository.CategoryRepository
 import io.reactivex.Completable
 import io.reactivex.Single
