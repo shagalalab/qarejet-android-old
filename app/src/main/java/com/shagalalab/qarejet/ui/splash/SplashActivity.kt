@@ -2,9 +2,9 @@ package com.shagalalab.qarejet.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
+import androidx.appcompat.app.AppCompatActivity
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.domain.model.Account
 import com.shagalalab.qarejet.domain.model.Category

@@ -2,8 +2,8 @@ apply plugin: 'kotlin'
 apply plugin: 'kotlin-kapt'
 
 ext {
-    rxKotlinVersion = '2.1.0'
-    rxAndroidVersion = '2.0.1'
+    rxKotlinVersion = '2.2.0'
+    rxAndroidVersion = '2.1.0'
     jUnitVersion = '4.12'
     mockitoKotlinVersion = '1.5.0'
     jodaVersion = '2.9.9.1'

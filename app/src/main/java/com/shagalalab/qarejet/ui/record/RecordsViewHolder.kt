@@ -1,11 +1,11 @@
 package com.shagalalab.qarejet.ui.record
 
 import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.util.getCurrencySign
@@ -14,7 +14,7 @@ import com.shagalalab.qarejet.util.isIncome
 import com.shagalalab.qarejet.util.toShortDateTime
 import java.util.Calendar
 
-class RecordsViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class RecordsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(transaction: Transaction) {
         val icon = itemView.findViewById<ImageView>(R.id.transactionIcon)

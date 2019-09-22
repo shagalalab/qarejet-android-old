@@ -1,7 +1,8 @@
 package com.shagalalab.qarejet.di.module
 
-import android.arch.persistence.room.Room
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.room.Room
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.data.db.Database
 import com.shagalalab.qarejet.domain.model.Account
@@ -43,9 +44,11 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun providesDatabase(context: Context) = Room.databaseBuilder(context, Database::class.java, "qarejet.db").build()
+    fun providesDatabase(context: Context) =
+        Room.databaseBuilder(context, Database::class.java, "qarejet.db").build()
 
     @Provides
     @Singleton
-    fun providesSharedPrefs(context: Context) = context.getSharedPreferences("QarejetPrefs", Context.MODE_PRIVATE)
+    fun providesSharedPrefs(context: Context): SharedPreferences =
+        context.getSharedPreferences("QarejetPrefs", Context.MODE_PRIVATE)
 }

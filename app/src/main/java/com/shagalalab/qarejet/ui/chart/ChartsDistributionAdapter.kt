@@ -1,12 +1,12 @@
 package com.shagalalab.qarejet.ui.chart
 
 import android.graphics.drawable.GradientDrawable
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 
@@ -14,13 +14,13 @@ class ChartsDistributionAdapter(private val listener: ChartsFragment.Listener) :
     private var categoriesList = listOf<CategoryWithAmount>()
     private var totalAmount = 0.0
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ChartsDistributionViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.item_chart, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChartsDistributionViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_chart, parent, false)
         return ChartsDistributionViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ChartsDistributionViewHolder?, position: Int) {
-        holder?.setItem(categoriesList[position], totalAmount, listener)
+    override fun onBindViewHolder(holder: ChartsDistributionViewHolder, position: Int) {
+        holder.setItem(categoriesList[position], totalAmount, listener)
     }
 
     override fun getItemCount() = categoriesList.size
@@ -32,7 +32,7 @@ class ChartsDistributionAdapter(private val listener: ChartsFragment.Listener) :
     }
 }
 
-class ChartsDistributionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+class ChartsDistributionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun setItem(categoryWithAmount: CategoryWithAmount, totalAmount: Double, listener: ChartsFragment.Listener) {
         itemView.setOnClickListener { listener.onChartItemClicked(categoryWithAmount.category) }

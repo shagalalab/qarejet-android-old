@@ -3,7 +3,7 @@ package com.shagalalab.qarejet.ui.widget.picker
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import java.util.Calendar
 
 class DatePickerFragment : DialogFragment() {
@@ -20,6 +20,6 @@ class DatePickerFragment : DialogFragment() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        return DatePickerDialog(context, listener, year, month, day)
+        return DatePickerDialog(requireContext(), listener, year, month, day)
     }
 }

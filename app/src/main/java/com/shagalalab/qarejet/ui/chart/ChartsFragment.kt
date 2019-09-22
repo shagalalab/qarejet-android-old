@@ -2,18 +2,18 @@ package com.shagalalab.qarejet.ui.chart
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.android.material.tabs.TabLayout
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
 import com.shagalalab.qarejet.domain.model.Category
@@ -36,15 +36,15 @@ class ChartsFragment : Fragment(), ChartsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity.application as QarejetApp).component.inject(this)
+        (activity?.application as QarejetApp).component.inject(this)
         presenter.init(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_charts, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_charts, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chartsMonthView.init(DateTime.now(), monthListener)
 
@@ -93,7 +93,7 @@ class ChartsFragment : Fragment(), ChartsView {
             .map { PieEntry(it.amount.toFloat(), it.category.title) }
 
         val set = PieDataSet(entries, "")
-        set.colors = categories.map { ContextCompat.getColor(activity, resources.getIdentifier(it.category.color, "color", activity.packageName)) }
+        set.colors = categories.map { ContextCompat.getColor(requireContext(), resources.getIdentifier(it.category.color, "color", activity?.packageName)) }
         set.valueTextColor = Color.WHITE
         set.valueTextSize = 13f
         pieChart.data = PieData(set)

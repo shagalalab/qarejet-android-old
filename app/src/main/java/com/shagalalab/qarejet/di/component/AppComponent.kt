@@ -17,7 +17,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AppModule::class, PresenterModule::class, UseCaseModule::class, RepositoryModule::class, DataModule::class))
+@Component(modules = [AppModule::class, PresenterModule::class, UseCaseModule::class, RepositoryModule::class, DataModule::class])
 interface AppComponent {
     fun inject(app: QarejetApp)
     fun inject(activity: SplashActivity)

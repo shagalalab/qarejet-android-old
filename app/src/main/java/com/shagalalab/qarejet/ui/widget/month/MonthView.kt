@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.view_months.view.*
 import org.joda.time.DateTime
 
 class MonthView : FrameLayout {
-    constructor(context: Context?) : super(context) { setup() }
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) { setup() }
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) { setup() }
+    constructor(context: Context) : super(context) { setup() }
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) { setup() }
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) { setup() }
 
     lateinit var presenter: MonthPresenter
 

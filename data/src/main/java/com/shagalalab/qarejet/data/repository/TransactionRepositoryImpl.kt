@@ -12,45 +12,45 @@ class TransactionRepositoryImpl (private val database : Database) : TransactionR
 
     override fun getTransaction(id: Long): Single<Transaction> {
         return database
-                .transactionDao
+                .transactionDao()
                 .getTransaction(id)
                 .map(DbToDomainMapper::mapTransaction)
     }
 
     override fun getAllTransactions(): Single<List<Transaction>> {
         return database
-                .transactionDao
+                .transactionDao()
                 .getTransactions()
                 .map(DbToDomainMapper::mapTransactionList)
     }
 
     override fun getTransactionsWithinDateByType(from: Long, to: Long, categoryType: Int): Single<List<Transaction>> {
         return database
-            .transactionDao
+            .transactionDao()
             .getTransactionsWithinDateByType(from, to, categoryType)
             .map(DbToDomainMapper::mapTransactionList)
     }
 
     override fun getTransactionsWithinDateByCategory(from: Long, to: Long, categoryId: Long): Single<List<Transaction>> {
         return database
-            .transactionDao
+            .transactionDao()
             .getTransactionsWithinDateByCategory(from, to, categoryId)
             .map(DbToDomainMapper::mapTransactionList)
     }
 
     override fun addTransaction(transaction: Transaction): Completable {
-        return Completable.fromAction({
+        return Completable.fromAction {
             database
-                    .transactionDao
-                    .insertTransaction(DomainToDbMapper.mapTransaction(transaction))
-        })
+                .transactionDao()
+                .insertTransaction(DomainToDbMapper.mapTransaction(transaction))
+        }
     }
 
     override fun addTransactions(transactions: List<Transaction>): Completable {
-        return Completable.fromAction({
+        return Completable.fromAction {
             database
-                .transactionDao
+                .transactionDao()
                 .insertTransactions(DomainToDbMapper.mapTransactionsList(transactions))
-        })
+        }
     }
 }

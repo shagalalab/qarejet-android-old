@@ -1,10 +1,10 @@
 package com.shagalalab.qarejet.ui.category
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -12,12 +12,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.R.id.categoryChart
-import com.shagalalab.qarejet.R.id.categoryList
-import com.shagalalab.qarejet.R.id.categoryMonthView
-import com.shagalalab.qarejet.R.id.categoryTotalBalance
-import com.shagalalab.qarejet.R.id.categoryTotalMonth
-import com.shagalalab.qarejet.R.id.categoryTotalYear
 import com.shagalalab.qarejet.domain.model.Category
 import com.shagalalab.qarejet.domain.model.CategoryWithAmount
 import com.shagalalab.qarejet.domain.model.Transaction
@@ -39,7 +33,7 @@ class CategoryActivity : AppCompatActivity(), CategoryView {
         setContentView(R.layout.activity_category)
         (application as QarejetApp).component.inject(this)
 
-        val data = intent.extras.getSerializable("data") as Pair<Category, DateTime>
+        val data = intent?.extras?.getSerializable("data") as Pair<Category, DateTime>
         categoryId = data.first.id
         date = data.second
         presenter.init(this)

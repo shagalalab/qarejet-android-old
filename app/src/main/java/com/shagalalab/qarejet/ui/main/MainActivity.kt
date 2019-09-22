@@ -1,35 +1,27 @@
 package com.shagalalab.qarejet.ui.main
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import com.google.android.material.navigation.NavigationView
 import com.shagalalab.qarejet.QarejetApp
 import com.shagalalab.qarejet.R
-import com.shagalalab.qarejet.domain.model.Category
-import com.shagalalab.qarejet.ui.category.CategoryActivity
-import com.shagalalab.qarejet.ui.chart.ChartsFragment
-import com.shagalalab.qarejet.ui.dashboard.DashboardFragment
-import com.shagalalab.qarejet.ui.record.RecordsFragment
-import com.shagalalab.qarejet.ui.transaction.AddTransactionActivity
-import com.shagalalab.qarejet.util.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import org.joda.time.DateTime
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.android.SupportAppNavigator
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     @Inject lateinit var presenter: MainPresenter
     @Inject lateinit var navigatorHolder: NavigatorHolder
+
+    private val navigator: Navigator =
+        SupportAppNavigator(this, supportFragmentManager, R.id.mainLayout)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +29,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         (application as QarejetApp).component.inject(this)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             presenter.openNewTransactionScreen()
         }
 
@@ -89,31 +81,5 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         presenter.handleDrawerItemSelection(item.itemId)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    private val navigator: Navigator = object : SupportAppNavigator(this, supportFragmentManager, R.id.mainLayout) {
-        override fun createActivityIntent(context: Context?, screenKey: String?, data: Any?): Intent? {
-            return when (screenKey) {
-                Constants.SCREEN_ADD_TRANSACTION -> Intent(this@MainActivity, AddTransactionActivity::class.java)
-                Constants.SCREEN_CATEGORY -> {
-                    val intent = Intent(this@MainActivity, CategoryActivity::class.java)
-                    val bundle = Bundle()
-                    bundle.putSerializable("data", data as Pair<Category, DateTime>)
-                    intent.putExtras(bundle)
-                    intent
-                }
-                else -> null
-            }
-        }
-
-        override fun createFragment(screenKey: String?, data: Any?): Fragment {
-            return when (screenKey) {
-                Constants.SCREEN_DASHBOARD -> DashboardFragment()
-                Constants.SCREEN_RECORDS -> RecordsFragment()
-                Constants.SCREEN_CHARTS -> ChartsFragment()
-                Constants.SCREEN_SETTINGS -> Fragment()
-                else -> Fragment()
-            }
-        }
     }
 }

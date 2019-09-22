@@ -5,7 +5,7 @@ import com.shagalalab.qarejet.domain.repository.ConfigRepository
 
 class ConfigRepositoryImpl(private var sharedPrefs: SharedPreferences) : ConfigRepository {
     companion object {
-        val INITIAL_DATA_POPULATED = "INITIAL_DATA_POPULATED"
+        const val INITIAL_DATA_POPULATED = "INITIAL_DATA_POPULATED"
     }
 
     override fun checkInitialDataPopulated(): Boolean {

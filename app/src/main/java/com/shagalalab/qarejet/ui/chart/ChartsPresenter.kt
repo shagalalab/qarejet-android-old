@@ -2,8 +2,8 @@ package com.shagalalab.qarejet.ui.chart
 
 import com.shagalalab.qarejet.domain.interactor.transaction.GetCategoriesWithAmountUseCase
 import com.shagalalab.qarejet.domain.model.Category
-import com.shagalalab.qarejet.util.Constants
 import com.shagalalab.qarejet.util.SchedulersProvider
+import com.shagalalab.qarejet.util.Screens
 import org.joda.time.DateTime
 import ru.terrakok.cicerone.Router
 
@@ -26,6 +26,6 @@ class ChartsPresenter(
     }
 
     fun handleChartItemClick(category: Category, currentDate: DateTime) {
-        router.navigateTo(Constants.SCREEN_CATEGORY, Pair(category, currentDate))
+        router.navigateTo(Screens.getCategoryScreen(Pair(category, currentDate)))
     }
 }

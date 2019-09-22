@@ -12,32 +12,32 @@ class CategoryRepositoryImpl constructor(var database: Database) : CategoryRepos
 
     override fun getAllCategories(): Single<List<Category>> {
         return database
-                .categoryDao
+                .categoryDao()
                 .getCategories()
                 .map(DbToDomainMapper::mapCategoriesList)
     }
 
     override fun getCategory(id: Long): Single<Category> {
         return database
-                .categoryDao
+                .categoryDao()
                 .getCategory(id)
                 .map(DbToDomainMapper::mapCategory)
     }
 
     override fun addCategory(category: Category): Completable {
-        return Completable.fromAction({
+        return Completable.fromAction {
             database
-                    .categoryDao
-                    .insertCategory(DomainToDbMapper.mapCategory(category))
-        })
+                .categoryDao()
+                .insertCategory(DomainToDbMapper.mapCategory(category))
+        }
     }
 
     override fun addCategories(categories: List<Category>): Completable {
-        return Completable.fromAction({
+        return Completable.fromAction {
             database
-                    .categoryDao
-                    .insertCategories(DomainToDbMapper.mapCategoriesList(categories))
-        })
+                .categoryDao()
+                .insertCategories(DomainToDbMapper.mapCategoriesList(categories))
+        }
     }
 
 }
