@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 apply from: '../quality.gradle'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion Android.compile_sdk_version
     defaultConfig {
         applicationId "com.shagalalab.qarejet"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Android.min_sdk_version
+        targetSdkVersion Android.target_sdk_version
+        versionCode Android.version_code
+        versionName Android.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -27,64 +27,40 @@ android {
     }
 }
 
-ext {
-    appCompatVersion = '1.1.0'
-    jUnitVersion = '4.12'
-    testRunnerVersion = '1.0.1'
-    extJunitVersion = '1.1.1'
-    espressoVersion = '3.2.0'
-    designVersion = "1.0.0"
-    rxKotlinVersion = '2.2.0'
-    rxAndroidVersion = '2.1.0'
-    daggerVersion = '2.24'
-    roomVersion = '2.1.0'
-    mockitoKotlinVersion = '1.5.0'
-    jodaVersion = '2.9.9.1'
-    mpAndroidChartVersion = 'v3.0.3'
-    ciceroneVersion = '5.0.0'
-}
-
 dependencies {
-    // Support libraries
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "com.google.android.material:material:$designVersion"
-    implementation "androidx.cardview:cardview:$designVersion"
-    implementation "androidx.recyclerview:recyclerview:$designVersion"
-
-    // RxJava
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
-
-    // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-
-    // Dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    // Dependency injection
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-
-    // JodaTime for better date processing
-    implementation "net.danlew:android.joda:$jodaVersion"
-
-    // Charts
-    implementation "com.github.PhilJay:MPAndroidChart:$mpAndroidChartVersion"
-
-    // Cicerone for navigation
-    implementation "ru.terrakok.cicerone:cicerone:$ciceroneVersion"
-
-    // Testing
-    testImplementation "junit:junit:$jUnitVersion"
-    testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
-    androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
-    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-
     implementation project(path: ':domain')
     implementation project(path: ':data')
+
+    // Support libraries
+    implementation Libs.kotlin_std
+    implementation Libs.appcompat
+    implementation Libs.material
+    implementation Libs.cardview
+    implementation Libs.recycler_view
+
+    // RxJava
+    implementation Libs.rx_kotlin
+    implementation Libs.rx_android
+
+    // Room
+    implementation Libs.room
+    implementation Libs.room_rx
+    kapt Libs.room_compiler
+
+    // Dagger
+    implementation Libs.dagger
+    kapt Libs.dagger_compiler
+
+    // JodaTime for better date processing
+    implementation Libs.joda
+
+    // Charts
+    implementation Libs.mp_chart
+
+    // Cicerone for navigation
+    implementation Libs.cicerone
+
+    // Testing
+    testImplementation TestLibs.junit
+    testImplementation TestLibs.mockito_kotlin
 }

@@ -4,42 +4,33 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion Android.compile_sdk_version
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion Android.min_sdk_version
+        targetSdkVersion Android.target_sdk_version
+        versionCode Android.version_code
+        versionName Android.version_name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
-ext {
-    jUnitVersion = '4.12'
-    roomVersion = '2.1.0'
-    rxKotlinVersion = '2.2.0'
-    rxAndroidVersion = '2.1.0'
-    daggerVersion = '2.11'
-    mockitoKotlinVersion = '1.5.0'
-}
-
 dependencies {
-    testImplementation "junit:junit:$jUnitVersion"
-    testImplementation "com.nhaarman:mockito-kotlin:$mockitoKotlinVersion"
+    implementation project(path: ':domain')
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation Libs.rx_kotlin
+    implementation Libs.rx_android
 
     // Dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation Libs.dagger
+    kapt Libs.dagger_compiler
 
     // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    implementation "androidx.room:room-rxjava2:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation Libs.room
+    implementation Libs.room_rx
+    kapt Libs.room_compiler
 
-    implementation project(path: ':domain')
+    testImplementation TestLibs.junit
+    testImplementation TestLibs.mockito_kotlin
 }
