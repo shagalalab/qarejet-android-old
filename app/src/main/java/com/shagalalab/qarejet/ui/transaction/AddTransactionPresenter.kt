@@ -10,33 +10,34 @@ import com.shagalalab.qarejet.domain.model.Transaction
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_EXPENSE
 import com.shagalalab.qarejet.util.Constants.TRANSACTION_TYPE_INCOME
 import com.shagalalab.qarejet.util.SchedulersProvider
-import java.util.Date
+import java.util.*
 
 class AddTransactionPresenter constructor(
-        private val addTransactionsUseCase: AddTransactionUseCase,
-        private val getAllAccountsUseCase: GetAllAccountsUseCase,
-        private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
-        private val schedulersProvider: SchedulersProvider
+    private val addTransactionsUseCase: AddTransactionUseCase,
+    private val getAllAccountsUseCase: GetAllAccountsUseCase,
+    private val getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    private val schedulersProvider: SchedulersProvider
 ) {
     private lateinit var view: AddTransactionView
     private var transactionType = TRANSACTION_TYPE_EXPENSE
 
     fun init(view: AddTransactionView) {
         this.view = view
+        transactionType = TRANSACTION_TYPE_EXPENSE
     }
 
     fun requestAccountData() {
         getAllAccountsUseCase.execute()
-                .subscribeOn(schedulersProvider.io())
-                .observeOn(schedulersProvider.ui())
-                .subscribe(view::updateAccounts)
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.ui())
+            .subscribe(view::updateAccounts)
     }
 
     fun requestCategoryData() {
         getAllCategoriesUseCase.execute()
-                .subscribeOn(schedulersProvider.io())
-                .observeOn(schedulersProvider.ui())
-                .subscribe(view::updateCategories)
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.ui())
+            .subscribe(view::updateCategories)
     }
 
     fun setTransactionTypeToIncome() {
@@ -59,15 +60,31 @@ class AddTransactionPresenter constructor(
         view.showTimeChooser()
     }
 
-    fun addNewTransaction(amount: Double, account: Account, category: Category, note: String, date: Date) {
+    fun addNewTransaction(
+        amount: Double,
+        account: Account,
+        category: Category,
+        note: String,
+        date: Date
+    ) {
         if (amount == 0.0) {
             view.showError(R.string.enter_amount)
             return
         }
-        addTransactionsUseCase.execute(Transaction(0, transactionType, date, account, category, amount, note))
-                .subscribeOn(schedulersProvider.io())
-                .observeOn(schedulersProvider.ui())
-                .subscribe(this::onSuccess, this::onFailure)
+        addTransactionsUseCase.execute(
+            Transaction(
+                0,
+                transactionType,
+                date,
+                account,
+                category,
+                amount,
+                note
+            )
+        )
+            .subscribeOn(schedulersProvider.io())
+            .observeOn(schedulersProvider.ui())
+            .subscribe(this::onSuccess, this::onFailure)
     }
 
     private fun onSuccess() {
